@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-import catppuccin from "starlight-theme-catppuccin";
+import createPlugin from "starlight-theme-catppuccin";
 
 // https://astro.build/config
 export default defineConfig({
@@ -63,7 +63,6 @@ export default defineConfig({
           autogenerate: { directory: "reference" },
         },
       ],
-      plugins: [catppuccin({ dark: "mocha-blue", light: "latte-blue" })],
       customCss: [
         // Base Font
         "@fontsource/inter/400.css",
@@ -76,7 +75,12 @@ export default defineConfig({
         // Headings Font
         "@fontsource/playfair-display/600.css",
         "@fontsource/playfair-display/700.css",
+        // Fonts CSS
         "./src/styles/custom.css",
+        // Catppuccin (not working when building)
+        "./src/styles/shared.css",
+        "./src/styles/catppuccin-latte-blue.css",
+        "./src/styles/catppuccin-mocha-blue.css",
       ],
     }),
   ],
