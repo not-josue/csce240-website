@@ -1,0 +1,50 @@
+---
+title: Welcome to CSCE240!
+description: Get started with learning the major concepts of C++ for CSCE240 at the University of South Carolina.
+template: splash
+hero:
+  tagline: Advanced Programming Techniques
+  image:
+    file: ../../assets/cpp-logo.webp
+    alt: The official C++ logo
+  actions:
+    - text: Get Started
+      link: /guides/example/
+      icon: right-arrow
+    - text: Read the Standard C++ docs
+      link: https://isocpp.org/
+      icon: external
+      variant: minimal
+      attrs:
+        target: _blank
+        rel: noopener noreferrer
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Next steps
+
+<CardGrid stagger>
+	<Card title="Configure your environment" icon="laptop">
+		Set up your C++ coding environment by installing a code editor and a compiler based on your OS.
+	</Card>
+	<Card title="Learn what you need" icon="pencil">
+		Grasp the essential concepts for this course through concise explanations.
+	</Card>
+	<Card title="Code along" icon="seti:json">
+		Use coding snippets as examples to build your programs.
+	</Card>
+	<Card title="Apply to coursework" icon="seti:cpp">
+		Implement what you learn to class examples and assignments.
+	</Card>
+	<Card title="Reference and review" icon="open-book">
+		Quickly access key course concepts for studying or debugging as you code.
+	</Card>
+	<Card title="Achieve success" icon="rocket">
+		Master core skills and build confidence to excel in the course.
+	</Card>
+</CardGrid>
+
+import IndexFooter from '../../components/IndexFooter.astro';
+
+<IndexFooter/>
