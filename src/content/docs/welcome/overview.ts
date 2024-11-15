@@ -61,7 +61,6 @@ using std::endl;
 int main() {
   GreetWorld();
   GreetSpanish();
-
   return 0;
 }
 `;

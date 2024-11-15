@@ -46,7 +46,7 @@
 
 - [x] Overview
 
-- [ ] History of C++
+- [x] History of C++
 
 - [ ] Language Basics
 
