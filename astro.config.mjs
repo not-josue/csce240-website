@@ -14,7 +14,7 @@ export default defineConfig({
         light: "./src/assets/logo-light.svg",
       },
       social: {
-        github: "https://github.com/withastro/starlight",
+        github: "https://github.com/not-josue/csce240-website",
       },
       head: [
         // Favicons
@@ -51,6 +51,24 @@ export default defineConfig({
       ],
       sidebar: [
         {
+          label: "Welcome, Students!",
+          items: [
+            {
+              label: "Overview",
+              slug: "overview/overview",
+            },
+          ],
+        },
+        {
+          label: "Getting Started",
+          items: [
+            {
+              label: "History of C++",
+              slug: "getting-started/history",
+            },
+          ],
+        },
+        {
           label: "Guides",
           items: [
             // Each item here is one entry in the navigation menu.
@@ -72,8 +90,8 @@ export default defineConfig({
         "@fontsource/fira-code/400.css",
         "@fontsource/fira-code/600.css",
         // Headings Font
-        "@fontsource/playfair-display/600.css",
-        "@fontsource/playfair-display/700.css",
+        "@fontsource/trirong/600.css",
+        "@fontsource/trirong/700.css",
         // Fonts CSS
         "./src/styles/custom.css",
         // Catppuccin (not working when building)

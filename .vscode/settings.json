@@ -1,0 +1,6 @@
+{
+    "editor.wordWrapColumn": 50,
+    "cSpell.enableFiletypes": [
+        "mdx"
+    ]
+}

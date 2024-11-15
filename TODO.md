@@ -2,11 +2,11 @@
 
 ## Misc
 
-- [ ] Upload to Github
+- [x] Upload to Github
 
 - [x] Configure vercel.json
 
-- [ ] Deploy to Vercel
+- [x] Deploy to Vercel
 
 ## Global
 
@@ -24,9 +24,9 @@
 
 - [x] Update Favicons
 
-- [ ] Customize code blocks to have line numbers
+- [x] Customize code blocks to have line numbers
 
-- [ ] Update Github Repo Link
+- [x] Update Github Repo Link
 
 - [ ] Import custom icons (vscode-icons)
 
@@ -40,9 +40,13 @@
 
 - [ ] Update link to repo license
 
-## Getting Started
+- [x] Update Github repo link
 
-- [ ] History
+## Welcome, Students
+
+- [ ] Overview
+
+- [ ] History of C++
 
 - [ ] Language Basics
 
