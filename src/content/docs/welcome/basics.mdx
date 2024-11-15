@@ -2,3 +2,116 @@
 title: Language Basics
 description: Discover the building blocks of C++, from classes and functions to the steps involved in creating and structuring a program.
 ---
+
+In C++, the fundamental building blocks of any program are **functions** and **classes**. Functions allow you to define 
+**reusable blocks of code** that perform specific tasks, while classes provide a way to organize and **structure data 
+and behavior**. Understanding these two concepts is key to mastering C++ and creating **efficient, modular programs**.
+
+## Functions
+
+At first, when you start writing C++ programs, you'll primarily work with a special function called **main**, which serves as 
+the **entry point of every program**. All your code will be written inside this function. 
+
+As your programs grow larger, you'll want to organize your code by **separating it into different functions**. This allows for 
+better structure, reusability, and readability. Later on, you'll also learn how to place these functions in separate files to 
+keep your projects **organized and manageable**.
+
+## Classes
+
+In the second half of the course, you'll start creating your own classes to model real-world concepts and **organize your code 
+more effectively**. Classes are a powerful feature in C++ that let you define custom data types with both properties **(variables)** 
+and behaviors **(functions)**. 
+
+From the very beginning, you'll work with two **special objects** of the `iostream` class: `cin` for **input** 
+and `cout` for **output**. These objects will help you interact with the user and display results as you begin writing more complex 
+programs.
+
+## C++ Creation Process
+
+The creation process of a C++ program involves 6 steps:
+
+1. Edit
+2. Preprocess
+3. Compile
+4. Link
+5. Load
+6. Execute
+
+### Edit
+
+The first step in creating a C++ program is writing the code in a text editor. This is where the programmer writes and organizes their 
+instructions for the program. Popular text editors for C++ include Visual Studio Code, CLion, and Sublime Text, though you can use any 
+editor you're comfortable with. For this course, you will be saving saving files with the following extensions: `.cc`, `.h`, and `makefile`.
+
+### Preprocess
+
+Before the source code is compiled, the preprocessor handles all **preprocessor directives**, which are instructions that begin with a `#` symbol. 
+These directives are executed to prepare the code for compilation. Common tasks performed during this step include including header files 
+(e.g., `#include <iostream>`), or like (e.g., `#include "program.h"`), and performing **conditional compilation**. The preprocessor ensures that your 
+code is properly set up before moving to the **compilation stage**.
+
+import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
+import { code } from "./basics"
+
+<Tabs>
+<TabItem label="Driver" icon="rocket">
+<Code code={code.preprocess} lang="cpp" title="driver.cc"/>
+</TabItem>
+</Tabs>
+
+### Compile
+
+In this step, the compiler translates your source code into **object code**, a lower-level representation that the computer can understand. 
+In this course, you'll use the `g++` compiler to perform this task. To compile a file into **object code**, you can use the `-c` flag with the 
+following command:
+
+<Tabs>
+<TabItem label="Terminal" icon="laptop">
+<Code code={code.compile} lang="bash"/>
+</TabItem>
+</Tabs>
+
+This will generate an **object file** (e.g., `driver.o`) that is ready for the next step in the process.
+
+### Link
+
+The **linker** takes the **object code files** produced during the compile step and combines them into a single **executable file**. This step ensures 
+that all the necessary code, including libraries and other dependencies, is properly connected. In this course, you'll use the `g++` compiler 
+as the **linker** with the following command:
+
+<Tabs>
+<TabItem label="Terminal" icon="laptop">
+<Code code={code.link01} lang="bash"/>
+</TabItem>
+</Tabs>
+
+The terminal command creates an `a.out` executable file by default since no name for the executable was defined. If you would 
+like to name your executable file you can use the `-o` flag followed by the desired name.
+
+<Tabs>
+<TabItem label="Terminal" icon="laptop">
+<Code code={code.link02} lang="bash"/>
+</TabItem>
+</Tabs>
+
+This terminal command creates a `driver` executable file. Most if not all example code in this course uses the default `a.out`.
+
+### Load
+
+During this step, the **loader** brings the executable file into memory, preparing it for **execution**. This involves allocating the necessary 
+resources and **setting up the environment** so the program can run smoothly. The operating system handles this process automatically, 
+ensuring the executable is ready to execute its instructions.
+
+### Execute
+
+In the final step, the program is **run directly from memory**. The CPU executes the instructions in the **executable file**, producing the desired 
+output or performing the intended tasks. To run the executable file, use the following command:
+
+<Tabs>
+<TabItem label="Terminal" icon="laptop">
+<Code code={code.execute} lang="bash"/>
+</TabItem>
+</Tabs>
+
+This command assumes the default output file name, `a.out`. If you specified a different name during the **linking step** 
+(e.g., `-o myprogram`), replace `a.out` with the name of your **executable**.
