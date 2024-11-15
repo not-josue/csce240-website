@@ -28,7 +28,7 @@
 
 - [x] Update Github Repo Link
 
-- [ ] Import custom icons (vscode-icons)
+- [ ] ~~Import custom icons to use in TabItems~~
 
 ## Index
 
@@ -44,7 +44,7 @@
 
 ## Welcome, Students
 
-- [ ] Overview
+- [x] Overview
 
 - [ ] History of C++
 
@@ -54,11 +54,11 @@
 
 ## Setup Environment
 
-- [ ] Linux Setup
+- [ ] Linux Users
 
-- [ ] Mac Setup
+- [ ] Mac Users
 
-- [ ] Windows Setup
+- [ ] Windows Users
 
 - [ ] Editor Setup
 

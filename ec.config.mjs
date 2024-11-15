@@ -7,8 +7,10 @@ export default {
   defaultProps: {
     showLineNumbers: true,
     overridesByLang: {
+      // Bash - don't show line #s, and mark the 1st line
       bash: {
         showLineNumbers: false,
+        mark: 1,
       },
     },
   },

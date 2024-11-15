@@ -68,6 +68,7 @@ int main() {
 
 const terminal: string = 
 `
+make driver
 g++ -std=c++17 -Wall -c driver.cc
 g++ -std=c++17 -Wall -c hello.cc
 g++ -std=c++17 -Wall driver.o hello.o

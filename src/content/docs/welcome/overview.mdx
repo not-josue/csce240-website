@@ -1,0 +1,52 @@
+---
+title: Overview
+description: Learn how this website can help you excel in learning C++ and being successful taking CSCE240 at the University of South Carolina.
+---
+
+**Hello, USC!** This website was created to support fellow students at the **University of South Carolina** who are currently taking, or planning to 
+take, **CSCE240: Advanced Programming Techniques**. Just as **CSCE145** and **CSCE146** have dedicated websites, I felt that **CSCE240** deserved 
+one too!
+  
+In general, I believe that every programming course should have a modern website. I think of this project as a way to help **"Webify"** USC.
+
+## What This Website Is 
+
+This website serves as both a preparation tool for **CSCE240** and a quick reference during the course. Key technical terminology introduced 
+in the course is presented with straightforward explanations, often drawing on concepts from **CSCE146**. 
+  
+You'll also find code snippets which you can copy into your editor, complete with expected terminal outputs for verification. Below are examples 
+of 4 files to paste code in, along with the expected terminal output. Don't worry if you don't understand the code or the filenames, we'll get to 
+that later!
+
+import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
+import { code } from './overview';
+
+<Tabs>
+<TabItem label="Makefile" icon="seti:makefile">
+<Code code={code.makefile} lang="makefile" title="makefile"  />
+</TabItem>
+<TabItem label="Header" icon="document">
+<Code code={code.header} lang="cpp" title="hello.h"/>
+</TabItem>
+<TabItem label="CC" icon="seti:cpp">
+<Code code={code.cc} lang="cpp" title="hello.cc"/>
+</TabItem>
+<TabItem label="Driver" icon="rocket">
+<Code code={code.driver} lang="cpp" title="driver.cc"/>
+</TabItem>
+<TabItem label="Terminal" icon="laptop">
+<Code code={code.terminal} lang="bash"/>
+</TabItem>
+</Tabs>
+
+## What This Website Is Not
+
+This website is **NOT** a substitute for lectures! The summarized concepts and coding snippets do not replace the thorough explanations nor the 
+long coding examples provided during lectures. Lecture is meant to prepare you for your upcoming coding assignments and for your exams.
+
+## Feedback
+
+Enjoying the site? Disliking the site? Did this site help you with the course? Want to see any new features added? Send me a 
+<a href="https://github.com/not-josue" target="_blank" rel="noopener noreferrer">message on Github</a> 
+or notify the professor with your feedback.
+

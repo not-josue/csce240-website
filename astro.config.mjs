@@ -55,18 +55,25 @@ export default defineConfig({
           items: [
             {
               label: "Overview",
-              slug: "overview/overview",
+              slug: "welcome/overview",
+            },
+            {
+              label: "History of C++",
+              slug: "welcome/history",
+            },
+            {
+              label: "Language Basics",
+              slug: "welcome/basics",
+            },
+            {
+              label: "Style Requirements",
+              slug: "welcome/style",
             },
           ],
         },
         {
           label: "Getting Started",
-          items: [
-            {
-              label: "History of C++",
-              slug: "getting-started/history",
-            },
-          ],
+          items: [],
         },
         {
           label: "Guides",
