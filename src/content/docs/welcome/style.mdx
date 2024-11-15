@@ -2,3 +2,112 @@
 title: Style Requirements
 description: Understand the style requirements for the course, including following the Google C++ Style Guide and using cpplint to ensure your code meets the standards.
 ---
+
+In **CSCE146**, you may have followed a simple formatting requirement, like right-clicking in the **Eclipse IDE** 
+and selecting "Format" to tidy up your code before submission. However, **CSCE240** introduces stricter style 
+guidelines, requiring attention to details such as maximum column lengths, case sensitivity in naming, and more.
+
+## C++ Google Style Guide
+
+This course follows the <a href="https://google.github.io/styleguide/cppguide.html" target="_blank" rel="noopener noreferrer">C++ Google Style Guide</a>.
+As we cover each topic, you'll be introduced to specific styling conventions relevant to that section. A [Style Reference](../reference/style) 
+has been written to quickly find any **style requirements** you may have forgotten.
+
+## Cpplint Style Checker
+
+We'll be using a tool called `cpplint` to check your code for **styling errors**. While `cpplint` will catch most issues, 
+there are certain cases where it might not flag a **styling error**, even if one exists. A [Cpplint Reference](../reference/ccplint) is available, 
+listing common issues, solutions, and other FAQs related to `cpplint`. The version of `cpplint` you download will depend on 
+your operating system.
+
+## Coding Snippets
+
+The previous sections involved some tedious micro-management, but don't worry—coding snippets provided on this site are 😁 pre-styled and 
+already pass `cpplint`!
+
+## Code Editor
+
+Ready for some 🫣 great news? Editors like <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a> 
+come with auto-formatting options that follow the 🫡 Google Style Guide! While it's not perfect and won't catch every style requirement, it will 
+take care of most of the heavy lifting, such as indentation and column length.
+
+## Basic Style Requirements
+
+To get you started, here are a couple of style rules that you will always deal with:
+
+### Beginner Bracket Placement
+
+You may have noticed from the code snippets the bracket of the **main** function is always placed on the same line as the **associated statement**. 
+This is because it is a required style. If the statement is short enough, as seen in previous code snippets, the ending bracket can also be in the same line. 
+Bracket placement will be expanded further in the guide. 
+
+The **Driver** tab shows the correct styling whilst the **Terminal** tab shows the **error** when styled incorrectly.
+
+<Tabs>
+<TabItem label="Driver" icon="rocket">
+<Code code={code.brackets} lang="cpp" title="driver.cc"/>
+</TabItem>
+<TabItem label="Terminal" icon="laptop">
+<Code code={code.bracketsErrors} lang="bash"/>
+</TabItem>
+</Tabs>
+
+### Column Length
+
+Do **NOT** go past column 80. If you do, you get the following **error** shown on the **Terminal** tab. Even though it looks awkward the 
+**Driver** code is formatted correctly.
+
+<Tabs>
+<TabItem label="Driver" icon="rocket">
+<Code code={code.columnLength} lang="cpp" title="driver.cc"/>
+</TabItem>
+<TabItem label="Terminal" icon="laptop">
+<Code code={code.columnError} lang="bash"/>
+</TabItem>
+</Tabs>
+
+### Copyright
+
+Just like in CSCE145 and CSCE146, you are required to **author each page through a comment** at the top of your file. The syntax is `Copyright <year> <name>`. In coding snippets, CSCE240 
+will be used as the name. The **Terminal** tab shows you the **error** you get if you don't author your file:
+
+import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
+import { code } from "./style"
+
+<Tabs>
+<TabItem label="Driver" icon="rocket">
+<Code code={code.copyright} lang="cpp" title="driver.cc"/>
+</TabItem>
+<TabItem label="Terminal" icon="laptop">
+<Code code={code.copyrightError} lang="bash"/>
+</TabItem>
+</Tabs>
+
+### Indentation
+
+In the Google C++ Style Guide, 2-space indentation is a strict requirement per indentation level. If you like to use the Tab key 
+for coding, you may be able to set your Tab Length to 2. This is the first case where `cpplint` does NOT detect the error. The 
+**Driver** shows various levels of indentation done correctly.
+
+<Tabs>
+<TabItem label="Driver" icon="rocket">
+<Code code={code.indent} lang="cpp" title="driver.cc"/>
+</TabItem>
+</Tabs>
+
+
+### Newline Character
+
+Every document should end with a blank line at the end. Here's the slight 😬 **caveat** with the coding snippets. The coding snippets
+trim blank lines at the end of strings, therefore I currently have no *reasonable* way to provide a code snippet with a blank line at the end. The 
+following snippet shows the **error** you get:
+
+<Tabs>
+<TabItem label="Terminal" icon="laptop">
+<Code code={code.newline} lang="bash"/>
+</TabItem>
+</Tabs>
+
+
+
+
