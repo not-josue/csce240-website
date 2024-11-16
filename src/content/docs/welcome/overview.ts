@@ -51,12 +51,7 @@ const driver: string =
 `
 // Copyright 2024 CSCE240
 
-#include <iostream>
-
 #include "hello.h"
-
-using std::cout;
-using std::endl;
 
 int main() {
   GreetWorld();
