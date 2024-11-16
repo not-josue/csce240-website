@@ -16,6 +16,15 @@ As your programs grow larger, you'll want to organize your code by **separating 
 better structure, reusability, and readability. Later on, you'll also learn how to place these functions in separate files to 
 keep your projects **organized and manageable**.
 
+import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
+import { code } from "./basics"
+
+<Tabs>
+<TabItem label="Driver" icon="rocket">
+<Code code={code.functions} lang="cpp" title="driver.cc"/>
+</TabItem>
+</Tabs>
+
 ## Classes
 
 In the second half of the course, you'll start creating your own classes to model real-world concepts and **organize your code 
@@ -25,6 +34,12 @@ and behaviors **(functions)**.
 From the very beginning, you'll work with two **special objects** of the `iostream` class: `cin` for **input** 
 and `cout` for **output**. These objects will help you interact with the user and display results as you begin writing more complex 
 programs.
+
+<Tabs>
+<TabItem label="Driver" icon="rocket">
+<Code code={code.classes} lang="cpp" title="driver.cc"/>
+</TabItem>
+</Tabs>
 
 ## C++ Creation Process
 
@@ -50,9 +65,6 @@ These directives are executed to prepare the code for compilation. Common tasks 
 (e.g., `#include <iostream>`), or like (e.g., `#include "program.h"`), and performing **conditional compilation**. The preprocessor ensures that your 
 code is properly set up before moving to the **compilation stage**.
 
-import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
-import { code } from "./basics"
-
 <Tabs>
 <TabItem label="Driver" icon="rocket">
 <Code code={code.preprocess} lang="cpp" title="driver.cc"/>
@@ -72,6 +84,21 @@ following command:
 </Tabs>
 
 This will generate an **object file** (e.g., `driver.o`) that is ready for the next step in the process.
+
+import { Aside, FileTree } from '@astrojs/starlight/components';
+
+<Aside>Remember that your location in the terminal has to be in the same folder as your code!</Aside>
+
+<FileTree>
+
+- CSCE240
+    - **Project01**
+        - driver.cc
+        - driver.o
+    - Project02
+        - TODO.md
+
+</FileTree>
 
 ### Link
 

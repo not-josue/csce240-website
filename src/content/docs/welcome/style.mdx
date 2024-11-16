@@ -15,7 +15,7 @@ has been written to quickly find any **style requirements** you may have forgott
 
 ## Cpplint Style Checker
 
-We'll be using a tool called `cpplint` to check your code for **styling errors**. While `cpplint` will catch most issues, 
+You'll be using a tool called `cpplint` to check your code for **styling errors**. While `cpplint` will catch most issues, 
 there are certain cases where it might not flag a **styling error**, even if one exists. A [Cpplint Reference](../reference/ccplint) is available, 
 listing common issues, solutions, and other FAQs related to `cpplint`. The version of `cpplint` you download will depend on 
 your operating system.
@@ -35,13 +35,15 @@ take care of most of the heavy lifting, such as indentation and column length.
 
 To get you started, here are a couple of style rules that you will always deal with:
 
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>The **Driver** contains the correct style, the **Terminal** tab contains the error you get for incorrect styling.</Aside>
+
 ### Beginner Bracket Placement
 
 You may have noticed from the code snippets the bracket of the **main** function is always placed on the same line as the **associated statement**. 
 This is because it is a required style. If the statement is short enough, as seen in previous code snippets, the ending bracket can also be in the same line. 
 Bracket placement will be expanded further in the guide. 
-
-The **Driver** tab shows the correct styling whilst the **Terminal** tab shows the **error** when styled incorrectly.
 
 <Tabs>
 <TabItem label="Driver" icon="rocket">
@@ -54,8 +56,7 @@ The **Driver** tab shows the correct styling whilst the **Terminal** tab shows t
 
 ### Column Length
 
-Do **NOT** go past column 80. If you do, you get the following **error** shown on the **Terminal** tab. Even though it looks awkward the 
-**Driver** code is formatted correctly.
+Do **NOT** go past column 80. Though the **Driver** looks awkward, it is styled correctly!
 
 <Tabs>
 <TabItem label="Driver" icon="rocket">
@@ -69,7 +70,7 @@ Do **NOT** go past column 80. If you do, you get the following **error** shown o
 ### Copyright
 
 Just like in CSCE145 and CSCE146, you are required to **author each page through a comment** at the top of your file. The syntax is `Copyright <year> <name>`. In coding snippets, CSCE240 
-will be used as the name. The **Terminal** tab shows you the **error** you get if you don't author your file:
+will be used as the name.
 
 import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
 import { code } from "./style"
@@ -86,8 +87,9 @@ import { code } from "./style"
 ### Indentation
 
 In the Google C++ Style Guide, 2-space indentation is a strict requirement per indentation level. If you like to use the Tab key 
-for coding, you may be able to set your Tab Length to 2. This is the first case where `cpplint` does NOT detect the error. The 
-**Driver** shows various levels of indentation done correctly.
+for coding, you may be able to set your Tab Length to 2. The **Driver** shows various levels of indentation done correctly.
+
+<Aside type='danger'>This is the first case where `cpplint` does **NOT** detect the error.</Aside>
 
 <Tabs>
 <TabItem label="Driver" icon="rocket">
@@ -98,9 +100,9 @@ for coding, you may be able to set your Tab Length to 2. This is the first case 
 
 ### Newline Character
 
-Every document should end with a blank line at the end. Here's the slight 😬 **caveat** with the coding snippets. The coding snippets
-trim blank lines at the end of strings, therefore I currently have no *reasonable* way to provide a code snippet with a blank line at the end. The 
-following snippet shows the **error** you get:
+Every document should end with a blank line at the end. Pretty simple.
+
+<Aside type='danger'>Coding snippets do **NOT** come with an empty blank line at the end thus will not pass this requirement in `cpplint`.</Aside>
 
 <Tabs>
 <TabItem label="Terminal" icon="laptop">

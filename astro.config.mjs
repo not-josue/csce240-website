@@ -10,8 +10,7 @@ export default defineConfig({
       description:
         "A C++ tutorial for CSCE 240 Advanced Programming Techniques at the University of South Carolina",
       logo: {
-        dark: "./src/assets/logo-dark.svg",
-        light: "./src/assets/logo-light.svg",
+        src: "./src/assets/logo.svg",
       },
       social: {
         github: "https://github.com/not-josue/csce240-website",
