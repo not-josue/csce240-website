@@ -6,11 +6,12 @@
   <p>
     Source code licensed
     <a
-      href="https://opensource.org/license/mit"
+      href="https://creativecommons.org/licenses/by-nc/4.0/"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="view MIT license">MIT</a
-    >. This site was created by
+      aria-label="view CC BY-NC 4.0 license">CC BY-NC 4.0</a
+    >
+    © <span id="date"></span>. This site was created by
     <a
       href="https://github.com/not-josue"
       target="_blank"
@@ -19,6 +20,12 @@
     >.
   </p>
 </footer>
+
+<script is:inline>
+  const spanEl = document.getElementById("date");
+  const date = new Date().getFullYear().toString();
+  spanEl.textContent = date;
+</script>
 
 <style>
   footer {
