@@ -74,11 +74,11 @@ export default defineConfig({
           label: "Setup Environment",
           items: [
             {
-              label: "Downloading the Tools",
-              slug: "environment/downloading-the-tools",
+              label: "Downloading Tools",
+              slug: "environment/downloading-tools",
             },
             {
-              label: "Optional: Visual Studio Code",
+              label: "VSCode Setup",
               slug: "environment/visual-studio-code",
             },
           ],
@@ -93,6 +93,10 @@ export default defineConfig({
             {
               label: "Google Style Reference",
               slug: "reference/google-style-reference",
+            },
+            {
+              label: "Keyword Reference",
+              slug: "reference/keyword-reference",
             },
           ],
         },
