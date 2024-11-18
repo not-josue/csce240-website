@@ -12,6 +12,12 @@ export default {
         showLineNumbers: false,
         mark: 1,
       },
+      zsh: {
+        showLineNumbers: false,
+      },
+      shell: {
+        showLineNumbers: false,
+      },
     },
   },
 };

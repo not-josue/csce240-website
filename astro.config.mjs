@@ -62,11 +62,11 @@ export default defineConfig({
             },
             {
               label: "Language Basics",
-              slug: "welcome/basics",
+              slug: "welcome/language-basics",
             },
             {
               label: "Style Requirements",
-              slug: "welcome/style",
+              slug: "welcome/style-requirements",
             },
           ],
         },
@@ -75,24 +75,26 @@ export default defineConfig({
           items: [
             {
               label: "Downloading the Tools",
-              slug: "environment/setup",
+              slug: "environment/downloading-the-tools",
             },
             {
               label: "Optional: Visual Studio Code",
-              slug: "environment/vscode",
+              slug: "environment/visual-studio-code",
             },
-          ],
-        },
-        {
-          label: "Guides",
-          items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", slug: "guides/example" },
           ],
         },
         {
           label: "Reference",
-          autogenerate: { directory: "reference" },
+          items: [
+            {
+              label: "Cpplint Reference",
+              slug: "reference/cpplint-reference",
+            },
+            {
+              label: "Google Style Reference",
+              slug: "reference/google-style-reference",
+            },
+          ],
         },
       ],
       customCss: [

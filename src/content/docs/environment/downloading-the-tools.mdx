@@ -49,28 +49,46 @@ You can enter the following commands in the terminal to setup the tools you need
 The Windows Subsystem for Linux (WSL) lets you run a full Linux environment directly on your Windows 11 or 10 computer—without needing 
 to set up a separate computer or install Linux as your main operating system.
 
-- In the search bar enter `windows features` and click on the Control Panel tool
+import { Steps } from "@astrojs/starlight/components"
 
+<Steps>
+
+<ol>
+{/* Step 01 */}
+<li>
+**Search Windows**
+
+In the search bar enter `windows features` and click on the Control Panel tool:
 {/* Image */}
 ![A Windows search result for "windows features"](@assets/setup/search-for-windows-features.webp)
+</li>
 
+{/* Step 02 */}
+<li>
+**Opt-in To Linux**
 
-- Scroll down and check `Windows Subsystem for Linux`, and restart your computer
-
+Scroll down and check `Windows Subsystem for Linux`, and restart your computer:
 {/* Image */}
 ![Different features in windows you turn on or off](@assets/setup/windows-subsystem-checkbox.webp)
+</li>
 
-- Search for `ubuntu lts` in the microsoft store, download it, and go through the installation process in the terminal
+{/* Step 03 */}
+<li>
+**Download from Microsoft Store**
 
+Search for `ubuntu lts` in the microsoft store, download it, and go through the installation process in the terminal:
 {/* Image */}
 ![Different features in windows you turn on or off](@assets/setup/microsoft-store-ubuntu-lts.webp)
-
-
 <Aside> You may be asked to download some Windows fixes, and may have to restart your computer </Aside>
+</li>
 
-- Create a username and password, as you're creating your password you won't see any characters typed, this is a security feature in Linux
+{/* Step 04 */}
+<li>
+**Create User, and Download Tools**
 
-- Use the following commands to setup the tools you need for class (they are the same as the Linux section):
+Create a username and password, as you're creating your password you won't see any characters typed, this is a security feature in Linux.
+
+Use the following commands to setup the tools you need for class (they are the same as the Linux section):
 
 {/* Didn't use bash so 1st line is not marked */}
 <Code code={code.windows} lang="shell"/>
@@ -79,31 +97,35 @@ to set up a separate computer or install Linux as your main operating system.
 - `sudo apt upgrade` installs the latest versions of all installed packages
 - `sudo apt install build-essential python3 python3-pip` installs essential build tools, Python 3, and its package manager, pip
 - `sudo pip3 install cpplint` for checking C++ code against Google's style guide
+</li>
 
-- If you open Windows File Explorer, you should now see a folder for Ubuntu
+{/* Step 05 */}
+<li>
+**Create Course Files**
+
+If you open Windows File Explorer, you should now see a folder for Ubuntu:
 
 {/* Image */}
 ![Windows File Explorer showing a Linux Ubuntu folder](@assets/setup/file-explorer.webp)
 
-- Open the `Ubuntu` folder and then open the folder named `home`. 
+Open the `Ubuntu` folder and then open the folder named `home`. 
 In that directory you should see a folder named after your username, go ahead and open that folder. This is where your Ubuntu 
 terminal opens.
 
-- To open your Ubuntu terminal open your Windows terminal, click on the down arrow, and select Ubuntu
+To open your Ubuntu terminal open your Windows terminal, click on the down arrow, and select Ubuntu:
 
 {/* Image */}
 ![A Windows terminal using the Ubuntu LTS](@assets/setup/terminal.webp)
 
-- In your `username` folder, you can create a folder to hold all the course files. I created a `USC` folder, then a `CSCE240` folder to 
+In your `username` folder, you can create a folder to hold all the course files. I created a `USC` folder, then a `CSCE240` folder to 
 store my files. This is in case I use Linux for other courses or projects.
 
 {/* Image */}
 ![The Ubuntu LTS folders in a Windows computer](@assets/setup/course-files.webp)
 
 <Aside type="tip">Remember to `cd` into the course folder when you open your terminal.</Aside>
+</li>
 
+</ol>
 
-
-
-
-
+</Steps>
