@@ -1,0 +1,109 @@
+---
+title: "Downloading The Tools"
+description: Learn how to download and set up the essential tools for success in CSCE240, including compilers, and style checkers.
+---
+
+To get started with CSCE240, you'll need to set up a few essential tools on your computer. 
+These include a C++ compiler, and a style checker to ensure your code meets 
+course standards. This guide will walk you through downloading and installing everything you 
+need for a smooth development experience.
+
+## Apple Users
+
+You can find different tools at <a href="https://brew.sh/" target="_blank" rel="noopener noreferrer" aria-label="the Hombrew website">Homebrew</a>.
+At the terminal you can install what you need with the following commands:
+
+import { Aside, Code } from "@astrojs/starlight/components"
+import { code } from "@ts/setup";
+
+<Code code={code.apple} lang="zsh"/>
+
+- `gcc` is for the C++ compiler
+- `make` allows you to build your programs through a `makefile`
+- `cpplint` is the linter that checks for Google Style compliancy
+
+<Aside>
+Macs already have the clang C++ compiler installed, and that compiler will be invoked with the g++ command. So,
+to use the newly installed gcc C++ compiler, you'll use the command `g++-##` where ## is the version number of the gcc
+compile.
+
+You can use `gcc --version` in your terminal to see which version you have. The following command uses version 14 to compile 
+a file called `hello.cc`:
+
+<Code code={code.appleCompile} lang="zsh"/>
+</Aside>
+
+## Linux Users
+
+You can enter the following commands in the terminal to setup the tools you need for this course:
+{/* Didn't use bash so 1st line is not marked */}
+<Code code={code.linux} lang="shell"/>
+
+- `sudo apt update` is to update the list of available software and package versions
+- `sudo apt upgrade` installs the latest versions of all installed packages
+- `sudo apt install build-essential python3 python3-pip` installs essential build tools, Python 3, and its package manager, pip
+- `sudo pip3 install cpplint` for checking C++ code against Google's style guide
+
+## Windows Users
+
+The Windows Subsystem for Linux (WSL) lets you run a full Linux environment directly on your Windows 11 or 10 computer—without needing 
+to set up a separate computer or install Linux as your main operating system.
+
+- In the search bar enter `windows features` and click on the Control Panel tool
+
+{/* Image */}
+![A Windows search result for "windows features"](@assets/setup/search-for-windows-features.webp)
+
+
+- Scroll down and check `Windows Subsystem for Linux`, and restart your computer
+
+{/* Image */}
+![Different features in windows you turn on or off](@assets/setup/windows-subsystem-checkbox.webp)
+
+- Search for `ubuntu lts` in the microsoft store, download it, and go through the installation process in the terminal
+
+{/* Image */}
+![Different features in windows you turn on or off](@assets/setup/microsoft-store-ubuntu-lts.webp)
+
+
+<Aside> You may be asked to download some Windows fixes, and may have to restart your computer </Aside>
+
+- Create a username and password, as you're creating your password you won't see any characters typed, this is a security feature in Linux
+
+- Use the following commands to setup the tools you need for class (they are the same as the Linux section):
+
+{/* Didn't use bash so 1st line is not marked */}
+<Code code={code.windows} lang="shell"/>
+
+- `sudo apt update` is to update the list of available software and package versions
+- `sudo apt upgrade` installs the latest versions of all installed packages
+- `sudo apt install build-essential python3 python3-pip` installs essential build tools, Python 3, and its package manager, pip
+- `sudo pip3 install cpplint` for checking C++ code against Google's style guide
+
+- If you open Windows File Explorer, you should now see a folder for Ubuntu
+
+{/* Image */}
+![Windows File Explorer showing a Linux Ubuntu folder](@assets/setup/file-explorer.webp)
+
+- Open the `Ubuntu` folder and then open the folder named `home`. 
+In that directory you should see a folder named after your username, go ahead and open that folder. This is where your Ubuntu 
+terminal opens.
+
+- To open your Ubuntu terminal open your Windows terminal, click on the down arrow, and select Ubuntu
+
+{/* Image */}
+![A Windows terminal using the Ubuntu LTS](@assets/setup/terminal.webp)
+
+- In your `username` folder, you can create a folder to hold all the course files. I created a `USC` folder, then a `CSCE240` folder to 
+store my files. This is in case I use Linux for other courses or projects.
+
+{/* Image */}
+![The Ubuntu LTS folders in a Windows computer](@assets/setup/course-files.webp)
+
+<Aside type="tip">Remember to `cd` into the course folder when you open your terminal.</Aside>
+
+
+
+
+
+

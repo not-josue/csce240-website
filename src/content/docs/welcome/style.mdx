@@ -45,6 +45,9 @@ You may have noticed from the code snippets the bracket of the **main** function
 This is because it is a required style. If the statement is short enough, as seen in previous code snippets, the ending bracket can also be in the same line. 
 Bracket placement will be expanded further in the guide. 
 
+import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
+import { code } from "@ts/style"
+
 <Tabs>
 <TabItem label="Driver" icon="rocket">
 <Code code={code.brackets} lang="cpp" title="driver.cc"/>
@@ -72,9 +75,6 @@ Do **NOT** go past column 80. Though the **Driver** looks awkward, it is styled 
 Just like in CSCE145 and CSCE146, you are required to **author each page through a comment** at the top of your file. The syntax is `Copyright <year> <name>`. In coding snippets, CSCE240 
 will be used as the name.
 
-import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
-import { code } from "./style"
-
 <Tabs>
 <TabItem label="Driver" icon="rocket">
 <Code code={code.copyright} lang="cpp" title="driver.cc"/>
@@ -91,12 +91,7 @@ for coding, you may be able to set your Tab Length to 2. The **Driver** shows va
 
 <Aside type='danger'>This is the first case where `cpplint` does **NOT** detect the error.</Aside>
 
-<Tabs>
-<TabItem label="Driver" icon="rocket">
 <Code code={code.indent} lang="cpp" title="driver.cc"/>
-</TabItem>
-</Tabs>
-
 
 ### Newline Character
 
@@ -104,11 +99,7 @@ Every document should end with a blank line at the end. Pretty simple.
 
 <Aside type='danger'>Coding snippets do **NOT** come with an empty blank line at the end thus will not pass this requirement in `cpplint`.</Aside>
 
-<Tabs>
-<TabItem label="Terminal" icon="laptop">
 <Code code={code.newline} lang="bash"/>
-</TabItem>
-</Tabs>
 
 
 

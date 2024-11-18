@@ -71,8 +71,17 @@ export default defineConfig({
           ],
         },
         {
-          label: "Getting Started",
-          items: [],
+          label: "Setup Environment",
+          items: [
+            {
+              label: "Downloading the Tools",
+              slug: "environment/setup",
+            },
+            {
+              label: "Optional: Visual Studio Code",
+              slug: "environment/vscode",
+            },
+          ],
         },
         {
           label: "Guides",

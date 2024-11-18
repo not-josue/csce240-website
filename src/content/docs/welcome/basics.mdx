@@ -16,14 +16,11 @@ As your programs grow larger, you'll want to organize your code by **separating 
 better structure, reusability, and readability. Later on, you'll also learn how to place these functions in separate files to 
 keep your projects **organized and manageable**.
 
-import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
-import { code } from "./basics"
+import { Code } from '@astrojs/starlight/components';
+import { code } from "@ts/basics"
 
-<Tabs>
-<TabItem label="Driver" icon="rocket">
 <Code code={code.functions} lang="cpp" title="driver.cc"/>
-</TabItem>
-</Tabs>
+
 
 ## Classes
 
@@ -35,11 +32,7 @@ From the very beginning, you'll work with two **special objects** of the `iostre
 and `cout` for **output**. These objects will help you interact with the user and display results as you begin writing more complex 
 programs.
 
-<Tabs>
-<TabItem label="Driver" icon="rocket">
 <Code code={code.classes} lang="cpp" title="driver.cc"/>
-</TabItem>
-</Tabs>
 
 ## C++ Creation Process
 
@@ -65,11 +58,7 @@ These directives are executed to prepare the code for compilation. Common tasks 
 (e.g., `#include <iostream>`), or like (e.g., `#include "program.h"`), and performing **conditional compilation**. The preprocessor ensures that your 
 code is properly set up before moving to the **compilation stage**.
 
-<Tabs>
-<TabItem label="Driver" icon="rocket">
 <Code code={code.preprocess} lang="cpp" title="driver.cc"/>
-</TabItem>
-</Tabs>
 
 ### Compile
 
@@ -77,11 +66,7 @@ In this step, the compiler translates your source code into **object code**, a l
 In this course, you'll use the `g++` compiler to perform this task. To compile a file into **object code**, you can use the `-c` flag with the 
 following command:
 
-<Tabs>
-<TabItem label="Terminal" icon="laptop">
 <Code code={code.compile} lang="bash"/>
-</TabItem>
-</Tabs>
 
 This will generate an **object file** (e.g., `driver.o`) that is ready for the next step in the process.
 
@@ -106,20 +91,12 @@ The **linker** takes the **object code files** produced during the compile step 
 that all the necessary code, including libraries and other dependencies, is properly connected. In this course, you'll use the `g++` compiler 
 as the **linker** with the following command:
 
-<Tabs>
-<TabItem label="Terminal" icon="laptop">
 <Code code={code.link01} lang="bash"/>
-</TabItem>
-</Tabs>
 
 The terminal command creates an `a.out` executable file by default since no name for the executable was defined. If you would 
 like to name your executable file you can use the `-o` flag followed by the desired name.
 
-<Tabs>
-<TabItem label="Terminal" icon="laptop">
 <Code code={code.link02} lang="bash"/>
-</TabItem>
-</Tabs>
 
 This terminal command creates a `driver` executable file.
 
@@ -136,11 +113,7 @@ ensuring the executable is ready to execute its instructions.
 In the final step, the program is **run directly from memory**. The CPU executes the instructions in the **executable file**, producing the desired 
 output or performing the intended tasks. To run the executable file, use the following command:
 
-<Tabs>
-<TabItem label="Terminal" icon="laptop">
 <Code code={code.execute} lang="bash"/>
-</TabItem>
-</Tabs>
 
 <Aside>
 This command assumes the default output file name, `a.out`. If you specified a different name during the **linking step** 

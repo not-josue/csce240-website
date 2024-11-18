@@ -1,6 +1,8 @@
+import { STD } from "./constants";
+
 const makefile: string = 
 `
-flags = -std=c++17 -Wall
+flags = -std=c++${STD} -Wall
 
 hello.o : hello.cc hello.h
 	g++ $(flags) -c $<
@@ -63,9 +65,9 @@ int main() {
 const terminal: string = 
 `
 make driver
-g++ -std=c++17 -Wall -c driver.cc
-g++ -std=c++17 -Wall -c hello.cc
-g++ -std=c++17 -Wall driver.o hello.o
+g++ -std=c++${STD} -Wall -c driver.cc
+g++ -std=c++${STD} -Wall -c hello.cc
+g++ -std=c++${STD} -Wall driver.o hello.o
 ./a.out
 Hello World!
 ¡Hola Mundo!

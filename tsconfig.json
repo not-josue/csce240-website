@@ -1,9 +1,12 @@
+// Custom import urls
 {
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
+      "@ts/*": ["src/ts/*"],
+      "@assets/*": ["src/assets/*"],
     }
   }
 }

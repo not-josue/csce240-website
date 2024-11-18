@@ -8,6 +8,8 @@
 
 - [x] Deploy to Vercel
 
+- [ ] Update README
+
 ## Global
 
 - [x] Change Theme to "Catppuccin"
@@ -48,19 +50,15 @@
 
 - [x] History of C++
 
-- [ ] Language Basics
+- [x] Language Basics
 
-- [ ] Style Requirements
+- [x] Style Requirements
 
 ## Setup Environment
 
-- [ ] Linux Users
+- [ ] Downloading the Tools
 
-- [ ] Mac Users
-
-- [ ] Windows Users
-
-- [ ] Editor Setup
+- [ ] Optional: Visual Studio Code
 
 ## Basic Syntax
 
