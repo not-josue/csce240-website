@@ -19,7 +19,7 @@ of 4 files to paste code in, along with the expected terminal output. 😊 Don't
 that later!
 
 import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
-import { code } from "@ts/overview"
+import { code } from "@ts/welcome/overview"
 
 <Tabs>
 <TabItem label="Makefile" icon="seti:makefile">
@@ -28,7 +28,7 @@ import { code } from "@ts/overview"
 <TabItem label="Header" icon="document">
 <Code code={code.header} lang="cpp" title="hello.h"/>
 </TabItem>
-<TabItem label="CC" icon="seti:cpp">
+<TabItem label="Source" icon="seti:cpp">
 <Code code={code.cc} lang="cpp" title="hello.cc"/>
 </TabItem>
 <TabItem label="Driver" icon="rocket">

@@ -14,7 +14,7 @@ You can find different tools at <a href="https://brew.sh/" target="_blank" rel="
 At the terminal you can install what you need with the following commands:
 
 import { Aside, Code } from "@astrojs/starlight/components"
-import { code } from "@ts/setup";
+import { code } from "@ts/environment/setup";
 
 <Code code={code.apple} lang="zsh"/>
 
@@ -93,10 +93,13 @@ Use the following commands to setup the tools you need for class (they are the s
 {/* Didn't use bash so 1st line is not marked */}
 <Code code={code.windows} lang="shell"/>
 
-- `sudo apt update` is to update the list of available software and package versions
-- `sudo apt upgrade` installs the latest versions of all installed packages
-- `sudo apt install build-essential python3 python3-pip` installs essential build tools, Python 3, and its package manager, pip
-- `sudo pip3 install cpplint` for checking C++ code against Google's style guide
+`sudo apt update` is to update the list of available software and package versions
+
+`sudo apt upgrade` installs the latest versions of all installed packages
+
+`sudo apt install build-essential python3 python3-pip` installs essential build tools, Python 3, and its package manager, pip
+
+`sudo pip3 install cpplint` for checking C++ code against Google's style guide
 </li>
 
 {/* Step 05 */}

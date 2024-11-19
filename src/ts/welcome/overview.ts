@@ -1,4 +1,4 @@
-import { STD } from "./constants";
+import { STD } from "@ts/constants";
 
 const makefile: string = 
 `

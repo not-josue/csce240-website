@@ -2,3 +2,124 @@
 title: Visual Studio Code
 description: Learn to setup Visual Studio Code to handle Google Style requirements automatically and the extensions that can help you develop C++ programs in CSCE240.
 ---
+
+While you're free to use any code editor you're comfortable with, I highly recommend using 
+<a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual 
+Studio Code</a>. It's lightweight, beginner-friendly, and comes with powerful extensions 
+that can streamline your workflow for CSCE240.
+
+## Extensions
+
+I **HIGHLY** recommend you get the C/C++ extension by Microsoft. It's going to add language 
+support for C++ such as Intellisense which is going to help tremendously when developing your 
+programs. 
+
+Click on your **Extensions** tab and enter `c++` in the search bar. The extension should 
+be the first to appear in the search results with over 70 million downloads.
+
+{/* Extensions Image */}
+![the recommended VSCode extensions for C++](@assets/editor/extensions.webp)
+
+import { Aside, Code, Steps } from "@astrojs/starlight/components";
+import { code } from "@ts/environment/vscode";
+ 
+## Auto-Formatter
+
+Remember in [the Style Requirements page](../welcome/style-requirements#code-editor) when 
+I mentioned that some code editors can be configured to automatically format your 
+code? Well VSCode just so happens to be one of those 😊 editors! You can setup auto-formatting the **quick method** by copying some code, or if you want to 
+practice customizing your editor you can follow the **slower method**:
+
+<Aside>I setup my environment using **Windows WSL** so images may show additional options that you may not see.</Aside>
+
+### Quick Method
+
+<Steps>
+
+1. Create a folder called `.vscode` in your `root` folder
+
+2. Create a file called `settings.json` and copy the following code:
+
+    <Code title="settings.json" lang="json" code={code.settings} />
+
+</Steps>
+
+### Slower Method
+
+<Steps>
+
+1. In VSCode, Click on **File** -> Hover Over **Preferences**, and Click **Settings**
+
+    {/* Preferences Image */}
+    ![how to find the preferences option in VSCode](@assets/editor/preferences.webp)
+
+2. Search for `@lang:cpp format`, Click on the **Workspace** tab (if you 
+want to set more global settings use other tabs), and Check **Editor: Format On Save**. 
+
+    <Aside>What we're doing is customizing the language settings for C++ to automatically format 
+    any associated C++ files when the document is saved.</Aside>
+
+    {/* Search Image */}
+    ![how to add "format on save" option in vscode](@assets/editor/search.webp)
+
+3. Search for `c_cpp`, Click on **Formatting** under **C/C++**, Edit the **C_Cpp: Clang_format_fallback Style **
+to be `Google`
+
+    {/* Fallback Image */}
+    ![how to change the fallback formatting style for c++ to Google in vscode](@assets/editor/fallback.webp)
+
+4. Finally scroll down to **C_Cpp: Formatting** and select `clangFormat`. Above that section 
+is **C_Cpp: Clang_format_style** and its value should be `file`
+
+    {/* Clang Image */}
+    ![how to change the default formatter for c++ to clang in vscode](@assets/editor/clang.webp)
+
+    <Aside>
+    What we did is change the default file formatter to `clang` and require it to check for a `clang-format` 
+    file that defines its styles. If no `clang-format` file is provided (which is always in our case), 
+    then a file will be formatted to Google's preferred styles.
+    </Aside>
+
+5. You should now have a folder called `.vscode` in your **root folder** along with a file inside it called `settings.json`
+
+    Check that the code in `settings.json` is similar to the following:
+
+    <Code title="settings.json" lang="json" code={code.settings} />
+
+</Steps>
+
+## Testing
+
+Create a file called `test.cc` in the **root folder**. The following should be your current file structure:
+
+import { FileTree, TabItem, Tabs } from "@astrojs/starlight/components";
+
+<FileTree>
+
+- CSCE240
+    - .vscode
+        - settings.json
+    - test.cc
+
+</FileTree>
+
+Copy the code in the **Before** tab and use `ctrl/cmd + s` to save. Your code should of been formatted to look like 
+the **After** tab's code! Auto-formatting has now been 🚀 implemented! Though not perfect, it will handle most of those 
+pesky style requirements.
+
+<Tabs>
+
+<TabItem label="Before" icon="close">
+<Code title="test.cc" lang="cpp" code={code.before} />
+</TabItem>
+
+<TabItem label="After" icon="approve-check">
+<Code title="test.cc" lang="cpp" code={code.after} />
+</TabItem>
+
+</Tabs>
+
+
+
+
+

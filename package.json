@@ -18,7 +18,6 @@
     "@fontsource/trirong": "^5.1.0",
     "astro": "^4.16.10",
     "sharp": "^0.32.5",
-    "starlight-theme-catppuccin": "^1.0.3",
     "typescript": "^5.6.3"
   }
 }
