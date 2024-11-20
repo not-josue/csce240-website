@@ -84,6 +84,15 @@ export default defineConfig({
           ],
         },
         {
+          label: "Basic Syntax",
+          items: [
+            {
+              label: "Basic Structure",
+              slug: "syntax/basic-structure",
+            },
+          ],
+        },
+        {
           label: "Reference",
           items: [
             {
@@ -95,8 +104,8 @@ export default defineConfig({
               slug: "reference/google-style-reference",
             },
             {
-              label: "Keyword Reference",
-              slug: "reference/keyword-reference",
+              label: "Key Terms Reference",
+              slug: "reference/key-terms-reference",
             },
           ],
         },

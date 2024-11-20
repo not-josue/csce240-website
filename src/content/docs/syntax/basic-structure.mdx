@@ -1,0 +1,144 @@
+---
+title: Basic Structure
+descriptions: Learn the beginning basic structure of a C++ file in CSCE240.
+---
+
+Every C++ program follows a basic structure that serves as its foundation. 
+This includes **adding comments** to document your code, using **preprocessor 
+directives** to set up the program, and writing the **main function** where 
+the program's execution begins. 
+
+## Commenting
+
+**Comments** are little notes about your code to remind yourself, or tell other 
+developers what your code is doing. Comments are ignored by the compiler, so 
+feel free to write as many as you need!
+
+- Single-line comment: `// Comment goes after`
+
+- Multi-line comment: `/* Comment goes in-between */`
+
+## Main Function
+
+The `main` function is the entry point of any C++ program. It's where the program begins 
+execution. Every C++ program must have exactly one `main` function, and its structure 
+allows the programmer to control the flow of the program. 
+
+You'll write your code inside 
+this function, making it the starting place for any task your program performs.
+The `main` function will usually be found in a file called `driver.cc`.
+
+import { Aside, Code } from "@astrojs/starlight/components";
+import { code } from "@ts/syntax/basic";
+
+<Code title="driver.cc" lang="cpp" code={code.main} />
+
+- `int` is the `return` type of the function
+
+- `main` is the name of the function
+
+- `()` means an empty parameter list for the **main** function
+
+<Aside>The **main** function can also take exactly two parameters `(int, char *)` but you won't see that in this course.</Aside>
+
+- `return 0;` 0 is treated as `false` in C++ and other programming languages so if code reaches all the way to that `return` line 
+the main function returns `false` meaning it is **false that the program had any errors**
+
+## Printing To The Console
+
+Before you can print anything to the console, you need to include the `<iostream>` header file using a **preprocessor directive**.
+
+### Preprocessor Directives
+
+**Preprocessor directives** are instructions that are processed before the actual 
+compilation of your code begins. They typically start with a # symbol and are 
+used to include files or define constants. For example, the directive `#include <iostream>` 
+imports the tools needed to use objects like `std::cout` for output and 
+`std::cin` for input.
+
+### Namespaces
+
+In C++, libraries like `<iostream>` organize their functionality into a namespace called `std`. 
+By specifying `std::cout`, you're telling the compiler you want to use the `cout` object from the 
+standard namespace. This avoids potential naming conflicts and keeps your code clear.
+
+<Aside type="danger">
+You may run into C++ tutorials that have `using namespace std` at the top of their code snippets. 
+This is considered a **bad practice** as you're **importing everything** from the **standard library** instead 
+of just the things that you need.
+</Aside>
+
+### Operators
+
+In C++, **operators** are special symbols or **keywords** that perform operations on variables and values.
+
+The first operator introduced is the **scope resolution operator** `::`. It is used to **access
+members of a namespace or a class**. For example, `std::cout` uses the scope resolution operator 
+to specify that `cout` belongs to the `std` (standard) namespace.
+
+Another operator in C++ is the **stream insertion 
+operator** `<<`, which is used for output. It works alongside the `cout` object to 
+display information on the screen. It's similar to using `System.out.print()` in CSCE145 
+and CSCE146 when you were learning Java.
+
+### Example
+
+The following code shows how to bring each concept together and print a value to the console. 
+Most files in this course will be structured this way:
+
+<Code title="driver.cc" lang="cpp" code={code.printing}/>
+
+Line 4 allows you to bring `cout` into the **global namespace**, 
+letting you use `cout` directly without needing to prepend it 
+with `std::`. This makes the code more concise, especially if 
+you use `cout` multiple times in your program.
+
+However, if you only need to use `cout` once or prefer not to 
+declare it globally, you can reference it directly from the 
+**std namespace**, as shown below:
+
+<Code title="driver.cc" lang="cpp" code={code.localCout}/>
+
+## Escape Sequences
+
+In C++, escape sequences are special character combinations that 
+let you format output in specific ways. They start with a backslash `\` 
+and are used to insert things like new lines, tabs, or special characters 
+into your output.
+
+The following is a list of some escape sequences:
+
+- `\n`: Go to the next line
+- `\r`: Return to the beginning of the current line
+- `\t`: Tab to the next default tab stop
+- `\a`: Ring the system bell
+- `\\`: Used to output a single backslash ("\\")
+
+<Aside>You'll mostly be seeing `\n` in this course as a way to structure output and not the rest of the **escape sequences**.</Aside>
+
+## Endl Stream Manipulator
+
+The `endl` stream manipulator is used to insert a newline character 
+into the output and **flush the output stream**, ensuring that any 
+buffered output is immediately written to the console. You can think 
+of it like the `System.out.println()` of C++.
+
+Since `endl` is part of the std namespace, you need to reference it with 
+`std::endl` unless you've declared it globally with `using std::endl;`. For example:
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+<Tabs>
+
+<TabItem label="Driver" icon="rocket">
+    <Code title="driver.cc" lang="cpp" code={code.endl} />
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+    <Code lang="bash" code={code.endlTerminal} mark={[1,2]} />
+</TabItem>
+
+</Tabs>
+
+<Aside>**Highlighted** lines in the Terminal tab are the commands **you have to enter in the Terminal**, the rest is what you should get as output.</Aside>
+

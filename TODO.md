@@ -40,7 +40,7 @@
 
 - [x] Create and use custom Footer
 
-- [ ] Update link to repo license
+- [x] Update license link
 
 - [x] Update Github repo link
 
@@ -56,14 +56,18 @@
 
 ## Setup Environment
 
-- [ ] Downloading the Tools
+- [x] Downloading the Tools
 
-- [ ] Optional: Visual Studio Code
+- [x] Optional: Visual Studio Code
 
 ## Basic Syntax
 
+- [ ] Basic Structure
+
 ## References
+
+- [ ] Cpplint Reference
 
 - [ ] Google Style Reference
 
-- [ ] Helpful Sites Reference
+- [ ] Key Terms Reference
