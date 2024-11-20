@@ -1,0 +1,113 @@
+---
+title: Arithmetic Operations
+description: Learn how to perform arithmetic operations in C++, including addition, subtraction, multiplication, division, and modulus, with examples.
+lastUpdated: true
+---
+
+Arithmetic operations are fundamental to programming in C++. 
+They allow you to perform calculations such as addition, subtraction, 
+multiplication, division, and finding the remainder using the modulus operator. 
+
+## Operators
+
+The symbols for arithmetic operations are the same as the ones you experienced in Java, and they follow 
+order of operations (PEMDAS):
+
+- `*`: for multiplication
+- `/`: for division
+- `%`: modulus operator
+- `+`: for addition
+- `-`: for subtraction
+
+import { Aside } from "@astrojs/starlight/components"
+
+<Aside>
+You can put an arithmetic operation in a `cout` statement: `cout << x + y << endl;`
+</Aside>
+
+In C++, the results of arithmetic operations **depend on the data types of the operands**. 
+For example, when both operands are integers, the division operator performs **integer division**, 
+truncating any decimal portion. This means `1 / 4` evaluates to `0`. 
+
+However, if at least one operand 
+is a floating-point number, the division operator performs **floating-point division**, preserving the decimal result. 
+For instance, `1 / 4.0` and `1.0 / 4` both evaluate to `0.25`. 
+
+## Compound Assignment Operators
+
+Compound assignment operators are shortcuts that **combine arithmetic operations with assignment**. 
+Instead of writing `x = x + 5`, you can use `x += 5` to achieve the same result in a more concise way. 
+These operators save time and make your code easier to read while performing the same calculations.
+
+| Type | Shortcut | Equivalence |
+| --- | --- | --- |
+| Addition | `x += y` | `x = x + y` |
+| Subtraction | `x -= y` | `x = x - y` |
+| Multiplication | `x *= y` | `x = x * y` |
+| Division | `x /= y` | `x = x / y` |
+| Modulus | `x %= y` | `x = x % y` |
+
+## Increment and Decrement Operators
+
+Increment (`++`) and decrement (`--`) operators are used to **increase or decrease the 
+value of a variable by one**. These operators are commonly used in loops, counters, 
+and other situations where a variable needs to be adjusted step by step.
+
+### Pre-Operations
+
+When the increment (`++`) or decrement (`--`) operator precedes a variable, it is called **pre-increment** 
+or **pre-decrement**. In this case, the operation is performed first, and the updated 
+value of the variable is returned immediately.
+
+```cpp
+int x = 5;
+int y = ++x // x is incremented to 6, and y is assigned the value of 6
+```
+
+### Post-Operations
+
+When the increment (`++`) or decrement (`--`) operator follows a variable, it is called 
+**post-increment** or **post-decrement**, respectively. In this case, the operation uses the 
+current value of the variable first, and then the variable is updated.
+
+```cpp
+int x = 5;
+int y = x++;  // y is assigned the value 5, and then x is incremented to 6
+```
+
+### More Examples 
+
+```cpp
+int x = 3, y;
+y = ++x + 2;
+cout << x << " " << y;
+// Output: 4 6
+```
+
+```cpp
+int x = 3, y;
+y = x++ + 2;
+cout << x << “ “ << y;
+// Output: 4 5
+```
+
+## Type Casting
+
+In C++, when performing arithmetic operations involving both integer and real 
+(floating-point) variables, the integer variable is **implicitly type cast** to a 
+real variable. This ensures that the operation is carried out in floating-point 
+precision rather than integer precision.
+
+```cpp
+int x = 5;
+double y = 2.0;
+double result = x / y;  // x is implicitly cast to 5.0, and the result is 2.5
+```
+
+This **implicit type casting** ensures accurate results when mixing data types in 
+arithmetic operations. However, **explicit type casting** can also be used for 
+greater control when needed. For instance:
+
+```cpp
+double result = static_cast<double>(x) / y;  // Explicitly cast x to a double
+```

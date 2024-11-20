@@ -94,6 +94,10 @@ export default defineConfig({
               label: "Variables & Constants",
               slug: "syntax/variables-and-constants",
             },
+            {
+              label: "Arithmetic Operations",
+              slug: "syntax/arithmetic-operations",
+            },
           ],
         },
         {
