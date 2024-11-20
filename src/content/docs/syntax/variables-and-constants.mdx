@@ -1,0 +1,143 @@
+---
+title: Variables & Constants
+description: Learn how to declare and use variables and constants in C++, including their types, initialization, and best practices for managing data in your programs.
+---
+
+In C++, **variables** and **constants** are used to manage data in your programs. 
+A variable is a label for a memory location that holds a value, **which can 
+change** during the program's execution. In contrast, a constant represents 
+a value that **remains fixed** and cannot be modified after it is defined.
+
+## Variables
+
+In this course, you'll work with several fundamental data types to store different kinds of values:
+
+- `int`: Used for integers (positive and negative whole numbers)
+- `double`: Used for real numbers; it provides more precision and takes up more space
+- `char`: Used to store a single character (any ASCII character) and is initialized with single quotes ('a')
+- `bool`: Used for logical values (true or false)
+
+### Declaring Variables
+
+When declaring a variable in C++, you tell the compiler that `variable_name` will hold values of a specific 
+type (`DataType`). The variable name must be a **valid identifier**, meaning it should follow naming rules, such 
+as starting with a letter and containing no special characters except underscores. At this stage, no value 
+is assigned to the variable, so it contains garbage data until initialized.
+
+import { Aside, Code, TabItem, Tabs } from "@astrojs/starlight/components";
+import { code } from "@ts/syntax/variables";
+
+<Aside>C++ is **CASE SENSITIVE** `var` does **NOT** equal `VAR`!</Aside>
+
+### Style Requirement
+
+The styling convention for variables is lowercase lettering and an underscore to separate each word (snake_case).
+
+<Aside>This is another case where `cpplint` does **NOT** catch this error, and is a case where VSCode does **NOT** fix this styling error for you.</Aside>
+
+<Tabs>
+
+<TabItem label="Good" icon="approve-check">
+<Code title="driver.cc" lang="cpp" code={code.goodVar} />
+</TabItem>
+
+<TabItem label="Bad" icon="close">
+<Code title="driver.cc" lang="cpp" code={code.badVar} />
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+<Code lang="bash" code={code.terminalVar} />
+</TabItem>
+
+</Tabs>
+
+### Initializing Variables
+
+**Initialize** means assigning an initial value to a variable before using it. 
+Initializing variables properly ensures your program avoids using uninitialized values, 
+which can lead to unpredictable behavior.
+
+<Code lang="cpp" code="int current_month = 11;" />
+
+The **assignment operator** (=) assigns a value from right to left, meaning the variable on the left-hand side 
+(LHS) is updated with the value on the right-hand side (RHS). You can use **cascading assignments** to assign 
+the same value to multiple variables in a single line. For example:
+
+<Tabs>
+
+<TabItem label="Driver" icon="rocket">
+<Code title="driver.cc" lang="cpp" code={code.cascade}/>
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+<Code lang="bash" mark={[1,2]} code={code.cascadeTerminal} />
+</TabItem>
+
+</Tabs>
+
+## Constants
+
+In C++, placing the `const` qualifier in front of a variable's declaration ensures that 
+its value **cannot be changed** during program execution. Constants are particularly useful 
+for defining **fixed values** like mathematical constants or configuration settings.
+
+<Aside title="Required Initialization">Constant variables must be initialized at the time of declaration, as their value cannot be altered later.</Aside>
+
+### Style Requirement
+
+The naming convention for **constants** is starting with a lowercase "k", followed by CamelCasing the rest of the name (`kCamelCase`);
+
+<Aside>Yet another case where `cpplint` does **NOT** catch this error, and is a case where VSCode does **NOT** fix this styling error for you.</Aside>
+
+<Tabs>
+
+<TabItem label="Good" icon="approve-check">
+<Code title="driver.cc" lang="cpp" code={code.goodConst} />
+</TabItem>
+
+<TabItem label="Bad" icon="close">
+<Code title="driver.cc" lang="cpp" code={code.badConst} />
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+<Code lang="bash" code={code.terminalConst} />
+</TabItem>
+
+</Tabs>
+
+## Initializing With Input
+
+The `cin` object is used to **take input from the user** in C++. Just like `cout`, it is part of 
+the `std` namespace and requires the inclusion of the `<iostream>` header file at the top of 
+your program. The `cin` object works alongside the **stream extraction operator** (`>>`) to store 
+user input in variables, making it a key tool for interactive programs.
+
+<Tabs>
+
+<TabItem label="Driver" icon="rocket">
+<Code title="driver.cc" lang="cpp" code={code.cin}/>
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+<Code lang="bash" mark={[1,2]} code={code.cinTerminal} />
+</TabItem>
+
+</Tabs>
+
+### Parsing Input
+
+The cin object in C++ allows you to parse structured input by using different data types. The following shows 
+how you can use variables of different data types to parse a date:
+
+<Tabs>
+
+<TabItem label="Driver" icon="rocket">
+<Code title="driver.cc" lang="cpp" code={code.parse}/>
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+<Code lang="bash" mark={[1,2, 4]} code={code.parseTerminal} />
+</TabItem>
+
+</Tabs>
+

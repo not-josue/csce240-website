@@ -62,7 +62,11 @@
 
 ## Basic Syntax
 
-- [ ] Basic Structure
+- [x] Basic Structure
+
+- [ ] Variables & Constants
+
+- [ ] Arithmetic Operations
 
 ## References
 

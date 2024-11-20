@@ -90,6 +90,10 @@ export default defineConfig({
               label: "Basic Structure",
               slug: "syntax/basic-structure",
             },
+            {
+              label: "Variables & Constants",
+              slug: "syntax/variables-and-constants",
+            },
           ],
         },
         {
