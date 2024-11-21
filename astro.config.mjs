@@ -105,6 +105,15 @@ export default defineConfig({
           ],
         },
         {
+          label: "Control Flow",
+          items: [
+            {
+              label: "Control Stuctures",
+              slug: "control/control-structures",
+            },
+          ],
+        },
+        {
           label: "Reference",
           items: [
             {

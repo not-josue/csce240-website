@@ -70,6 +70,18 @@
 
 - [x] Makefile
 
+## Control Flow
+
+- [x] Control Structures
+
+- [ ] Logical Operators
+
+- [ ] If-Else Statement
+
+- [ ] Switch Statement
+
+- [ ] Loops
+
 ## References
 
 - [ ] Cpplint Reference
