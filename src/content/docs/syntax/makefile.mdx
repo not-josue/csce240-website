@@ -1,0 +1,233 @@
+---
+title: Makefile
+description: Learn how to create and use a Makefile to automate the compilation and linking process for your C++ programs in CSCE240.
+lastUpdated: true
+---
+
+`make` is a utility that helps **keep your object code and executable 
+files up-to-date**. It **automates the compilation** process by checking 
+dependencies and only recompiling files that have changed.
+
+The `make` utility looks for a file named `makefile` (or `Makefile`) 
+in the current directory, which contains the rules you've written 
+to define how your files should be compiled and linked.
+
+## Why Make?
+
+Using a `makefile` simplifies the process of **compiling and linking your 
+C++ programs**. Instead of typing long and complex commands every time you 
+want to compile your code, a `makefile` allows you to automate the process 
+with a **single, simple command**. This becomes especially useful as your 
+programs grow and involve multiple files, making make an essential tool 
+for efficient development.
+
+## Syntax
+
+Makefiles follow a specific syntax to define rules and instructions for 
+compiling and linking your programs. In this section, we'll explore the 
+basic structure and components, including how to add comments and define rules.
+
+### Commenting
+
+You can make single-line comments in a `makefile` by starting the line 
+with a #:
+
+```makefile title="makefile"
+# A comment in a makefile
+```
+
+### Make Rule
+
+A make rule defines how a specific file (the target) is created or updated. 
+It consists of three main parts:
+
+1. **Target:** The file to be created or updated (e.g., an object file or executable).
+2. **Prerequisite(s):** The file(s) the target depends on, such as source files or header files.
+3. **Recipe Command(s):** The shell commands to generate or update the target.
+
+```makefile title="makefile"
+target: Prerequisite(s)
+    recipe command(s)
+```
+
+import { Aside } from "@astrojs/starlight/components";
+
+<Aside>
+The line(s) containing recipe command(s) must
+begin with a `tab` **NOT** `spaces`.
+</Aside>
+
+<Aside type="caution">
+Some code editors may **interpret tabs as spaces when copying and pasting recipe commands** 
+from code snippets. If you get the following error, **reset the recipe commands to the start 
+of the line** with `backspace` and enter `tab`:
+
+```shell
+*** missing separator.  Stop.
+```
+</Aside>
+
+```makefile title="makefile"
+hello.o : hello.cc
+	g++ -c hello.cc
+```
+
+- The rule above says the **target** hello.o is dependent on
+the **prerequisite** hello.cc
+
+- When you enter `make hello.o` into the terminal, it will check to see if hello.cc **has
+been updated more recently** than hello.o, and if so, the
+recipe command will execute:
+
+```bash
+make hello.o
+g++ -c hello.cc
+```
+
+### Flags
+
+Flags are options passed to the compiler to control how your program is compiled. 
+In this course, the following flags will be used:
+
+- `-Wall`: Enables most compiler warnings, helping you identify potential issues in your code.
+- `-std=c++17`: Specifies that the program should be compiled using the C++17 standard.
+
+Lets update the `makefile` to include these flags:
+
+```makefile title="makefile"
+hello.o : hello.cc
+    g++ -c -Wall -std=c++17 hello.cc
+```
+
+### Multiple Rules
+
+Makefiles allow you to **define multiple rules**, **each with specific commands**, 
+to handle different parts of the compilation process. For example, you can 
+create separate rules to compile individual source files, link them into an 
+executable, and even 🚀 run the program.
+
+The following updates the makefile to compile, link, and execute a program:
+
+import { Code, Steps ,TabItem, Tabs } from "@astrojs/starlight/components";
+import { code } from "@ts/syntax/makefile";
+
+<Tabs>
+
+<TabItem label="Makefile" icon="seti:makefile">
+    <Code title="makefile" lang="makefile" code={code.multiRuleMake} />
+</TabItem>
+
+<TabItem label="Source" icon="seti:cpp">
+    <Code title="hello.cc" lang="cpp" code={code.multiRuleSource} />
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+    <Code lang="bash" code={code.multiRuleTerminal} />
+</TabItem>
+
+</Tabs>
+
+<Steps>
+
+1. `make hello` will first examine the rule for prerequisite hello.o, and run the recipe
+`g++ -c -Wall -std=c++17 hello.cc`
+
+2. Then it will check if `hello.o` has been updated more recently than the
+executable `hello` and, if so, the recipe below will execute
+`g++ -Wall -std=c++17 hello.o -o hello`
+
+3. Finally it will run the command to execute the `hello` program `./hello`
+
+</Steps>
+
+### Variables
+
+Variables in makefiles are useful for **reducing repetition and minimizing the 
+chance of errors**. Instead of typing out long commands or file names multiple 
+times, you can define them once as a variable and **reuse them** throughout your 
+`makefile`.
+
+The following is the basic syntax:
+
+```makefile title="makefile"
+# Define
+variable_name = value
+# Use Variable
+$(variable_name)
+```
+
+The following are common variables found in the course:
+
+```makefile title="makefile"
+compiler = g++
+flags = -Wall -std=c++17
+compile = $(compiler) -c
+link = $(compiler) $(flags) -o $@
+```
+
+Makefiles include several built-in variables that can simplify your 
+commands by automatically referring to parts of a rule:
+
+- `$<`: Represents the first prerequisite in the rule.
+- `$^`: Represents all prerequisites in the rule.
+- `$@`: Represents the target of the rule.
+
+Lets update the makefile we've been working on with variables:
+
+```makefile title="makefile"
+# Variables
+compiler = g++
+flags = -Wall -std=c++17
+compile = $(compiler) $(flags) -c
+link = $(compiler) $(flags)
+
+# Compile
+hello.o : hello.cc
+    $(compile) $<
+
+# Link
+hello : hello.o
+    $(link) $^ -o $@
+    ./$@
+```
+
+### Clean
+
+A rule you'll encounter in each `makefile` in this course is `clean`. It 
+is a rule to **remove all of the object code files**, **executable files,** and 
+any other temporary files in the directory.
+
+```makefile title="makefile"
+clean :
+    rm *.o hello
+```
+
+<Aside>
+If **no prerequisites are listed**, then recipe commands
+will **execute each time** the rule is made. So, `make clean`
+will always execute the `rm` command.
+</Aside>
+
+What the command is saying is **"remove any files with a** `.o` **extension and any file that is 
+called** `hello`**"** which is the name chosen for the executable.
+
+Lets finalize our makefile, update the source code, execute our program, and clean our folder:
+
+<Tabs>
+
+<TabItem label="Makefile" icon="seti:makefile">
+    <Code title="makefile" lang="makefile" code={code.cleanMake} />
+</TabItem>
+
+<TabItem label="Source" icon="seti:cpp">
+    <Code title="hello.cc" lang="cpp" code={code.cleanSource} />
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+    <Code lang="bash" code={code.cleanTerminal} mark={[1, 7]} />
+</TabItem>
+
+</Tabs>
+
+
+

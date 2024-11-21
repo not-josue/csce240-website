@@ -29,15 +29,22 @@
 
 <style>
   footer {
+    font-size: var(--sl-text-sm);
+    text-align: center;
     display: flex;
     justify-content: center;
     align-content: center;
     background-color: var(--sl-color-bg-nav);
-    height: var(--sl-nav-height);
     padding: 1rem;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+  }
+
+  @media (min-width: 50rem) {
+    footer {
+      font-size: var(--sl-text-base);
+    }
   }
 </style>

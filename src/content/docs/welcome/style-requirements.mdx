@@ -39,7 +39,7 @@ To get you started, here are a couple of style rules that you will always deal w
 
 import { Aside } from '@astrojs/starlight/components';
 
-<Aside>The **Driver** contains the correct style, the **Terminal** tab contains the error you get for incorrect styling.</Aside>
+<Aside>The **Correct Style** tab contains the correct style, the **Terminal Error** tab contains the error you get for incorrect styling.</Aside>
 
 ### Beginner Bracket Placement
 
@@ -51,23 +51,23 @@ import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
 import { code } from "@ts/welcome/style"
 
 <Tabs>
-<TabItem label="Driver" icon="rocket">
+<TabItem label="Correct Style" icon="approve-check">
 <Code code={code.brackets} lang="cpp" title="driver.cc"/>
 </TabItem>
-<TabItem label="Terminal" icon="laptop">
+<TabItem label="Terminal Error" icon="error">
 <Code code={code.bracketsErrors} lang="bash"/>
 </TabItem>
 </Tabs>
 
 ### Column Length
 
-Do **NOT** go past column 80. Though the **Driver** looks awkward, it is styled correctly!
+Do **NOT** go past column 80. Though the example looks awkward, it is styled correctly!
 
 <Tabs>
-<TabItem label="Driver" icon="rocket">
+<TabItem label="Correct Style" icon="approve-check">
 <Code code={code.columnLength} lang="cpp" title="driver.cc"/>
 </TabItem>
-<TabItem label="Terminal" icon="laptop">
+<TabItem label="Terminal Error" icon="error">
 <Code code={code.columnError} lang="bash"/>
 </TabItem>
 </Tabs>
@@ -78,10 +78,10 @@ Just like in CSCE145 and CSCE146, you are required to **author each page through
 will be used as the name.
 
 <Tabs>
-<TabItem label="Driver" icon="rocket">
+<TabItem label="Correct Style" icon="approve-check">
 <Code code={code.copyright} lang="cpp" title="driver.cc"/>
 </TabItem>
-<TabItem label="Terminal" icon="laptop">
+<TabItem label="Terminal Error" icon="error">
 <Code code={code.copyrightError} lang="bash"/>
 </TabItem>
 </Tabs>
@@ -101,7 +101,7 @@ Every document should end with a blank line at the end. Pretty simple.
 
 <Aside type='danger'>Coding snippets do **NOT** come with an empty blank line at the end thus will not pass this requirement in `cpplint`.</Aside>
 
-<Code code={code.newline} lang="bash"/>
+<Code code={code.newline} title='Terminal Error' lang="bash"/>
 
 
 

@@ -98,6 +98,10 @@ export default defineConfig({
               label: "Arithmetic Operations",
               slug: "syntax/arithmetic-operations",
             },
+            {
+              label: "Makefile",
+              slug: "syntax/makefile",
+            },
           ],
         },
         {

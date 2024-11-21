@@ -5,17 +5,17 @@ const makefile: string =
 flags = -std=c++${STD} -Wall
 
 hello.o : hello.cc hello.h
-	g++ $(flags) -c $<
+	  g++ $(flags) -c $<
 
 driver.o : driver.cc hello.h
-	g++ $(flags) -c $<
+	  g++ $(flags) -c $<
 
 driver : driver.o hello.o
-	g++ $(flags) $^
-	./a.out
+	  g++ $(flags) $^
+	  ./a.out
 
 clean:
-	rm *.o a.out
+	  rm *.o a.out
 `;
 
 const header: string =

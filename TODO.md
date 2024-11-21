@@ -64,9 +64,11 @@
 
 - [x] Basic Structure
 
-- [ ] Variables & Constants
+- [x] Variables & Constants
 
-- [ ] Arithmetic Operations
+- [x] Arithmetic Operations
+
+- [x] Makefile
 
 ## References
 
