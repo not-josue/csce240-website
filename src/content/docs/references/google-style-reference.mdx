@@ -12,26 +12,36 @@ programs. Use this as a guide to meet the course's styling expectations.
 import { Aside, Badge, Code, TabItem, Tabs } from "@astrojs/starlight/components";
 import { styleGuide } from "@ts/references/style";
 
-### `Column Length` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+## `Access Specifier Indent` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+Access specifiers like `public`, `protected`, and `private` should be indented by 1-space.
+```cpp title="myclass.h"
+class MyClass {
+ public:
+  void Print() const;
+};
+```
+[Reference to `cpplint` error](./cpplint-reference#access-specifier-indent)
+
+## `Column Length` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 Your **MAX** column length is 80.
 <Code lang="cpp"  code={ styleGuide.columnLength }/>
 [Reference to `cpplint` error](./cpplint-reference#column-length)
 
-### `Constant` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
+## `Constant` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 Constants should be formatted with a lowercase `k` followed by `CamelCasing` the rest of the name.
 ```cpp
 const double kPie = 3.14;
 ```
 Error not detected by `cpplint`.
 
-### `Copyright` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+## `Copyright` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 The first line of each file should be authored with a comment in the following format `// Copyright <year> <name>`.
 ```cpp
 // Copyright 2024 CSCE240
 ```
 [Reference to `cpplint` error](./cpplint-reference#copyright)
 
-### `Function Bracket Placement` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+## `Function Bracket Placement` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 Opening brackets should **ALWAYS** be in the same line as the associated statement. If the function implementation is only 
 one line small line, you can place the closing bracket on the same line.
 
@@ -49,17 +59,18 @@ one line small line, you can place the closing bracket on the same line.
 
 [Reference to `cpplint` error](./cpplint-reference#function-bracket-placement)
 
-### `Indentation` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
+## `Indentation` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 2-space indent length per indentation level.
 <Code lang="cpp" code={ styleGuide.indentation } />
 Error not detected by `cpplint`.
 
-### `Newline Character` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+## `Newline Character` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 Every file should end with a blank line.
-<Aside type="caution">Coding snippets do not provide an empty line at the end.</Aside>
-[Reference to `cpplint` error](./cpplint-reference#newline-character)
 
-### `Variable` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
+[Reference to `cpplint` error](./cpplint-reference#newline-character)
+<Aside type="caution">Coding snippets do not provide an empty line at the end.</Aside>
+
+## `Variable` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 Variables should be named using `snake_case`.
 ```cpp
 int my_integer = 10;

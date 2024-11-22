@@ -1,9 +1,9 @@
 # Key Terms List
 
-- Identifier
-- Namespace
-- Operators
-- Preprocessor Directives
-- Scope Resolution Operator
-- Stream Extraction Operator
-- Stream Insertion Operator
+- [x] Identifier
+- [ ] Namespace
+- [ ] Operators
+- [ ] Preprocessor Directives
+- [ ] Scope Resolution Operator
+- [ ] Stream Extraction Operator
+- [ ] Stream Insertion Operator
