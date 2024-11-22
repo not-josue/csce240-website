@@ -10,9 +10,9 @@ npm create astro@latest -- --template starlight
 
 ## Details
 
-- [Astro](https://astro.build/) - Web Framework
+- [Astro](https://astro.build/) - web framework
 
-- [Catppuccin](https://github.com/TheOtterlord/catppuccin-starlight) - Color Theme plugin
+- [Catppuccin](https://github.com/TheOtterlord/catppuccin-starlight) - color theme plugin
 
     - Project wouldn't build using `catppuccin()`
     - Easy fix is to copy and paste the CSS files into a `styles` folder in the `src` folder
@@ -32,16 +32,16 @@ npm create astro@latest -- --template starlight
     })
 ```
 - Fonts through [Fontsource](https://fontsource.org/):
-    - [Inter](https://fontsource.org/fonts/inter) - Base Font
-    - [Fira Code](https://fontsource.org/fonts/fira-code) - Code Font
-    - [Trirong](https://fontsource.org/fonts/trirong) - Heading Font
+    - [Inter](https://fontsource.org/fonts/inter) - base font
+    - [Fira Code](https://fontsource.org/fonts/fira-code) - code font
+    - [Trirong](https://fontsource.org/fonts/trirong) - heading font
 
-- [Excalidraw](https://excalidraw.com/) - Drawing Tool
+- [Excalidraw](https://excalidraw.com/) - drawing tool
 
-- [Favicon.io](https://favicon.io/) - Favicon Generator
+- [Favicon.io](https://favicon.io/) - favicon generator
 
-- [Inkscape](https://inkscape.org/) - Graphic Design
+- [Inkscape](https://inkscape.org/) - graphic design
 
-- [Starlight](https://starlight.astro.build/) - Astro Technical Documentation Template
+- [Starlight](https://starlight.astro.build/) - astro technical documentation template
 
-- [TinyPNG](https://tinypng.com/) - Image Compression
+- [TinyPNG](https://tinypng.com/) - image compression
