@@ -1,0 +1,68 @@
+---
+title: Google Style Reference
+description: Explore the Google C++ Style Guide requirements followed in CSCE240, including naming conventions, formatting rules, and best practices.
+lastUpdated: true
+---
+
+This page outlines the **correct styling practices** for scenarios encountered in the course, 
+based on the **Google C++ Style Guide**. Each section provides clear examples to ensure your 
+code adheres to the required standards, helping you write clean, readable, and maintainable 
+programs. Use this as a guide to meet the course's styling expectations.
+
+import { Aside, Badge, Code, TabItem, Tabs } from "@astrojs/starlight/components";
+import { styleGuide } from "@ts/references/style";
+
+### `Column Length` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+Your **MAX** column length is 80.
+<Code lang="cpp"  code={ styleGuide.columnLength }/>
+[Reference to `cpplint` error](./cpplint-reference#column-length)
+
+### `Constant` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
+Constants should be formatted with a lowercase `k` followed by `CamelCasing` the rest of the name.
+```cpp
+const double kPie = 3.14;
+```
+Error not detected by `cpplint`.
+
+### `Copyright` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+The first line of each file should be authored with a comment in the following format `// Copyright <year> <name>`.
+```cpp
+// Copyright 2024 CSCE240
+```
+[Reference to `cpplint` error](./cpplint-reference#copyright)
+
+### `Function Bracket Placement` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+Opening brackets should **ALWAYS** be in the same line as the associated statement. If the function implementation is only 
+one line small line, you can place the closing bracket on the same line.
+
+<Tabs>
+
+<TabItem label="Single-Line" icon="seti:cpp">
+    <Code lang="cpp" code={ styleGuide.funcBrackets1 } />
+</TabItem>
+
+<TabItem label="Multi-Line" icon="seti:cpp">
+    <Code lang="cpp" code={ styleGuide.funcBrackets2 } />
+</TabItem>
+
+</Tabs>
+
+[Reference to `cpplint` error](./cpplint-reference#function-bracket-placement)
+
+### `Indentation` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
+2-space indent length per indentation level.
+<Code lang="cpp" code={ styleGuide.indentation } />
+Error not detected by `cpplint`.
+
+### `Newline Character` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+Every file should end with a blank line.
+<Aside type="caution">Coding snippets do not provide an empty line at the end.</Aside>
+[Reference to `cpplint` error](./cpplint-reference#newline-character)
+
+### `Variable` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
+Variables should be named using `snake_case`.
+```cpp
+int my_integer = 10;
+double my_double = 10.0;
+```
+Error not detected by `cpplint`.

@@ -11,13 +11,13 @@ guidelines, requiring attention to details such as maximum column lengths, case 
 ## C++ Google Style Guide
 
 This course follows the <a href="https://google.github.io/styleguide/cppguide.html" target="_blank" rel="noopener noreferrer">C++ Google Style Guide</a>.
-As we cover each topic, you'll be introduced to specific styling conventions relevant to that section. A [Style Reference](../reference/style) 
+As we cover each topic, you'll be introduced to specific styling conventions relevant to that section. A [Style Reference](../references/google-style-reference) 
 has been written to quickly find any **style requirements** you may have forgotten.
 
 ## Cpplint Style Checker
 
 You'll be using a tool called `cpplint` to check your code for **styling errors**. While `cpplint` will catch most issues, 
-there are certain cases where it might not flag a **styling error**, even if one exists. A [Cpplint Reference](../reference/ccplint) is available, 
+there are certain cases where it might not flag a **styling error**, even if one exists. A [Cpplint Reference](../references/cpplint-reference) is available, 
 listing common issues, solutions, and other FAQs related to `cpplint`. The version of `cpplint` you download will depend on 
 your operating system. To check your files, use `cpplint <filename>` where `<filename>` is replaced by the name of the file and the 
 extension (for this course `.h` and `.cc`).
@@ -41,23 +41,8 @@ import { Aside } from '@astrojs/starlight/components';
 
 <Aside>The **Correct Style** tab contains the correct style, the **Terminal Error** tab contains the error you get for incorrect styling.</Aside>
 
-### Beginner Bracket Placement
-
-You may have noticed from the code snippets the bracket of the **main** function is always placed on the same line as the **associated statement**. 
-This is because it is a required style. If the statement is short enough, as seen in previous code snippets, the ending bracket can also be in the same line. 
-Bracket placement will be expanded further in the guide. 
-
 import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
 import { code } from "@ts/welcome/style"
-
-<Tabs>
-<TabItem label="Correct Style" icon="approve-check">
-<Code code={code.brackets} lang="cpp" title="driver.cc"/>
-</TabItem>
-<TabItem label="Terminal Error" icon="error">
-<Code code={code.bracketsErrors} lang="bash"/>
-</TabItem>
-</Tabs>
 
 ### Column Length
 
@@ -83,6 +68,21 @@ will be used as the name.
 </TabItem>
 <TabItem label="Terminal Error" icon="error">
 <Code code={code.copyrightError} lang="bash"/>
+</TabItem>
+</Tabs>
+
+### Function Bracket Placement
+
+You may have noticed from the code snippets the bracket of the **main** function is always placed on the same line as the **associated statement**. 
+This is because it is a required style. If the statement is short enough, as seen in previous code snippets, the ending bracket can also be in the same line. 
+Bracket placement will be expanded further in the guide.
+
+<Tabs>
+<TabItem label="Correct Style" icon="approve-check">
+<Code code={code.brackets} lang="cpp" title="driver.cc"/>
+</TabItem>
+<TabItem label="Terminal Error" icon="error">
+<Code code={code.bracketsErrors} lang="bash"/>
 </TabItem>
 </Tabs>
 

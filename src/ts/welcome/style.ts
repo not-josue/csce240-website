@@ -14,7 +14,7 @@ driver.cc:4:  Line ends in whitespace.  Consider deleting these extra spaces.  [
 driver.cc:5:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
 Done processing driver.cc
 Total errors found: 2
-`
+`;
 
 const copyright : string = 
 `

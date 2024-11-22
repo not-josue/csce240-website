@@ -1,0 +1,42 @@
+---
+title: Cpplint Reference
+description: Explore common Cpplint errors, how to fix them, acceptable errors, and style issues that Cpplint does not catch for CSCE240.
+lastUpdated: true
+---
+
+This page provides a list of common `cpplint` errors, along with 
+links to the correct styling approach. Understanding these errors will 
+help you debug and improve your code to meet the Google C++ Style 
+Guide requirements. Use this reference to identify and resolve 
+style issues efficiently.
+
+import { Badge, Code } from "@astrojs/starlight/components";
+import { errors } from "@ts/references/cpplint";
+
+### `Column Length` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+<Code lang="shell"  code={ errors.columnError }/>
+[Reference to style](./google-style-reference#column-length)
+
+### `Constant` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
+<Code lang="shell"  code={ errors.notDetected }/>
+[Reference to style](./google-style-reference#constant)
+
+### `Copyright` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+<Code lang="shell"  code={ errors.copyrightError }/>
+[Reference to style](./google-style-reference#copyright)
+
+### `Function Bracket Placement` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+<Code lang="shell"  code={ errors.bracketFunctionError }/>
+[Reference to style](./google-style-reference#function-bracket-placement)
+
+### `Indentation` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
+<Code lang="shell"  code={ errors.notDetected}/>
+[Reference to style](./google-style-reference#indentation)
+
+### `Newline Character` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+<Code lang="shell"  code={ errors.newlineError}/>
+[Reference to style](./google-style-reference#newline-character)
+
+### `Variable` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
+<Code lang="shell"  code={ errors.notDetected}/>
+[Reference to style](./google-style-reference#variable)

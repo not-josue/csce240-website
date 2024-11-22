@@ -114,19 +114,19 @@ export default defineConfig({
           ],
         },
         {
-          label: "Reference",
+          label: "References",
           items: [
             {
               label: "Cpplint Reference",
-              slug: "reference/cpplint-reference",
+              slug: "references/cpplint-reference",
             },
             {
               label: "Google Style Reference",
-              slug: "reference/google-style-reference",
+              slug: "references/google-style-reference",
             },
             {
               label: "Key Terms Reference",
-              slug: "reference/key-terms-reference",
+              slug: "references/key-terms-reference",
             },
           ],
         },

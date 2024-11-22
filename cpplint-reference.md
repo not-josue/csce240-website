@@ -1,4 +1,4 @@
-# Style References
+# Cpplint Reference
 
 - [x] Column Length
 - [x] Constant
