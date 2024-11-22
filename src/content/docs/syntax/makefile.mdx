@@ -72,11 +72,11 @@ hello.o : hello.cc
 	g++ -c hello.cc
 ```
 
-- The rule above says the **target** hello.o is dependent on
+- The rule above says the **target** `hello.o` is dependent on
 the **prerequisite** hello.cc
 
-- When you enter `make hello.o` into the terminal, it will check to see if hello.cc **has
-been updated more recently** than hello.o, and if so, the
+- When you enter `make hello.o` into the terminal, it will check to see if `hello.cc` **has
+been updated more recently** than `hello.o`, and if so, the
 recipe command will execute:
 
 ```bash
