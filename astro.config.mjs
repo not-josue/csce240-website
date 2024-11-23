@@ -111,6 +111,10 @@ export default defineConfig({
               label: "Control Stuctures",
               slug: "control/control-structures",
             },
+            {
+              label: "Logical Expressions",
+              slug: "control/logical-expressions",
+            },
           ],
         },
         {

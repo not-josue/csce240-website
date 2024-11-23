@@ -1,0 +1,90 @@
+---
+title: Logical Expressions
+description: Learn how to construct logical expressions in C++ using relational and logical operators to control the flow of your programs effectively.
+lastUpdated: true
+---
+
+Logical expressions are a fundamental part of control flow in C++. They **evaluate to either true or false** and are used to 
+**make decisions or repeat actions** in your programs. By combining relational operators (e.g., `==`, `<`, `>`) and logical operators 
+(e.g., `&&`, `||`, `!`), you can create complex conditions that determine how your code executes.
+
+## Relational Operators
+
+Relational operators compare two values and return a boolean result: 
+`true` if the condition is met, or `false` if it is not. These operators 
+are commonly used in logical expressions to make decisions or control loops.
+
+| Operator | Meaning | Example |
+| --- | --- | --- |
+| `<` | less than | `my_variable < 10` |
+| `>` | greater than | `my_variable > 10` |
+| `<=` | less than or equal to | `i <= size` |
+| `>=` | greater than or equal to | `value >= 1` |
+| `==` | equals | `value % 2 == 0` |
+| `!=` | not equals | `choice != "quit"` |
+
+## Logical Operators
+
+In C++, the primary logical operators are AND (`&&`), OR (`||`), and NOT (`!`). 
+These operators are used to evaluate multiple conditions or invert a condition's 
+truth value, enabling more flexible and dynamic decision-making in your programs.
+
+When you need to check for multiple conditions, use the AND operator:
+
+```cpp
+x > 0 && x < 10
+```
+
+The OR operator is useful when meeting multiple conditions leads to the same result:
+
+```cpp
+job == "web developer" || job == "frontend developer"
+```
+
+An example for when to use the NOT operator is when you are looking for falsy values.
+
+```cpp
+(!a_true_value)
+```
+
+## Truth Tables
+
+Truth tables are a simple way to visualize how logical operators evaluate conditions. 
+They show all possible combinations of input values and the corresponding output for 
+operators like `AND`, `OR`, and `NOT`.
+
+### AND
+
+The AND operator (`&&`) returns `true` only if both conditions are true. By looking at the 
+truth table, you can see that if even one condition is `false`, the entire statement 
+evaluates to `false`.
+
+| A | B | A && B |
+| :---: | :---: | :---: |
+| `true` | `true` | `true` |
+| `true` | `false` | `false` |
+| `false` | `true` | `false` |
+| `false` | `false` | `false` |
+
+### OR
+
+The OR operator (`||`) returns `true` if at least one of the conditions is `true`. By examining the 
+truth table, you can see that the statement evaluates to `false` only when both conditions are `false`.
+
+| A | B | A \|\| B |
+| :---: | :---: | :---: |
+| `true` | `true` | `true` |
+| `true` | `false` | `true` |
+| `false` | `true` | `true` |
+| `false` | `false` | `false` |
+
+### NOT
+
+The NOT operator (`!`) inverts the truth value of a condition. If the condition is `true`, applying the NOT 
+operator makes it `false`, and vice versa.
+
+| A | !A |
+| :---: | :---: |
+| `true` | `false` |
+| `false` | `true` |
+
