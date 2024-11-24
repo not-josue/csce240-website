@@ -8,4 +8,5 @@
 - [x] If-Else Brackets
 - [x] Indentation
 - [x] Newline Character
+- [ ] Switch Brackets
 - [x] Variable

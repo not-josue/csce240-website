@@ -15,11 +15,7 @@ import { errors } from "@ts/references/cpplint";
 
 
 ## `Access Specifier Indent` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
-```shell
-myclass.h:3:  public: should be indented +1 space inside class MyClass  [whitespace/indent] [3]
-Done processing myclass.h
-Total errors found: 1
-```
+<Code lang="shell"  code={ errors.accessSpecifierError }/>
 [Reference to style](./google-style-reference#access-specifier-indent)
 
 ## `Column Length` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
@@ -41,27 +37,16 @@ Total errors found: 1
 ## `If-Else Brackets` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 
 Misplaced `if` bracket:
-```shell
-driver.cc:12:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
-```
+<Code lang="shell"  code={ errors.misplacedIfBracket }/>
+
 Misplaced `else` statement:
-```shell
-driver.cc:14:  An else should appear on the same line as the preceding }  [whitespace/newline] [4]
-driver.cc:14:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
-```
+<Code lang="shell"  code={ errors.misplacedElseBracket }/>
 
 Missing brackets when including an `else` statement:
-```shell
-driver.cc:8:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-driver.cc:8:  Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
-driver.cc:11:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-driver.cc:13:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-```
+<Code lang="shell"  code={ errors.missingIfElseBrackets }/>
 
 You may also see the following error if you omit brackets when using nested `if-else` statements:
-```shell
-driver.cc:11:  Else clause should be indented at the same level as if. Ambiguous nested if/else chains require braces.  [readability/braces] [4]
-```
+<Code lang="shell"  code={ errors.missingNestedBrackets }/>
 
 
 [Reference to style](./google-style-reference#if-else-brackets)
@@ -73,6 +58,13 @@ driver.cc:11:  Else clause should be indented at the same level as if. Ambiguous
 ## `Newline Character` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 <Code lang="shell"  code={ errors.newlineError}/>
 [Reference to style](./google-style-reference#newline-character)
+
+## `Switch Brackets` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+```shell
+driver.cc:10:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+driver.cc:11:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+```
+[Reference to style](./google-style-reference#switch-brackets)
 
 ## `Variable` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 <Code lang="shell"  code={ errors.notDetected}/>

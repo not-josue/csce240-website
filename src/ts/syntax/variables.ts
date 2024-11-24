@@ -1,25 +1,16 @@
 const goodVar: string =
 `
-// Copyright 2024 CSCE2024
-int main() {
-  int my_var;
-  return 0;
-}
+int my_var;
 `;
 
 const badVar: string =
 `
-// Copyright 2024 CSCE2024
-int main() {
-  int myVar;
-  return 0;
-}
+int myVar;
 `;
 
 const terminalVar: string =
 `
 cpplint driver.cc
-Done processing driver.cc
 `;
 
 const cascade: string =
@@ -46,20 +37,12 @@ g++ driver.cc
 
 const goodConst: string =
 `
-// Copyright 2024 CSCE2024
-int main() {
-  const double kPie = 3.14;
-  return 0;
-}
+const double kPie = 3.14;
 `;
 
 const badConst: string =
 `
-// Copyright 2024 CSCE2024
-int main() {
-  const double PIE = 3.14;
-  return 0;
-}
+const double PIE = 3.14;
 `;
 
 const terminalConst: string =

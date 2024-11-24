@@ -78,7 +78,7 @@
 
 - [x] If-Else Statement
 
-- [ ] Switch Statement
+- [x] Switch Statement
 
 - [ ] Loops
 

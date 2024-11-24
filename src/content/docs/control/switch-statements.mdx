@@ -25,7 +25,7 @@ switch (integer_expression) {
     break;
   // ...
   default:
-  }
+}
 ```
 
 import { Aside } from "@astrojs/starlight/components";
@@ -40,3 +40,79 @@ This behavior, known as **fall-through**, can lead to unintended results.
 However, the `break` statement is not required in the `default` case since 
 it is the last block and no further execution follows.
 </Aside>
+
+## Use Cases
+
+`switch` statements are particularly **useful for menu-driven scenarios**, where a 
+user selects an option, and the program executes the corresponding code block. 
+This structure makes the code more organized and easier to manage compared to 
+multiple `if-else` statements.
+
+```cpp
+// Copyright 2024 CSCE240
+#include <iostream>
+
+using std::cin;
+using std::cout;
+using std::endl;
+
+int main() {
+  // Message user
+  cout << "Welcome to the Program!" << endl;
+  cout << "-----------------------" << endl;
+  cout << "Enter 1: To Do This\nEnter 2: To Do That\nEnter 3: To Do "
+          "Something\nEnter 4: To Quit"
+       << endl;
+      
+  // Get user input
+  int input;
+  cin >> input;
+
+  // Do something
+  switch (input) {
+    case 1:
+      // Do this
+      break;
+    case 2:
+      // Do that
+      break;
+    case 3:
+      // Do something
+      break;
+    case 4:
+      cout << "Goodbye..." << endl;
+      break;
+    default:
+      cout << "Please select one of the allowed options..." << endl;
+  }
+
+  return 0;
+}
+```
+
+<Aside>
+You would want to wrap most of the program in a `while` loop which will be covered in another section so that it repeats until the user quits.
+</Aside>
+
+`switch` statements can also be useful if you need to `return` a value when creating functions, which will be covered later. If returning a value, 
+you can omit the `break` statements.
+
+```cpp
+switch (month) {
+  case 1:
+    return "January";
+  case 2:
+    return "February";
+  // Cont'd
+}
+```
+
+## Style Requirements
+
+When creating a `switch` statement, put the opening bracket \{ in the same line as the `switch` statement like the previous examples. The 
+following error is thrown by `cpplint` when you've incorrectly styled it:
+
+```shell
+driver.cc:10:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+driver.cc:11:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+```

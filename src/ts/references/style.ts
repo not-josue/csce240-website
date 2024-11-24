@@ -82,8 +82,22 @@ int main() {
 }
 `;
 
+const switchBrackets: string =
+`
+switch (integer_expression) {
+  case value1:
+    // Case actions
+    break;
+  case value2:
+    // Case actions
+    break;
+  // ...
+  default:
+}
+`;
+
 const styleGuide: { columnLength: string, funcBrackets1: string, funcBrackets2: string, ifNoElse: string, ifWithElse: string, 
-ifWithNested: string,  indentation: string } =
-{ columnLength, funcBrackets1, funcBrackets2, ifNoElse, ifWithElse, ifWithNested, indentation };
+ifWithNested: string,  indentation: string, switchBrackets: string, } =
+{ columnLength, funcBrackets1, funcBrackets2, ifNoElse, ifWithElse, ifWithNested, indentation, switchBrackets, };
 
 export { styleGuide };
