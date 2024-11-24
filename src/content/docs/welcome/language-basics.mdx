@@ -120,3 +120,34 @@ output or performing the intended tasks. To run the executable file, use the fol
 This command assumes the default output file name, `a.out`. If you specified a different name during the **linking step** 
 (e.g., `-o myprogram`), replace `a.out` with the name of your **executable**.
 </Aside>
+
+## Errors
+
+Errors in C++ can occur in different forms, and understanding them is key to debugging your programs. Two common types of errors you'll 
+encounter are **syntax errors** and **logic errors**.
+
+### Syntax Errors
+
+Syntax errors occur when **the code violates the rules of the C++** language. These errors **prevent the program from compiling** and often result 
+from issues like missing semicolons, incorrect spelling of keywords, or unmatched parentheses. For example:
+
+```cpp
+int x = 10 // Missing semicolon
+```
+
+### Logic Errors
+
+Logic errors occur when the **code compiles and runs but doesn't produce the 
+expected result**. These errors are **caused by incorrect logic or assumptions** 
+in the program, such as using the wrong operator or formula. For example:
+
+```cpp
+if (x = 2) { // Should be x == 2
+  cout << "x is 2" << endl;
+} else {
+  cout << "x is not 2" << endl;
+}
+```
+
+Since the **assignment operator** is used instead of a **comparison operator**, `x` will 
+**ALWAYS** equal `2`.

@@ -25,6 +25,37 @@ int main() {
 }
 `;
 
+const ifNoElse: string =
+`
+if (true) // Do something
+// OR
+if (true)
+  // Do something
+`;
+
+const ifWithElse: string = 
+`
+if (true) {
+  // Do something
+} else {
+  // Do something 
+}
+`;
+
+const ifWithNested: string =
+`
+if (true) {
+  // Do something
+  if (true) {
+    // Do something
+  } else {
+    // Do something 
+  }
+} else {
+  // Do something
+}
+`;
+
 const indentation: string =
 `
 // Copyright 2024 CSCE240
@@ -51,7 +82,8 @@ int main() {
 }
 `;
 
-const styleGuide: { columnLength: string, funcBrackets1: string, funcBrackets2: string, indentation: string } =
-{ columnLength, funcBrackets1, funcBrackets2, indentation };
+const styleGuide: { columnLength: string, funcBrackets1: string, funcBrackets2: string, ifNoElse: string, ifWithElse: string, 
+ifWithNested: string,  indentation: string } =
+{ columnLength, funcBrackets1, funcBrackets2, ifNoElse, ifWithElse, ifWithNested, indentation };
 
 export { styleGuide };

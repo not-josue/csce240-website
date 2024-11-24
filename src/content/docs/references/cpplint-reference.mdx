@@ -34,9 +34,37 @@ Total errors found: 1
 <Code lang="shell"  code={ errors.copyrightError }/>
 [Reference to style](./google-style-reference#copyright)
 
-## `Function Bracket Placement` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+## `Function Brackets` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 <Code lang="shell"  code={ errors.bracketFunctionError }/>
-[Reference to style](./google-style-reference#function-bracket-placement)
+[Reference to style](./google-style-reference#function-brackets)
+
+## `If-Else Brackets` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+
+Misplaced `if` bracket:
+```shell
+driver.cc:12:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+```
+Misplaced `else` statement:
+```shell
+driver.cc:14:  An else should appear on the same line as the preceding }  [whitespace/newline] [4]
+driver.cc:14:  If an else has a brace on one side, it should have it on both  [readability/braces] [5]
+```
+
+Missing brackets when including an `else` statement:
+```shell
+driver.cc:8:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+driver.cc:8:  Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+driver.cc:11:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+driver.cc:13:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+```
+
+You may also see the following error if you omit brackets when using nested `if-else` statements:
+```shell
+driver.cc:11:  Else clause should be indented at the same level as if. Ambiguous nested if/else chains require braces.  [readability/braces] [4]
+```
+
+
+[Reference to style](./google-style-reference#if-else-brackets)
 
 ## `Indentation` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 <Code lang="shell"  code={ errors.notDetected}/>

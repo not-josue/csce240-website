@@ -115,6 +115,14 @@ export default defineConfig({
               label: "Logical Expressions",
               slug: "control/logical-expressions",
             },
+            {
+              label: "If-Else Statements",
+              slug: "control/if-else-statements",
+            },
+            {
+              label: "Switch Statements",
+              slug: "control/switch-statements",
+            },
           ],
         },
         {

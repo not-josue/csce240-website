@@ -8,7 +8,7 @@
 
 - [x] Deploy to Vercel
 
-- [ ] Update README
+- [x] Update README
 
 ## Global
 
@@ -74,9 +74,9 @@
 
 - [x] Control Structures
 
-- [ ] Logical Operators
+- [x] Logical Operators
 
-- [ ] If-Else Statement
+- [x] If-Else Statement
 
 - [ ] Switch Statement
 

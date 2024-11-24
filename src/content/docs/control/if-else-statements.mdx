@@ -1,0 +1,168 @@
+---
+title: If-Else Statements
+description: Learn how to use if-else statements in C++ to make decisions and execute different blocks of code based on conditional expressions.
+lastUpdated: true
+---
+
+The `if-else` statement allows a program to **choose between 
+two paths based on a condition**. If the condition evaluates 
+to `true`, one block of code is executed; otherwise, the 
+alternative block is executed.
+
+![A flow chart that shows a decision based flow chart](@assets/control/decision.webp)
+
+## Syntax
+
+An `if-else` statement in C++ follows this basic structure:
+
+```cpp
+if (logical expression) {
+  // Code to execute if condition is true
+} else {
+  // Code to execute if condition is false
+}
+```
+
+The `else` block is optional in C++. If you only need to execute 
+code when the condition is `true`, you can omit the `else` statement:
+
+```cpp
+if (condition) {
+  // Code to execute if condition is true
+}
+```
+
+You can nest `if-else` statements within one another to handle multiple 
+conditions. This structure allows your program to make more complex 
+decisions by checking additional conditions inside the `if` or `else` blocks. 
+For example:
+
+```cpp
+if (true) {
+  // Do something...
+  if (true) {
+    // Do something...
+  } else {
+    // Do something...
+  }
+} else {
+  // Do something...
+}
+```
+
+If you have more than 2 cases you can use as many `else if` statements as you need:
+
+```cpp
+if (condition1) {
+  // Do something
+} else if (condition2) {
+  // Do something
+} else if (condition3) {
+  // Do something
+} else {
+  // Do something
+}
+```
+
+## Style Requirements
+
+According to the Google Style Guide, **ALWAYS** use braces {} with 
+`if` and `else` statements, even if the block contains only a single 
+line of code. Brackets are also required if nesting `if` statements. 
+The final requirement is that `else` should appear on the same line 
+as the preceding closing bracket `}`:
+
+```cpp
+if (account < price) {
+  cout << "Insufficient funds" << endl;
+} else {
+  account -= price;
+  cout << "Thank you for your order!" << endl;
+}
+```
+
+You can omit the braces if your code block does not contain an `else` 
+statement and consists of only a single line. If the statement is short 
+enough, you can even place it all on one line:
+
+```cpp
+if (highest_score) cout << "You have the #1 rank!" << endl;
+```
+
+import { Aside } from "@astrojs/starlight/components";
+
+<Aside type="caution">
+Keep in mind that omitting braces can lead to errors if additional lines are added to the block later.
+</Aside>
+
+### Incorrect Styles
+
+The next examples show a couple of errors thrown by `cpplint` when your `if-else` statement is incorrectly styled. 
+I've only shown the main error messages for the first two examples instead of the full error message as they only 
+mention `whitespace` errors that don't really tell you what the issue is.
+
+import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
+import { code } from "@ts/control/if-else";
+
+The following is an example of an incorrectly placed opening bracket:
+
+<Tabs>
+  <TabItem label="Incorrect Style" icon="close">
+    <Code lang="cpp" code={ code.wrongStyle1 } del={[1, 2]} />
+  </TabItem>
+  <TabItem label="Error Msg" icon="laptop">
+    <Code lang="shell" code={ code.error1 } />
+  </TabItem>
+</Tabs>
+
+The next incorrect style shows an incorrectly placed `else` statement:
+
+<Tabs>
+  <TabItem label="Incorrect Style" icon="close">
+    <Code lang="cpp" code={ code.wrongStyle2 } del={[3, 4]} />
+  </TabItem>
+  <TabItem label="Error Msg" icon="laptop">
+    <Code lang="shell" code={ code.error2 } />
+  </TabItem>
+</Tabs>
+
+The final incorrect style shows missing brackets, unfortunately the error message does not mention missing brackets on both statements:
+
+<Tabs>
+  <TabItem label="Incorrect Style" icon="close">
+    <Code lang="cpp" code={ code.wrongStyle3 } del={[1, 2, 3, 4]} />
+  </TabItem>
+  <TabItem label="Error Msg" icon="laptop">
+    <Code lang="shell" code={ code.error3 } />
+  </TabItem>
+</Tabs>
+
+## Ternary Operator
+
+Most of the operators we've encountered so far, such as `+`, `-`, `*`, `/`, `%`, `=` and 
+comparison operators like `==` and `!=`, are **binary operators, meaning they take 
+two operands**.
+
+The conditional operator (`?:`), also known as the ternary operator, is unique 
+because it takes three operands. The syntax is:
+
+```cpp
+condition ? true_action : false_action
+```
+
+They are useful for variables whose values require a condition:
+
+```cpp
+int x = 1, y = 5;
+int max = (x > y) ? x : y;
+```
+
+In this example, `max` will hold the value of `y` because the condition 
+`x > y` is `false`. The ternary operator is a compact alternative to `if-
+else` statements for simple conditional assignments.
+
+<Aside type="caution">
+The `true` and `false` actions/values in a ternary operator must evaluate to the 
+same type. If they don't, the compiler may throw an error or implicitly convert 
+one value to match the other, which could lead to unexpected behavior.
+</Aside>

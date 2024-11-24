@@ -41,7 +41,7 @@ The first line of each file should be authored with a comment in the following f
 ```
 [Reference to `cpplint` error](./cpplint-reference#copyright)
 
-## `Function Bracket Placement` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+## `Function Brackets` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 Opening brackets should **ALWAYS** be in the same line as the associated statement. If the function implementation is only 
 one line small line, you can place the closing bracket on the same line.
 
@@ -57,7 +57,29 @@ one line small line, you can place the closing bracket on the same line.
 
 </Tabs>
 
-[Reference to `cpplint` error](./cpplint-reference#function-bracket-placement)
+[Reference to `cpplint` error](./cpplint-reference#function-brackets)
+
+## `If-Else Brackets` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+When using `else` or when nesting `if-else`, brackets are required. When using a single `if` statement and a code block 
+consists of one line, no brackets are required.
+
+<Tabs>
+
+<TabItem label="If" icon="seti:cpp">
+    <Code lang="cpp" code={ styleGuide.ifNoElse } />
+</TabItem>
+
+<TabItem label="Else" icon="seti:cpp">
+    <Code lang="cpp" code={ styleGuide.ifWithElse} />
+</TabItem>
+
+<TabItem label="Nested" icon="seti:cpp">
+    <Code lang="cpp" code={ styleGuide.ifWithNested } />
+</TabItem>
+
+</Tabs>
+
+[Reference to `cpplint` errors](./cpplint-reference#if-else-brackets)
 
 ## `Indentation` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 2-space indent length per indentation level.

@@ -25,6 +25,16 @@ type (`DataType`). The variable name must be a **valid identifier**, meaning it 
 as starting with a letter and containing no special characters except underscores. At this stage, no value 
 is assigned to the variable, so it contains garbage data until initialized.
 
+```cpp
+int user_score;
+```
+
+You can also declare multiple variables in one line using a comma (,) to separate each:
+
+```cpp
+int first_var, second_var, third_var;
+```
+
 import { Aside, Code, TabItem, Tabs } from "@astrojs/starlight/components";
 import { code } from "@ts/syntax/variables";
 
@@ -60,7 +70,7 @@ which can lead to unpredictable behavior.
 
 <Code lang="cpp" code="int current_month = 11;" />
 
-The **assignment operator** (=) assigns a value from right to left, meaning the variable on the left-hand side 
+The **assignment operator** (`=`) assigns a value from right to left, meaning the variable on the left-hand side 
 (LHS) is updated with the value on the right-hand side (RHS). You can use **cascading assignments** to assign 
 the same value to multiple variables in a single line. For example:
 
