@@ -1,0 +1,143 @@
+---
+title: Loops
+description: Learn how to use while, do-while, and for loops in C++ to repeat actions efficiently and control program flow.
+lastUpdated: true
+---
+
+Loops are a fundamental control structure in C++ that allow you to repeat actions 
+efficiently based on a condition. Whether you need to iterate while a condition is 
+true, ensure a block of code runs at least once, or repeat a set number of times, 
+loops provide the flexibility to handle various scenarios. In this section, we'll 
+explore three common types of loops: `while`, `do-while`, and `for`.
+
+![A flow chart that shows a repetition based flow chart](@assets/control/repetition.webp)
+
+## While Loops
+
+A `while` loop evaluates its condition at the top of the loop, before executing the body. 
+If the condition evaluates to `true`, the loop continues executing the body repeatedly. 
+Once the condition becomes `false`, the loop is skipped, and the program moves on to the 
+commands that follow. This makes `while` loops **ideal for situations where the number of 
+iterations depends on a dynamic condition rather than a fixed count**.
+
+### Syntax
+
+The basic syntax of a `while` loop in C++ is as follows:
+
+```cpp
+while (condition) {
+  // Body of the loop
+}
+
+```
+
+#### Key Points
+
+- **No Semicolon:** The `while` statement should not end with a semicolon after the condition. 
+Adding one will result in a syntax error or unintended behavior.
+
+- **Scope:** Variables declared inside the loop block are local to that block and cannot be accessed outside of it. 
+For example:
+
+```cpp
+while (condition) {
+  int x = 10;  // 'x' is only accessible within this block
+}
+// x is no longer accessible here
+```
+
+### Use Case
+
+The following is an example of a use case for a `while` loop:
+
+import { Code, TabItem, Tabs, Steps } from "@astrojs/starlight/components";
+import { code } from "@ts/control/loops";
+
+<Steps>
+
+1. Asks the user to enter a number that represents where to start a countdown from.
+
+2. The user's number is used in a `while` loop condition to check that it is greater 
+than 0.
+
+3. The current number is logged to the terminal and then decremented.
+
+4. After the `while` loop finishes, a message is logged to signal the end of the countdown.
+
+</Steps>
+
+<Tabs>
+
+<TabItem label="Driver" icon="seti:cpp">
+    <Code title="driver.cc" lang="cpp" code={code.whileExample} />
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+    <Code title="driver.cc" lang="bash" code={code.whileResult} mark={[1, 2, 4]} />
+</TabItem>
+
+</Tabs>
+
+### Style Requirements
+
+Braces are required as `cpplint` throws an error if you omit them, and the opening brace must be on the same line as the `while` statement.
+If not styled correctly, you'll get a couple of whitespace errors:
+
+import { errors } from "@ts/constants";
+
+<Code lang="shell" code={ errors.whileError } />
+
+## Do-While Loops
+
+A `do-while` loop evaluates its condition at the bottom of the loop, ensuring that the body of the 
+loop is executed at least once, regardless of the condition. If the condition evaluates to `true`, 
+the loop continues executing. Once the condition becomes `false`, the loop terminates, and the program 
+proceeds with the commands that follow. This structure is particularly useful **when the loop's 
+body must run at least once before checking the condition**.
+
+### Syntax
+
+The basic syntax of a `do-while` loop in C++ is as follows:
+
+```cpp
+do {
+  // Body of the loop
+} while (condition);
+```
+
+#### Key Point
+
+**Semicolon:** Unlike other loops, a `do-while` loop requires a semicolon (`;`) at the end of the `while` statement. 
+Omitting it will result in a syntax error.
+
+This structure ensures that the loop is executed at least once, with clear rules for writing valid and readable do-while loops.
+
+### Use Case
+
+A `do-while` loop is particularly useful in scenarios where user input must be validated, and the program requires the input to be 
+processed at least once before rechecking the condition. For example:
+
+<Tabs>
+
+<TabItem label="Driver" icon="seti:cpp">
+    <Code title="driver.cc" lang="cpp" code={code.doWhileExample} />
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+    <Code title="driver.cc" lang="bash" code={code.doWhileResult} mark={[1, 2, 4, 6, 8]} />
+</TabItem>
+
+</Tabs>
+
+### Style Requirements
+
+Just like `while` loops, braces are required in `do-while` loops as `cpplint` throws errors when omitted. The 
+opening brace must be on the same line as the `do` statement and the closing brace must be in the same line as 
+the `while` statement.
+
+The following are some errors shown for improper styling:
+
+<Code lang="shell" code={ errors.doWhileBraces } />
+
+## For Loops
+

@@ -109,10 +109,10 @@ switch (month) {
 
 ## Style Requirements
 
-When creating a `switch` statement, put the opening bracket \{ in the same line as the `switch` statement like the previous examples. The 
+When creating a `switch` statement, put the opening brace `{` in the same line as the `switch` statement like the previous examples. The 
 following error is thrown by `cpplint` when you've incorrectly styled it:
 
-```shell
-driver.cc:10:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-driver.cc:11:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
-```
+import { Code } from "@astrojs/starlight/components"
+import { errors } from "@ts/constants";
+
+<Code lang="shell" code={errors.switchError} />

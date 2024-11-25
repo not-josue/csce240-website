@@ -68,9 +68,9 @@ if (condition1) {
 
 According to the Google Style Guide, **ALWAYS** use braces {} with 
 `if` and `else` statements, even if the block contains only a single 
-line of code. Brackets are also required if nesting `if` statements. 
+line of code. Braces are also required if nesting `if` statements. 
 The final requirement is that `else` should appear on the same line 
-as the preceding closing bracket `}`:
+as the preceding closing brace `}`:
 
 ```cpp
 if (account < price) {
@@ -103,15 +103,16 @@ mention `whitespace` errors that don't really tell you what the issue is.
 
 import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
 import { code } from "@ts/control/if-else";
+import { errors } from "@ts/constants";
 
-The following is an example of an incorrectly placed opening bracket:
+The following is an example of an incorrectly placed opening brace:
 
 <Tabs>
   <TabItem label="Incorrect Style" icon="close">
     <Code lang="cpp" code={ code.wrongStyle1 } del={[1, 2]} />
   </TabItem>
   <TabItem label="Error Msg" icon="laptop">
-    <Code lang="shell" code={ code.error1 } />
+    <Code lang="shell" code={ errors.misplacedIfBraces } />
   </TabItem>
 </Tabs>
 
@@ -122,18 +123,18 @@ The next incorrect style shows an incorrectly placed `else` statement:
     <Code lang="cpp" code={ code.wrongStyle2 } del={[3, 4]} />
   </TabItem>
   <TabItem label="Error Msg" icon="laptop">
-    <Code lang="shell" code={ code.error2 } />
+    <Code lang="shell" code={ errors.misplacedElseBraces } />
   </TabItem>
 </Tabs>
 
-The final incorrect style shows missing brackets, unfortunately the error message does not mention missing brackets on both statements:
+The final incorrect style shows missing braces, unfortunately the error message does not mention missing braces on both statements:
 
 <Tabs>
   <TabItem label="Incorrect Style" icon="close">
     <Code lang="cpp" code={ code.wrongStyle3 } del={[1, 2, 3, 4]} />
   </TabItem>
   <TabItem label="Error Msg" icon="laptop">
-    <Code lang="shell" code={ code.error3 } />
+    <Code lang="shell" code={ errors.missingIfElseBraces } />
   </TabItem>
 </Tabs>
 

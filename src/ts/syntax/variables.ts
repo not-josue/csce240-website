@@ -11,6 +11,7 @@ int myVar;
 const terminalVar: string =
 `
 cpplint driver.cc
+Done processing driver.cc
 `;
 
 const cascade: string =

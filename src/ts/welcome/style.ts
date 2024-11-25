@@ -1,4 +1,4 @@
-const brackets : string =
+const braces : string =
 `
 // Copyright 2024 CSCE240
 int main() { 
@@ -7,11 +7,11 @@ int main() {
 }
 `;
 
-const bracketsErrors : string =
+const bracesErrors : string =
 `
 cpplint driver.cc
-driver.cc:4:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-driver.cc:5:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
+Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+{ should almost always be at the end of the previous line  [whitespace/braces] [4]
 `;
 
 const copyright : string = 
@@ -23,13 +23,13 @@ int main() { return 0; }
 const copyrightError : string = 
 `
 cpplint driver.cc
-driver.cc:0:  No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]
+No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]
 `;
 
 const newline : string =
 `
 cpplint driver.cc
-driver.cc:2:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
+Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
 `;
 
 const columnLength: string =
@@ -48,7 +48,7 @@ int main() {
 const columnError: string =
 `
 cpplint driver.cc
-driver.cc:5:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+Lines should be <= 80 characters long  [whitespace/line_length] [2]
 `;
 
 const indent: string = 
@@ -66,7 +66,7 @@ int main() {
 }
 `;
 
-const code : {brackets: string, bracketsErrors: string, copyright: string, copyrightError: string, indent: string, newline: string, columnLength: string, columnError: string} = 
-{brackets, bracketsErrors, copyright, copyrightError, indent, newline, columnLength, columnError};
+const code : {braces: string, bracesErrors: string, copyright: string, copyrightError: string, indent: string, newline: string, columnLength: string, columnError: string} = 
+{braces, bracesErrors, copyright, copyrightError, indent, newline, columnLength, columnError};
 
 export {code};

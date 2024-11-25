@@ -11,12 +11,12 @@ int main() {
 }
 `;
 
-const funcBrackets1: string =
+const funcBraces1: string =
 `
 int GetData() const { return data_; }
 `;
 
-const funcBrackets2: string =
+const funcBraces2: string =
 `
 // Copyright 2024 CSCE240
 int main() { 
@@ -27,6 +27,12 @@ int main() {
 
 const ifNoElse: string =
 `
+// Single Line OR Multi Line w/o omitting braces
+if (true) {
+  // Do something
+}
+  
+// Single Line w/ omitting braces
 if (true) // Do something
 // OR
 if (true)
@@ -82,7 +88,7 @@ int main() {
 }
 `;
 
-const switchBrackets: string =
+const switchBraces: string =
 `
 switch (integer_expression) {
   case value1:
@@ -96,8 +102,15 @@ switch (integer_expression) {
 }
 `;
 
-const styleGuide: { columnLength: string, funcBrackets1: string, funcBrackets2: string, ifNoElse: string, ifWithElse: string, 
-ifWithNested: string,  indentation: string, switchBrackets: string, } =
-{ columnLength, funcBrackets1, funcBrackets2, ifNoElse, ifWithElse, ifWithNested, indentation, switchBrackets, };
+const whileBraces: string =
+`
+while (condition) {
+  // Body of the loop
+}
+`;
+
+const styleGuide: { columnLength: string, funcBraces1: string, funcBraces2: string, ifNoElse: string, ifWithElse: string, 
+ifWithNested: string,  indentation: string, switchBraces: string, whileBraces: string, } =
+{ columnLength, funcBraces1, funcBraces2, ifNoElse, ifWithElse, ifWithNested, indentation, switchBraces, whileBraces, };
 
 export { styleGuide };

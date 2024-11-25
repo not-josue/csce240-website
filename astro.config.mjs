@@ -123,6 +123,10 @@ export default defineConfig({
               label: "Switch Statements",
               slug: "control/switch-statements",
             },
+            {
+              label: "Loops",
+              slug: "control/loops",
+            },
           ],
         },
         {

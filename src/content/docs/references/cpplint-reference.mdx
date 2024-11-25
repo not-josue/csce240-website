@@ -11,7 +11,7 @@ Guide requirements. Use this reference to identify and resolve
 style issues efficiently.
 
 import { Badge, Code } from "@astrojs/starlight/components";
-import { errors } from "@ts/references/cpplint";
+import { errors } from "@ts/constants";
 
 
 ## `Access Specifier Indent` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
@@ -30,26 +30,28 @@ import { errors } from "@ts/references/cpplint";
 <Code lang="shell"  code={ errors.copyrightError }/>
 [Reference to style](./google-style-reference#copyright)
 
-## `Function Brackets` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
-<Code lang="shell"  code={ errors.bracketFunctionError }/>
-[Reference to style](./google-style-reference#function-brackets)
+## `Do-While Braces` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+<Code lang="shell"  code={ errors.doWhileBraces }/>
+[Reference to style](./google-style-reference#do-while-braces)
 
-## `If-Else Brackets` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+## `Function Braces` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+<Code lang="shell"  code={ errors.bracketFunctionError }/>
+[Reference to style](./google-style-reference#function-braces)
+
+## `If-Else Braces` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 
 Misplaced `if` bracket:
-<Code lang="shell"  code={ errors.misplacedIfBracket }/>
+<Code lang="shell"  code={ errors.misplacedIfBraces }/>
 
 Misplaced `else` statement:
-<Code lang="shell"  code={ errors.misplacedElseBracket }/>
+<Code lang="shell"  code={ errors.misplacedElseBraces }/>
 
-Missing brackets when including an `else` statement:
-<Code lang="shell"  code={ errors.missingIfElseBrackets }/>
+Missing braces when including an `else` statement:
+<Code lang="shell"  code={ errors.missingIfElseBraces }/>
 
-You may also see the following error if you omit brackets when using nested `if-else` statements:
-<Code lang="shell"  code={ errors.missingNestedBrackets }/>
-
-
-[Reference to style](./google-style-reference#if-else-brackets)
+You may also see the following error if you omit braces when using nested `if-else` statements:
+<Code lang="shell"  code={ errors.missingNestedBraces }/>
+[Reference to style](./google-style-reference#if-else-braces)
 
 ## `Indentation` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 <Code lang="shell"  code={ errors.notDetected}/>
@@ -59,13 +61,14 @@ You may also see the following error if you omit brackets when using nested `if-
 <Code lang="shell"  code={ errors.newlineError}/>
 [Reference to style](./google-style-reference#newline-character)
 
-## `Switch Brackets` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
-```shell
-driver.cc:10:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-driver.cc:11:  { should almost always be at the end of the previous line  [whitespace/braces] [4]
-```
-[Reference to style](./google-style-reference#switch-brackets)
+## `Switch Braces` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+<Code lang="shell"  code={ errors.switchError}/>
+[Reference to style](./google-style-reference#switch-braces)
 
 ## `Variable` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 <Code lang="shell"  code={ errors.notDetected}/>
 [Reference to style](./google-style-reference#variable)
+
+## `While Braces` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+<Code lang="shell"  code={ errors.whileError}/>
+[Reference to style](./google-style-reference#while-braces)

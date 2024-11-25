@@ -5,8 +5,9 @@
 - [x] Constant
 - [x] Copyright
 - [x] Function Brackets
-- [ ] If-Else Brackets
+- [x] If-Else Brackets
 - [x] Indentation
 - [x] Newline Character
-- [ ] Switch Brackets
+- [x] Switch Brackets
 - [x] Variable
+- [x] While Brackets
