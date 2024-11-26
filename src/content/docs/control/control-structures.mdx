@@ -53,3 +53,30 @@ Common loop structures in C++ include `for`, `while`, and `do-while` loops, each
 for different types of repetition scenarios.
 
 ![A flow chart that shows a repetition based flow chart](@assets/control/repetition.webp)
+
+## Style Requirements
+
+All control structures follow similar style requirements:
+
+- There should be a blank space between the statement type and the parenthesis.
+
+- There should **NOT** be a blank space after the opening parenthesis and before the closing parenthesis.
+
+- There should be a single space between the parenthesis and the opening brace.
+
+- The opening brace should be on the same line as the statement.
+
+- There should **NOT** be any blank lines between the braces and the code block.
+
+```cpp
+type (condition) {
+  // Do something
+}
+```
+
+Here are some errors that are thrown for improper styling:
+
+import { Code } from "@astrojs/starlight/components";
+import { errors } from "@ts/constants";
+
+<Code lang="shell" code={errors.controlStructuresError} />

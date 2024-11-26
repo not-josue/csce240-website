@@ -10,6 +10,8 @@ int main() {
 const bracesErrors : string =
 `
 cpplint driver.cc
+Extra space before ( in function call  [whitespace/parens] [4]
+Missing space before {  [whitespace/braces] [5]
 Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
 { should almost always be at the end of the previous line  [whitespace/braces] [4]
 `;

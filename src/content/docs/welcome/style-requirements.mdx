@@ -42,7 +42,7 @@ import { Aside } from '@astrojs/starlight/components';
 <Aside>The **Correct Style** tab contains the correct style, the **Terminal Error** tab contains the error you get for incorrect styling.</Aside>
 
 import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
-import { code } from "@ts/welcome/style"
+import { code } from "@ts/welcome/style";
 
 ### Column Length
 
@@ -71,11 +71,23 @@ will be used as the name.
 </TabItem>
 </Tabs>
 
-### Function Braces Placement
+### Indentation
+
+In the Google C++ Style Guide, 2-space indentation is a strict requirement per indentation level. If you like to use the Tab key 
+for coding, you may be able to set your Tab Length to 2. The **Driver** shows various levels of indentation done correctly.
+
+<Aside type='danger'>This is the first case where `cpplint` does **NOT** detect the error.</Aside>
+
+<Code code={code.indent} lang="cpp" title="driver.cc"/>
+
+### Main Function
 
 You may have noticed from the code snippets the braces of the **main** function is always placed on the same line as the **associated statement**. 
 This is because it is a required style. If the statement is short enough, as seen in previous code snippets, the ending braces can also be in the same line. 
 Braces placement will be expanded further in the guide.
+
+A couple of extra requirements is that parenthesis () should be next to the function's name, and you should have a single space between 
+the parenthesis and the opening bracket.
 
 <Tabs>
 <TabItem label="Correct Style" icon="approve-check">
@@ -85,15 +97,6 @@ Braces placement will be expanded further in the guide.
 <Code code={code.bracesErrors} lang="bash"/>
 </TabItem>
 </Tabs>
-
-### Indentation
-
-In the Google C++ Style Guide, 2-space indentation is a strict requirement per indentation level. If you like to use the Tab key 
-for coding, you may be able to set your Tab Length to 2. The **Driver** shows various levels of indentation done correctly.
-
-<Aside type='danger'>This is the first case where `cpplint` does **NOT** detect the error.</Aside>
-
-<Code code={code.indent} lang="cpp" title="driver.cc"/>
 
 ### Newline Character
 

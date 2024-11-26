@@ -66,11 +66,8 @@ if (condition1) {
 
 ## Style Requirements
 
-According to the Google Style Guide, **ALWAYS** use braces {} with 
-`if` and `else` statements, even if the block contains only a single 
-line of code. Braces are also required if nesting `if` statements. 
-The final requirement is that `else` should appear on the same line 
-as the preceding closing brace `}`:
+You can find a list of general requirements that apply to a control structure like `if-else` statements in the [control structures page](./control-structures#style-requirements). 
+The following is an example of an `if-else` statement using code instead of placeholders:
 
 ```cpp
 if (account < price) {
@@ -97,46 +94,20 @@ Keep in mind that omitting braces can lead to errors if additional lines are add
 
 ### Incorrect Styles
 
-The next examples show a couple of errors thrown by `cpplint` when your `if-else` statement is incorrectly styled. 
-I've only shown the main error messages for the first two examples instead of the full error message as they only 
-mention `whitespace` errors that don't really tell you what the issue is.
-
-import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
+import { Code } from "@astrojs/starlight/components";
 import { code } from "@ts/control/if-else";
-import { errors } from "@ts/constants";
 
 The following is an example of an incorrectly placed opening brace:
 
-<Tabs>
-  <TabItem label="Incorrect Style" icon="close">
-    <Code lang="cpp" code={ code.wrongStyle1 } del={[1, 2]} />
-  </TabItem>
-  <TabItem label="Error Msg" icon="laptop">
-    <Code lang="shell" code={ errors.misplacedIfBraces } />
-  </TabItem>
-</Tabs>
-
+<Code lang="cpp" code={ code.wrongStyle1 } del={[1, 2]} />
+  
 The next incorrect style shows an incorrectly placed `else` statement:
 
-<Tabs>
-  <TabItem label="Incorrect Style" icon="close">
-    <Code lang="cpp" code={ code.wrongStyle2 } del={[3, 4]} />
-  </TabItem>
-  <TabItem label="Error Msg" icon="laptop">
-    <Code lang="shell" code={ errors.misplacedElseBraces } />
-  </TabItem>
-</Tabs>
+<Code lang="cpp" code={ code.wrongStyle2 } del={[3, 4]} />
 
 The final incorrect style shows missing braces, unfortunately the error message does not mention missing braces on both statements:
 
-<Tabs>
-  <TabItem label="Incorrect Style" icon="close">
-    <Code lang="cpp" code={ code.wrongStyle3 } del={[1, 2, 3, 4]} />
-  </TabItem>
-  <TabItem label="Error Msg" icon="laptop">
-    <Code lang="shell" code={ errors.missingIfElseBraces } />
-  </TabItem>
-</Tabs>
+<Code lang="cpp" code={ code.wrongStyle3 } del={[1, 2, 3, 4]} />
 
 ## Ternary Operator
 

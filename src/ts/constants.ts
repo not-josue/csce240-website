@@ -7,10 +7,19 @@ const accessSpecifierError: string =
 public: should be indented +1 space inside class MyClass  [whitespace/indent] [3]
 `;
 
-const bracketFunctionError: string = 
+const controlStructuresError: string =
 `
-Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+# General Errors
+Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
 { should almost always be at the end of the previous line  [whitespace/braces] [4]
+Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+Empty loop bodies should use {} or continue  [whitespace/empty_loop_body] [5]
+
+# Else Errors
+An else should appear on the same line as the preceding }  [whitespace/newline] [4]
+Else clause should be indented at the same level as if. Ambiguous nested if/else chains require braces.  [readability/braces] [4]
+If an else has a brace on one side, it should have it on both  [readability/braces] [5]
 `;
 
 const columnError: string =
@@ -23,12 +32,23 @@ const copyrightError: string =
 No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]
 `;
 
-const doWhileBraces: string =
+// const doWhileBraces: string =
+// `
+// Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+// Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
+// { should almost always be at the end of the previous line  [whitespace/braces] [4]
+// Empty loop bodies should use {} or continue  [whitespace/empty_loop_body] [5]
+// Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+// Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
+// `;
+
+const functionError: string = 
 `
-{ should almost always be at the end of the previous line  [whitespace/braces] [4]
-Empty loop bodies should use {} or continue  [whitespace/empty_loop_body] [5]
+Extra space after ( in function call  [whitespace/parens] [4]
+Extra space before ( in function call  [whitespace/parens] [4]
+Missing space before {  [whitespace/braces] [5]
 Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
+{ should almost always be at the end of the previous line  [whitespace/braces] [4]
 `;
 
 const misplacedIfBraces: string =
@@ -36,24 +56,24 @@ const misplacedIfBraces: string =
 { should almost always be at the end of the previous line  [whitespace/braces] [4]
 `;
 
-const misplacedElseBraces: string =
-`
-An else should appear on the same line as the preceding }  [whitespace/newline] [4]
-If an else has a brace on one side, it should have it on both  [readability/braces] [5]
-`;
+// const misplacedElseBraces: string =
+// `
+// An else should appear on the same line as the preceding }  [whitespace/newline] [4]
+// If an else has a brace on one side, it should have it on both  [readability/braces] [5]
+// `;
 
-const missingIfElseBraces: string =
-`
-Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
-Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-`;
+// const missingIfElseBraces: string =
+// `
+// Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+// Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+// Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+// Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+// `;
 
-const missingNestedBraces: string = 
-`
-Else clause should be indented at the same level as if. Ambiguous nested if/else chains require braces.  [readability/braces] [4]
-`;
+// const missingNestedBraces: string = 
+// `
+// Else clause should be indented at the same level as if. Ambiguous nested if/else chains require braces.  [readability/braces] [4]
+// `;
 
 const newlineError: string =
 `
@@ -65,23 +85,23 @@ const notDetected: string =
 Done processing driver.cc
 `;
 
-const switchError: string = 
-`
-Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-{ should almost always be at the end of the previous line  [whitespace/braces] [4]
-`;
+// const switchError: string = 
+// `
+// Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+// { should almost always be at the end of the previous line  [whitespace/braces] [4]
+// `;
 
-const whileError: string = 
-`
-Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
-{ should almost always be at the end of the previous line  [whitespace/braces] [4]
-`;
+// const whileError: string = 
+// `
+// Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+// Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
+// Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+// { should almost always be at the end of the previous line  [whitespace/braces] [4]
+// `;
 
-const errors: { accessSpecifierError: string, bracketFunctionError: string, columnError: string, copyrightError: string, 
-    doWhileBraces: string, misplacedIfBraces: string, misplacedElseBraces: string, missingIfElseBraces: string, missingNestedBraces: string, 
-    newlineError: string, notDetected: string, switchError: string, whileError: string, } =
-{ accessSpecifierError, bracketFunctionError, columnError, copyrightError, doWhileBraces,
-    misplacedIfBraces, misplacedElseBraces, missingIfElseBraces, missingNestedBraces,
-    newlineError, notDetected, switchError, whileError, };
+const errors: { accessSpecifierError: string, functionError: string, columnError: string, controlStructuresError: string,
+    copyrightError: string, newlineError: string, notDetected: string, } =
+{ accessSpecifierError, controlStructuresError, columnError, copyrightError, functionError,
+    newlineError, notDetected, };
 
 export { STD, errors };

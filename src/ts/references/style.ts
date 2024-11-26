@@ -11,6 +11,20 @@ int main() {
 }
 `;
 
+const doWhileBraces: string =
+`
+do {
+  // Body of the loop
+} while (condition);
+`;
+
+const forLoops: string =
+`
+for (initialization; condition; update) {
+  // Body of the loop
+}
+`;
+
 const funcBraces1: string =
 `
 int GetData() const { return data_; }
@@ -109,8 +123,8 @@ while (condition) {
 }
 `;
 
-const styleGuide: { columnLength: string, funcBraces1: string, funcBraces2: string, ifNoElse: string, ifWithElse: string, 
+const styleGuide: { columnLength: string, doWhileBraces: string, forLoops: string, funcBraces1: string, funcBraces2: string, ifNoElse: string, ifWithElse: string, 
 ifWithNested: string,  indentation: string, switchBraces: string, whileBraces: string, } =
-{ columnLength, funcBraces1, funcBraces2, ifNoElse, ifWithElse, ifWithNested, indentation, switchBraces, whileBraces, };
+{ columnLength, doWhileBraces, forLoops, funcBraces1, funcBraces2, ifNoElse, ifWithElse, ifWithNested, indentation, switchBraces, whileBraces, };
 
 export { styleGuide };
