@@ -33,9 +33,9 @@ int GetData() const { return data_; }
 const funcBraces2: string =
 `
 // Copyright 2024 CSCE240
-int main() { 
-  int num = 7;
-  return 0; 
+void GreetAmigo() { 
+  cout << "¡Hola, amigo!" << endl;
+  cout << "¿Cómo estás?" << endl;
 }
 `;
 
@@ -118,6 +118,7 @@ switch (integer_expression) {
 
 const whileBraces: string =
 `
+// Braces REQUIRED
 while (condition) {
   // Body of the loop
 }

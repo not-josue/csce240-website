@@ -61,7 +61,9 @@ int main() {
 
 const doWhileResult: string =
 `
-g++ driver.cc
+cpplint driver.cc
+Done processing driver.cc
+g++ -Wall -std=c++17 driver.cc
 ./a.out
 Enter a number between 1 and 10:
 0
@@ -136,7 +138,87 @@ Fizz
 FizzBuzz
 `;
 
-const code: { whileExample: string, whileResult: string, doWhileExample: string, doWhileResult: string, fizzBuzz: string, fizzBuzzTerminal: string } = 
-{ whileExample, whileResult, doWhileExample, doWhileResult, fizzBuzz, fizzBuzzTerminal, };
+const breakExample: string =
+`
+// Copyright 2024 CSCE240
+#include <iostream>
+using std::cout;
+using std::endl;
+
+int main() {
+  // Lowest Common Multiples of x and y using a max range of kRange
+  const int kRange = 100;
+  int x = 4, y = 5;
+  // Assume no Least Common Multiple exists
+  int lcm = 0;
+  // Make looping faster by iterating by the max amount instead of 1
+  // Used for demonstration in case you didn't know x and y
+  int max = x > y ? x : y;
+
+  // Start at the max value and increment by the max value
+  for (int i = max; i <= kRange; i += max) {
+    if (i % x == 0 && i % y == 0) {
+      lcm = i;
+      break;
+    }
+  }
+
+  if (lcm == 0) {
+    cout << "No Least Common Multiple found for " << x << " and " << y
+         << " in a max range of " << kRange << "." << endl;
+  } else {
+    cout << "The Least Common Multiple for " << x << " and " << y << " is "
+         << lcm << "." << endl;
+  }
+}
+`;
+
+const breakTerminal: string =
+`
+cpplint driver.cc
+Done processing driver.cc
+g++ -Wall -std=c++17 driver.cc
+./a.out
+The Least Common Multiple for 4 and 5 is 20.
+`;
+
+const continueExample: string =
+`
+// Copyright 2024 CSCE240
+#include <iostream>
+using std::cout;
+using std::endl;
+
+int main() {
+  // Print only odd numbers
+  const int kRange = 10;
+
+  for (int i = 1; i <= kRange; ++i) {
+    if (i % 2 == 0) {
+      continue;
+    } else {
+      cout << i << endl;
+    }
+  }
+}
+`;
+
+const continueTerminal: string =
+`
+cpplint driver.cc
+Done processing driver.cc
+g++ -Wall -std=c++17 driver.cc
+./a.out
+1
+3
+5
+7
+9
+`;
+
+const code: { whileExample: string, whileResult: string, doWhileExample: string, doWhileResult: string, fizzBuzz: string, fizzBuzzTerminal: string, 
+breakExample: string, breakTerminal: string, continueExample: string, continueTerminal: string,
+} = 
+{ whileExample, whileResult, doWhileExample, doWhileResult, fizzBuzz, fizzBuzzTerminal, breakExample, breakTerminal, continueExample, continueTerminal };
 
 export { code };
