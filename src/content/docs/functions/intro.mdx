@@ -1,0 +1,116 @@
+---
+title: Functions Intro
+description: Learn the basics of functions in C++, including their purpose, structure, and how they help organize and reuse code efficiently.
+lastUpdated: true
+---
+
+A function in C++ is a **list of instructions designed to perform a 
+specific task**. Functions help organize your code, making it easier 
+to read, maintain, and reuse. For example, the `main` function, which 
+you've already encountered, is the entry point of every C++ program.
+
+## Terminology
+
+This section introduces the terms and concepts you'll frequently encounter 
+when working with functions in C++, along with examples to illustrate their use.
+
+### Arguments
+
+*Arguments* are the **values sent to a function when it is called**. These 
+values are used by the function to perform its task. For example, the 
+main functions you've written so far have taken no arguments, as shown below:
+
+```cpp title="driver.cc"
+int main() {
+  // No arguments passed to main
+  return 0;
+}
+```
+
+However, functions can accept arguments to process specific data. For instance:
+
+```cpp
+void PrintNumber(int x) { cout << x << endl; }
+```
+
+### Call
+
+*Calling* a function means executing it by passing the required *arguments*. This *invokes* the function's code.
+
+```cpp
+int main() {
+  cout << "Enter a number to square: " << endl;
+  int n;
+  cin >> n;
+  cout << n << " squared = " << Square(n) << endl; // Calling the Square function
+}
+```
+
+### Implementation
+
+The *definition* or *implementation* of a function is the complete code of the function, 
+including the body that specifies what the function does.
+
+```cpp
+char GetLetter(int n) {
+  // Implementation of GetLetter()
+  if (n <= 1 || n > 26) return 'a';
+  return 'a' + (n - 1) % 26;
+}
+```
+
+### Name
+
+The *name* of a function is its identifier, **used to call or reference the function**
+in code. It must be unique within the same scope.
+
+```cpp
+// Add is the name
+int Add(int x, int y) { return x + y; }
+
+// Greet is the name
+void Greet() { cout << "Hello World" << endl; }
+```
+
+### Parameters
+
+*Parameters* are the **variables listed in the function definition that receive values 
+when the function is called**. They are like placeholders for the *arguments* passed to the function.
+
+```cpp
+// x and y are the parameters
+int Add(int x, int y) { return x + y; }
+```
+
+### Prototype
+
+The function *prototype* is a declaration of a function that **specifies the return type**, **name**, 
+**and parameters but without the body**. It informs the compiler about the function before its actual definition.
+
+Function prototypes are found either above the `main` function or in a `header` file.
+
+```cpp
+int Subtract(int x, int y);
+```
+
+### Return Type
+
+The *return type* of a function specifies **the type of value the function returns after execution**. 
+If a function doesn't return any value, the return type is `void`.
+
+```cpp
+// int is the return type
+int Max(int x, int y) { return x > y ? x : y; }
+// no return type
+void ProductInfo() { cout << "Name:\nCategory:\nPrice:\nItem #:" << endl; }
+```
+
+### Signature
+
+A function's *signature* consists of the **function's name and its parameter types 
+(but not the return type)**. It uniquely identifies a function.
+
+```cpp
+// int and int are the signatures
+int Multiply(int x, int y);
+```

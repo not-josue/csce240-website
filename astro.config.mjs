@@ -130,6 +130,15 @@ export default defineConfig({
           ],
         },
         {
+          label: "Functions",
+          items: [
+            {
+              label: "Introduction",
+              slug: "functions/intro",
+            },
+          ],
+        },
+        {
           label: "References",
           items: [
             {
@@ -139,10 +148,6 @@ export default defineConfig({
             {
               label: "Google Style Reference",
               slug: "references/google-style-reference",
-            },
-            {
-              label: "Key Terms Reference",
-              slug: "references/key-terms-reference",
             },
           ],
         },

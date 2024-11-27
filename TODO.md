@@ -80,7 +80,13 @@
 
 - [x] Switch Statement
 
-- [ ] Loops
+- [x] Loops
+
+## Functions
+
+- [ ] Introduction
+
+- [ ] Using Functions
 
 ## References
 
@@ -88,4 +94,3 @@
 
 - [ ] Google Style Reference
 
-- [ ] Key Terms Reference
