@@ -1,6 +1,6 @@
 ---
 title: Functions Intro
-description: Learn the basics of functions in C++, including their purpose, structure, and how they help organize and reuse code efficiently.
+description: Learn the basics of functions in C++, including terminology, and the Google styling requirements for CSCE240.
 lastUpdated: true
 ---
 
@@ -21,6 +21,7 @@ values are used by the function to perform its task. For example, the
 main functions you've written so far have taken no arguments, as shown below:
 
 ```cpp title="driver.cc"
+// Copyright 2024 CSCE2024
 int main() {
   // No arguments passed to main
   return 0;
@@ -38,11 +39,14 @@ void PrintNumber(int x) { cout << x << endl; }
 *Calling* a function means executing it by passing the required *arguments*. This *invokes* the function's code.
 
 ```cpp
+// Copyright 2024 CSCE2024
 int main() {
   cout << "Enter a number to square: " << endl;
   int n;
   cin >> n;
   cout << n << " squared = " << Square(n) << endl; // Calling the Square function
+
+  return 0;
 }
 ```
 
@@ -58,6 +62,15 @@ char GetLetter(int n) {
   return 'a' + (n - 1) % 26;
 }
 ```
+
+import { Aside } from "@astrojs/starlight/components";
+
+<Aside>
+In C++, adding a `char` and an `int` works because characters are internally stored as numbers (ASCII codes). 
+When you add an integer to a character, C++ automatically uses the character's numeric value, does the 
+math, and can convert it back to a character when needed. This is why the expression `'a' + (n - 1) % 26` 
+gives you the correct letter in the alphabet based on the value of `n`.
+</Aside>
 
 ### Name
 
@@ -91,7 +104,14 @@ Function prototypes are found either above the `main` function or in a `header` 
 
 ```cpp
 int Subtract(int x, int y);
+// OR
+int Subtract(int, int);
 ```
+
+<Aside>
+You can think of writing a function's *prototype* as declaring it but not initializing it. 
+Remember to add the semicolon `;` at the end of the *prototype*.
+</Aside>
 
 ### Return Type
 
@@ -100,7 +120,7 @@ If a function doesn't return any value, the return type is `void`.
 
 ```cpp
 // int is the return type
-int Max(int x, int y) { return x > y ? x : y; }
+int Max(int x, int y) { return x >= y ? x : y; }
 // no return type
 void ProductInfo() { cout << "Name:\nCategory:\nPrice:\nItem #:" << endl; }
 ```
@@ -114,3 +134,32 @@ A function's *signature* consists of the **function's name and its parameter typ
 // int and int are the signatures
 int Multiply(int x, int y);
 ```
+
+## Style Requirements
+
+These are the styling patterns shown in the previous code snippets:
+
+- The name of the function is capitalized and follows CamelCasing.
+
+<Aside>The `main` function is an exception in that it should **ALWAYS** be written as `main()`.</Aside>
+
+<Aside type="danger">`cpplint` does not catch this styling error. It is the only function styling error not caught by `cpplint`.</Aside>
+
+- The parenthesis are next to the function name.
+
+- There is **NOT** a space after the starting parenthesis nor before the ending parenthesis (e.g. `Add(int x, int y)`).
+
+- There is a space between the ending parenthesis and the opening brace.
+
+- The opening brace is on the same line as the function declaration.
+
+- If short enough and only a single line, the function declaration and implementation can be written on a single line.
+
+- No blank lines occur after the function declaration or before the closing brace.
+
+import { Code } from "@astrojs/starlight/components";
+import { errors } from "@ts/constants";
+
+These are some of the errors thrown by `cpplint` when something is off with the way you styled a function: 
+
+<Code lang="shell" code={errors.functionError} />

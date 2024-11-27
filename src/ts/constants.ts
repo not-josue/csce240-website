@@ -34,6 +34,8 @@ No copyright message found.  You should have a line: "Copyright [year] <Copyrigh
 
 const functionError: string = 
 `
+Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
 Extra space after ( in function call  [whitespace/parens] [4]
 Extra space before ( in function call  [whitespace/parens] [4]
 Missing space before {  [whitespace/braces] [5]

@@ -1,0 +1,72 @@
+---
+title: Writing & Using
+description: TODO
+lastUpdated: true
+---
+
+Functions are an essential part of **writing organized and 
+maintainable C++ programs**. They allow you to delegate tasks, 
+making your code easier to test, reuse, and extend. In this 
+page, you'll learn why functions are important, how to write 
+and use them, and where they can be defined in your projects.
+
+## Why
+
+Functions are a key tool for **improving the structure and efficiency** 
+of your programs. Using functions promotes cleaner, more modular code, 
+making your programs more efficient and easier to debug.
+
+- **Delegation of Tasks**: Functions allow you to break down complex problems 
+into smaller, manageable tasks. Each function performs a specific job, 
+making your code easier to understand and maintain.
+
+- **Ease of Testing**: By isolating tasks into functions, you can test them 
+independently to ensure they work correctly before integrating them into your program.
+
+- **Reusability**: Functions can be reused across different parts of your program 
+or even in future projects, saving time and effort.
+
+- **DRY Principle**: Functions help you adhere to the **Don't Repeat Yourself (DRY)** 
+principle by consolidating repetitive code into a single function, reducing 
+redundancy and the chance of errors.
+
+## How
+
+Writing and using functions in C++ involves a few straightforward steps:
+
+import { Code, TabItem, Tabs, Steps } from "@astrojs/starlight/components";
+import { code } from "@ts/functions/writing";
+
+<Steps>
+
+1. **Create the Prototype**: Define the function's return type, name, and parameter list at the 
+beginning of your program or in a header file. This tells the compiler what the function looks 
+like before its implementation.
+
+    ```cpp
+    int GetMin(int, int);
+    ```
+
+2. **Write the Implementation**: Provide the actual code for the function, specifying how it performs 
+its task. This is usually done after the main function or in a separate source file.
+
+    ```cpp
+    int GetMin(int x, int y) { return x <= y ? x : y; }
+    ```
+
+3. **Test It (Call It)**: Call the function from your main function or another part of your program 
+to test its behavior and ensure it works as expected.
+
+    <Tabs>
+
+        <TabItem label="Driver" icon="rocket">
+            <Code title="driver.cc" lang="cpp" code={code.howExample} />
+        </TabItem>
+
+        <TabItem label="Terminal" icon="laptop">
+            <Code lang="bash" code={code.howTerminal} mark={[1, 3, 4]} />
+        </TabItem>
+
+    </Tabs>
+
+</Steps>

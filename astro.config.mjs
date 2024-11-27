@@ -136,6 +136,10 @@ export default defineConfig({
               label: "Introduction",
               slug: "functions/intro",
             },
+            {
+              label: "Writing & Using",
+              slug: "functions/writing-and-using",
+            },
           ],
         },
         {
