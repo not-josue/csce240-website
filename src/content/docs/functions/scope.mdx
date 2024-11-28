@@ -1,0 +1,108 @@
+---
+title: Scope
+description: Explore the concept of scope in C++, including block, file, function, class, and namespace scope, to understand variable visibility and accessibility in your programs.
+lastUpdated: true
+---
+
+In C++, scope refers to **the region of a program where a variable or identifier is accessible**. 
+Understanding the different types of scope is crucial for managing variable visibility and preventing 
+naming conflicts.
+
+## Types Of Scope
+
+You'll run into various situations in CSCE240 that will test your familiarity of scopes. 
+Here are the main types of scopes you'll see in the course:
+
+### Block Scope 
+
+Variables declared inside a block (enclosed by {}) are only accessible within that 
+block and its sub-blocks.
+
+```cpp
+{
+  int x = 10;  // x is accessible only inside this block
+}
+// x is not accessible here
+```
+
+### File Scope: 
+
+Variables declared outside of any block are accessible anywhere in the file. 
+These are often called global variables.
+
+```cpp
+// Copyright 2024 CSCE240
+#include <iostream>
+using std::cout;
+using std::endl;
+
+int global_var = 5;
+
+int main() {
+  cout << global_var << endl;
+  return 0;
+}
+```
+
+### Function Scope 
+
+Parameters named in a function implementation are accessible only within that function.
+
+```cpp
+void example(int y) {
+  // y is accessible only inside this function
+}
+```
+
+### Class Scope
+
+Variables and methods defined within a class are accessible within the class. 
+Additional details, such as access modifiers (`private`, `public`, `protected`), will be discussed later.
+
+```cpp
+class MyClass {
+  int data_member_;  // Class scope
+};
+```
+
+### Namespace Scope 
+
+Variables or functions declared in a namespace are accessible within the namespace and 
+outside of it using a `using` statement or the `::` operator.
+
+```cpp
+// Copyright 2024 CSCE240
+#include <iostream>
+using std::cout;
+using std::endl;
+
+namespace csce240 {
+int var = 42;
+}
+
+using csce240::var;  // Access var directly
+
+int main() {
+  cout << var << endl;
+  return 0;
+}
+```
+
+## Unary Scope Resolution Operator
+
+The *unary scope resolution operator* (`::`) is used to access a variable declared outside of a block, 
+even if a variable with the same name is declared within the block. By preceding the variable name 
+with `::`, you can refer to the variable in the outer scope, bypassing the local declaration.
+
+```cpp
+#include <iostream>
+using std::cout;
+
+int x = 1;  // Global variable
+
+int main() {
+  int x = 5;  // Local variable in main
+  cout << x << "\n";   // Prints the local x (5)
+  cout << ::x << "\n"; // Prints the global x (1)
+  return 0;
+}

@@ -140,6 +140,10 @@ export default defineConfig({
               label: "Writing & Using",
               slug: "functions/writing-and-using",
             },
+            {
+              label: "Scope",
+              slug: "functions/scope",
+            },
           ],
         },
         {

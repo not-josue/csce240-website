@@ -34,7 +34,7 @@ redundancy and the chance of errors.
 
 Writing and using functions in C++ involves a few straightforward steps:
 
-import { Code, TabItem, Tabs, Steps } from "@astrojs/starlight/components";
+import { Aside, Code, TabItem, Tabs, Steps } from "@astrojs/starlight/components";
 import { code } from "@ts/functions/writing";
 
 <Steps>
@@ -68,5 +68,217 @@ to test its behavior and ensure it works as expected.
         </TabItem>
 
     </Tabs>
+
+</Steps>
+
+## Where
+
+Functions can be written in various locations depending on the structure of your program and how you plan to use them.
+
+**In the Driver with main**: When starting out, you'll typically write your functions in the same source file as your 
+`main` function. This keeps everything in one place, making it easier to learn and test.
+
+**In Separate Source Files**: Functions can also be written in separate source files without a `main` function. These files 
+can be compiled individually and linked into larger projects. This approach is useful for organizing code in larger programs.
+
+**In Header Files**: Functions can be declared in header files and implemented in source files. This allows you to reuse them 
+across multiple projects by simply including the header file.
+
+<Aside>
+You may have an assignment where all your code goes in a single file which is why we're going to cover using separate files in a future lesson.
+</Aside>
+
+## The Prototype
+
+A function's prototype is a declaration that specifies the structure of a function, including its name, return type, and parameter list. 
+It **serves as a promise to the compiler that the function will be implemented later** in the program.
+
+### Key Points
+
+- **Single Statement**: A prototype is a single statement and must end with a semicolon (`;`). For example:
+
+```cpp
+int Multiply(int x, int y);
+```
+
+- **Optional Parameter Names**: Naming the parameters in the prototype is optional, but including them can improve readability:
+
+```cpp
+int Add(int, int);  // Valid
+int Add(int a, int b);  // Also valid and more descriptive
+```
+
+**Placement**: Prototypes should not appear inside the body of any other function. They must also precede all calls to the function, either 
+at the top of the source file or in a header file.
+
+## The Implementation
+
+The implementation of a function provides the full definition, including how it performs its task. It consists of two main parts:
+
+1. **The Function Header**: Specifies the return type, function name, and parameter list.
+
+2. **The Function Body**: Contains the C++ commands enclosed in braces ({}) that define the function's behavior.
+
+### Key Points
+
+- **Named Parameters**: Parameters must be named in the function header so they can be referenced within the function body. 
+These parameters are local to the function, meaning they cannot be accessed outside of it.
+
+```cpp
+int Add(int a, int b) {  // 'a' and 'b' are local to this function
+  return a + b;
+}
+```
+
+- **No Semicolon**: There is no semicolon between the function header and the opening brace of the body.
+
+- **Separate Implementations**: Each function must be implemented independently. One function cannot be implemented 
+inside the body of another function.
+
+## Example
+
+Lets create a calculator program that allows a user to add, subtract, multiply, and divide numbers they enter.
+
+<Steps>
+
+1. ### Setup File
+
+    - We'll create a document called `driver.cc`, copyright the document, and create our `main` function.
+
+    - We want to print to the terminal and take user input so we'll `#include` the `<iostream>` class and use 
+    the `cin`, `cout`, and `endl` objects
+
+    <Code title="driver.cc" lang="cpp" code={code.exampleSetup} />
+
+2. ### Create Function Prototypes
+
+    - We want to great the user when the program is first run.
+
+    - Lets give the user the ability to add, subtract, multiply, divide, and square integers they enter.
+
+    <Code title="driver.cc" lang="cpp" code={code.exampleProto} />
+
+3. ### Write Implementation
+
+    - Below our `main` function, we'll code the implementation of our functions.
+
+    - We'll assume for this exercise that user input is **ALWAYS** correct.
+
+    <Code title="driver.cc" lang="cpp" code={code.exampleImp} />
+
+4. ### Test Functions
+
+    - Lets write a couple of tests in our `main` function to check the implementation of our functions.
+
+    - Then we'll check our styles and run the program.
+
+    <Tabs>
+
+        <TabItem label="Driver" icon="rocket">
+            <Code title="driver.cc" lang="cpp" code={code.exampleTest1} />
+        </TabItem>
+
+        <TabItem label="Terminal" icon="laptop">
+            <Code lang="bash" code={code.exampleTerm1} mark={[1, 3, 4]}/>
+        </TabItem>
+
+    </Tabs>
+
+    - `Divide()` is a little different than the rest of the functions, so we'll call it a couple 
+    of times to see its output
+
+    - Finally we'll recompile our program and run it to see the results.
+
+    <Tabs>
+
+        <TabItem label="Driver" icon="rocket">
+            <Code title="driver.cc" lang="cpp" code={code.exampleTest2} />
+        </TabItem>
+
+        <TabItem label="Terminal" icon="laptop">
+            <Code lang="bash" code={code.exampleTerm2} mark={[1, 2]}/>
+        </TabItem>
+
+    </Tabs>
+
+5. ### Create FrontEnd
+
+    - We need to print a message for the user to notify them which options they have.
+
+    - Lets declare another function prototype and add it to the others.
+
+    ```cpp title="driver.cc"
+    void FrontEnd();
+    ```
+
+    - Now we need to write its implementation.
+
+    ```cpp title="driver.cc"
+    void FrontEnd() {
+      cout << "Enter 1: To Add" << endl;
+      cout << "Enter 2: To Subtract" << endl;
+      cout << "Enter 3: To Multiply" << endl;
+      cout << "Enter 4: To Divide" << endl;
+      cout << "Enter 5: To Square" << endl;
+      cout << "Enter 0: To Quit" << endl;
+    }
+    ```
+
+    - This FrontEnd should remind you of the many programs written in CSCE146. What we 
+    are going to do is:
+
+        1. Wrapping our code in a `while` loop.
+
+        2. Printing options to the user -> await input.
+
+        3. Direct that input to match a case in a `switch` statement.
+
+        4. Get the required input to fulfill the requirements of that operation.
+
+        5. Print an output.
+
+        6. Repeat until the user quits the program.
+
+    - This is the final version of our `main` function:
+
+    <Code title="driver.cc" lang="cpp" code={code.exampleFeLast} />
+
+6. ### Run and Test
+
+    - Finally we can run our program and test different inputs to see if it runs.
+
+    - Instead of showing one long terminal log, I've parsed the output for each test:
+
+    #### Check Style, Compile, & Run
+
+    <Code lang="bash" code={code.outputStart} mark={[1, 3, 4]}/>
+
+    #### Wrong Option Route
+
+    <Code lang="bash" code={code.outputWrongOption} mark={[11]}/>
+
+    #### Addition Route
+
+    <Code lang="bash" code={code.outputAdd} mark={[7, 9, 11]}/>
+
+    #### Subtraction Route
+
+    <Code lang="bash" code={code.outputSub} mark={[7, 9, 11]}/>
+
+    #### Multiplication Route
+
+    <Code lang="bash" code={code.outputMul} mark={[7, 9, 11]}/>
+
+    #### Division Route
+
+    <Code lang="bash" code={code.outputDiv} mark={[7, 9, 11]}/>
+
+    #### Squaring Route
+
+    <Code lang="bash" code={code.outputSquare} mark={[7, 9]}/>
+
+    #### Quitting Route
+
+    <Code lang="bash" code={code.outputQuit} mark={[7]}/>
 
 </Steps>
