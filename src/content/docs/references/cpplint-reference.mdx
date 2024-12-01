@@ -10,7 +10,7 @@ help you debug and improve your code to meet the Google C++ Style
 Guide requirements. Use this reference to identify and resolve 
 style issues efficiently.
 
-import { Badge, Code } from "@astrojs/starlight/components";
+import { Aside, Badge, Code } from "@astrojs/starlight/components";
 import { errors } from "@ts/constants";
 
 
@@ -38,9 +38,23 @@ import { errors } from "@ts/constants";
 <Code lang="shell"  code={ errors.functionError }/>
 [Reference to style](./google-style-reference#function)
 
+## `Header Guards` <Badge text="Falsely Detected" variant="success"  size="medium" aria-label="error falsely detected"/>
+<Code lang="shell"  code={ errors.headerGuardsError}/>
+[Reference to style](./google-style-reference#header-guards)
+<Aside>This error can be disregarded</Aside>
+
+## `Include File` <Badge text="Falsely Detected" variant="success"  size="medium" aria-label="error falsely detected"/>
+<Code lang="shell"  code={ errors.includeFileError}/>
+[Reference to style](./google-style-reference#include-file)
+<Aside>This error can be disregarded</Aside>
+
 ## `Indentation` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 <Code lang="shell"  code={ errors.notDetected}/>
 [Reference to style](./google-style-reference#indentation)
+
+## `Makefile` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+<Code lang="shell"  code={ errors.makefileError}/>
+[Reference to style](./google-style-reference#makefile)
 
 ## `Newline Character` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 <Code lang="shell"  code={ errors.newlineError}/>

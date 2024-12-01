@@ -1,0 +1,162 @@
+---
+title: Separate Compilation
+description: Learn how to use separate compilation in C++ by combining makefiles, header files, source files, and a driver to create organized and modular projects.
+lastUpdated: true
+---
+
+To create truly reusable functions, their implementations need to be written 
+in a separate file that does not contain a `main` function. This approach, known 
+as **separate compilation**, allows you to organize your project into multiple 
+files, making it easier to manage, test, and reuse your code. By combining a 
+`makefile`, header files, source files, and a driver, you can build modular 
+and scalable C++ projects.
+
+## Header File
+
+A *header file* (`.h`) is used to **declare function prototypes**, **class definitions**, 
+**and other shared components**, allowing them to be included in multiple C++ files. 
+By placing your function prototypes in a header file, you enable other source 
+files to access and use those functions without redefining them.
+
+### Key Points
+
+- **Reusable Prototypes**: Placing function prototypes in a header file makes 
+them accessible to multiple source files within a project.
+
+- **Header Guards**: To prevent multiple inclusions of the same header file, use *header guards*. 
+These ensure that the contents of the header file are included only once during compilation:
+
+```cpp title="program.h"
+#ifndef PROJECT_PATH_FILENAME_H_
+#define PROJECT_PATH_FILENAME_H_
+
+// Function prototypes here
+int aFunction(int, int);
+void anotherFunction();
+
+#endif
+```
+
+import { Aside } from "@astrojs/starlight/components";
+
+<Aside title="Header Guards">You can think of those statements like: "if not defined," then "define this header", finally "end my if statement"</Aside>
+
+## Source File
+
+A source file (`.cc`) contains the **actual implementation of your functions and 
+includes the corresponding header file for the function prototypes**. This 
+structure allows for clean separation of declarations and implementations, 
+enhancing modularity and reusability in your code.
+
+### Key Points
+
+- **Including the Header File**: The source file begins by including the header file that 
+declares the function prototypes. This ensures that the implementation matches the declarations.
+
+```cpp title="source.cc"
+#include "header.h"
+
+int aFunction(int x, int y) {
+  // Do something
+}
+
+void anotherFunction() {
+  // Do something
+}
+```
+
+- **Compiling the Source File**: Use the `g++ -c` command to compile the source file into an object file (`.o`). 
+For example, the following would generate a `source.o` file:
+
+```shell
+g++ -Wall -std=c++17 -c source.cc
+```
+
+- **Linking Object Files**: The object code can be linked with other object files and a driver file to create an executable. 
+For example:
+
+```shell
+g++ -Wall -std=c++17 source.o driver.o -o executable
+```
+
+<Aside>
+Now that we are separating code into different files we'll finally start utilizing a `makefile`. 
+If you need to review makefiles, [you can view the reference page](../syntax/makefile.mdx).
+</Aside>
+
+## Example
+
+Lets take the previous Calculator program from the [Writing and Using page](./writing-and-using#example) and properly separate it into different files.
+
+### Header File
+
+Create a file called `calculator.h` and add the function prototypes:
+
+import { Code } from "@astrojs/starlight/components";
+import { code } from "@ts/functions/separate";
+
+<Code title="calculator.h" lang="cpp" code={code.header} />
+
+Checking the file with `cpplint` will throw the following error:
+
+```shell
+cpplint calculator.h
+calculator.h:3: #ifndef header guard has wrong style, please use: FILE_PATH  [build/header_guard] [5]
+calculator.h:14: #endif line should be "#endif  // FILE_PATH"  [build/header_guard] [5]
+```
+
+<Aside>
+This is the first case where a `cpplint` error can be disregarded. `cpplint` is basically asking you 
+to use a complete file path instead of a relative one after `ifndef` and asking you to include 
+a complete file path after `#endif`.
+</Aside>
+
+### Source File
+
+Now create a file called `calculator.cc` and add the implementation for each function:
+
+<Code title="calculator.cc" lang="cpp" code={code.source} />
+
+Again, running `cpplint` will throw the following error: 
+
+```shell
+cpplint calculator.cc
+calculator.cc:3:  Include the directory when naming header files  [build/include_subdir] [4]
+```
+
+<Aside>
+This is another case where `cpplint` can be disregarded as it is asking you to include a complete 
+file path after `#include` instead of a relative one.
+</Aside>
+
+### Driver File
+
+The Driver will contain our `main` function so create a file called `driver.cc` and add what your program does: 
+
+<Code title="driver.cc" lang="cpp" code={code.driver} />
+
+<Aside>`cpplint` will again throw a false error since we're using `#include` with a relative file path.</Aside>
+
+### Makefile
+
+The final file to create is a `makefile`. Not using one becomes incredibly tedious as we would have to compile and 
+link various files. Add the following code to your `makefile`: 
+
+<Code title="driver.cc" lang="cpp" code={code.makefile} />
+
+<Aside>
+Remember that when copying the `makefile` code snippet that some code editors don't recognize tabs. Use `backspace` 
+to reset each recipe line then enter `tab` to give them the proper indentation. The following error is thrown when this is 
+the case:
+
+import { errors } from "@ts/constants";
+
+<Code lang="shell" code={errors.makefileError}/>
+</Aside>
+
+### Compile, Link, & Run
+
+Now that we created a `makefile` we can compile, link, and run our calculator program. Though the `makefile` shows many 
+commands, we only have to run the `driver` script to accomplish everything!
+
+<Code lang="bash" code={code.run} mark={[1, 16, 18, 20, 29]} />

@@ -50,7 +50,8 @@ target: Prerequisite(s)
     recipe command(s)
 ```
 
-import { Aside } from "@astrojs/starlight/components";
+import { Aside, Code } from "@astrojs/starlight/components";
+import { errors } from "@ts/constants";
 
 <Aside>
 The line(s) containing recipe command(s) must
@@ -62,9 +63,8 @@ Some code editors may **interpret tabs as spaces when copying and pasting recipe
 from code snippets. If you get the following error, **reset the recipe commands to the start 
 of the line** with `backspace` and enter `tab`:
 
-```shell
-*** missing separator.  Stop.
-```
+<Code lang="shell" code={errors.makefileError} />
+
 </Aside>
 
 ```makefile title="makefile"
@@ -108,7 +108,7 @@ executable, and even 🚀 run the program.
 
 The following updates the makefile to compile, link, and execute a program:
 
-import { Code, Steps ,TabItem, Tabs } from "@astrojs/starlight/components";
+import { Steps ,TabItem, Tabs } from "@astrojs/starlight/components";
 import { code } from "@ts/syntax/makefile";
 
 <Tabs>

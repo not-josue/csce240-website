@@ -1,3 +1,5 @@
+import { STD } from "@ts/constants";
+
 const howExample: string = 
 `
 // Copyright 2024 CSCE240
@@ -27,7 +29,7 @@ const howTerminal: string =
 `
 cpplint driver.cc
 Done processing driver.cc
-g++ -Wall -std=c++17 driver.cc
+g++ -Wall -std=c++${STD} driver.cc
 ./a.out
 Test 1: 1
 Test 2: 1
@@ -120,7 +122,7 @@ const exampleTerm1: string =
 `
 cpplint driver.cc
 Done processing driver.cc
-g++ -Wall -std=c++17 driver.cc
+g++ -Wall -std=c++${STD} driver.cc
 ./a.out
 ------------------------------------
 Welcome to the CSCE240 Calculator!!!
@@ -147,7 +149,7 @@ int main() {
 
 const exampleTerm2: string =
 `
-g++ -Wall -std=c++17 driver.cc
+g++ -Wall -std=c++${STD} driver.cc
 ./a.out
 0.5
 0
@@ -257,7 +259,7 @@ const outputStart: string =
 `
 cpplint driver.cc
 Done processing driver.cc
-g++ -Wall -std=c++17 driver.cc
+g++ -Wall -std=c++${STD} driver.cc
 ./a.out
 `;
 

@@ -39,6 +39,16 @@ void GreetAmigo() {
 }
 `;
 
+const headerGuards: string =
+`
+#ifndef FILE_NAME_
+#define FILE_NAME_
+
+// Prototypes
+
+#endif
+`;
+
 const ifNoElse: string =
 `
 // Single Line OR Multi Line w/o omitting braces
@@ -76,6 +86,11 @@ if (true) {
 }
 `;
 
+const includeFile: string =
+`
+#include "filename.file_extension"
+`;
+
 const indentation: string =
 `
 // Copyright 2024 CSCE240
@@ -102,6 +117,16 @@ int main() {
 }
 `;
 
+const makeFile: string =
+`
+target: Prerequisite(s)
+    recipe command(s)
+
+# As many as you need
+target: Prerequisite(s)
+    recipe command(s)
+`;
+
 const switchBraces: string =
 `
 switch (integer_expression) {
@@ -124,8 +149,9 @@ while (condition) {
 }
 `;
 
-const styleGuide: { columnLength: string, doWhileBraces: string, forLoops: string, funcBraces1: string, funcBraces2: string, ifNoElse: string, ifWithElse: string, 
-ifWithNested: string,  indentation: string, switchBraces: string, whileBraces: string, } =
-{ columnLength, doWhileBraces, forLoops, funcBraces1, funcBraces2, ifNoElse, ifWithElse, ifWithNested, indentation, switchBraces, whileBraces, };
+const styleGuide: { columnLength: string, doWhileBraces: string, forLoops: string, funcBraces1: string, funcBraces2: string, headerGuards: string, ifNoElse: string, ifWithElse: string, 
+ifWithNested: string, includeFile: string,  indentation: string, makeFile: string, switchBraces: string, whileBraces: string, } =
+{ columnLength, doWhileBraces, forLoops, funcBraces1, funcBraces2, headerGuards, ifNoElse, ifWithElse, ifWithNested, includeFile, 
+  indentation, makeFile, switchBraces, whileBraces, };
 
 export { styleGuide };

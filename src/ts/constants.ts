@@ -43,6 +43,22 @@ Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end
 { should almost always be at the end of the previous line  [whitespace/braces] [4]
 `;
 
+const headerGuardsError: string = 
+`
+#ifndef header guard has wrong style, please use: FILE_PATH  [build/header_guard] [5]
+#endif line should be "#endif  // FILE_PATH"  [build/header_guard] [5]
+`;
+
+const includeFileError: string =
+`
+Include the directory when naming header files  [build/include_subdir] [4]
+`;
+
+const makefileError: string =
+`
+*** missing separator.  Stop.
+`;
+
 const newlineError: string =
 `
 Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
@@ -53,9 +69,10 @@ const notDetected: string =
 Done processing driver.cc
 `;
 
-const errors: { accessSpecifierError: string, functionError: string, columnError: string, controlStructuresError: string,
-    copyrightError: string, newlineError: string, notDetected: string, } =
+const errors: { accessSpecifierError: string, columnError: string, controlStructuresError: string,
+    copyrightError: string, functionError: string, headerGuardsError: string, includeFileError: string,
+    makefileError:string, newlineError: string, notDetected: string, } =
 { accessSpecifierError, controlStructuresError, columnError, copyrightError, functionError,
-    newlineError, notDetected, };
+    headerGuardsError, includeFileError, makefileError, newlineError, notDetected, };
 
 export { STD, errors };

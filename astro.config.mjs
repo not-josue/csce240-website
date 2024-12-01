@@ -144,6 +144,10 @@ export default defineConfig({
               label: "Scope",
               slug: "functions/scope",
             },
+            {
+              label: "Separate Compilation",
+              slug: "functions/separate-compilation",
+            },
           ],
         },
         {

@@ -119,10 +119,27 @@ one small line, you can place the closing brace on the same line.
 
 [Reference to `cpplint` error](./cpplint-reference#function)
 
+## `Header Guards` <Badge text="Falsely Detected" variant="success"  size="medium" aria-label="error falsely detected"/>
+You can disregard the error thrown as `cpplint` asks for a complete file path after `#ifndef` and after 
+`#endif`. Complete filepaths should **NOT** be used in this course.
+<Code lang="cpp" code={ styleGuide.headerGuards } />
+[Reference to `cpplint` error](./cpplint-reference#header-guards)
+
+## `Include File` <Badge text="Falsely Detected" variant="success"  size="medium" aria-label="error falsely detected"/>
+You can disregard the error thrown as `cpplint` asks for a complete file path after `#include` instead of the 
+relative one that is used. Complete filepaths should **NOT** be used in this course.
+<Code lang="cpp" code={ styleGuide.includeFile } />
+[Reference to `cpplint` error](./cpplint-reference#include-file)
+
 ## `Indentation` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 2-space indent length per indentation level.
 <Code lang="cpp" code={ styleGuide.indentation } />
 Error not detected by `cpplint`
+
+## `Makefile` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+Your recipe commands should be indented with a `tab` not spaces. Copying and pasting code snippets may 
+produce this error as some code editors don't recognize a copied `tab`.
+<Code lang="cpp" code={ styleGuide.makeFile } />
 
 ## `Newline Character` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 Every file should end with a blank line.
