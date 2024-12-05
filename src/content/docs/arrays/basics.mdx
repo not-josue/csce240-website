@@ -1,0 +1,143 @@
+---
+title: Array Basics
+description: Learn the fundamentals of arrays in C++, including how to declare, initialize, and use them to store and manage collections of data efficiently.
+lastUpdated: true
+---
+
+An array is a fundamental data structure in C++ that provides a 
+**contiguous block of memory for storing multiple values of the 
+same type**. Because arrays can hold elements of any data 
+type—integers, floating-point numbers, characters, or even complex 
+objects—they are a versatile way to manage collections of data.
+
+## Declaring Arrays
+
+To declare an array use the following structure:
+
+```cpp
+type variable_name [kSizeConstant];
+```
+
+The following is an integer array that can hold up to 5 values:
+
+```cpp
+const int kSize = 4;
+int array [kSize];
+```
+
+import { Aside } from "@astrojs/starlight/components";
+
+<Aside>
+We are using `static` arrays
+meaning the **size must be set when the
+array is declared**, and can **NOT**
+change during the course of the
+program.
+</Aside>
+
+<Aside type="tip">
+Use **constant variables** for the
+array's size so that modifications to
+the size can be made in one place.
+</Aside>
+
+Declaring an array does **not automatically initialize its values**. 
+If no initial values are provided, the contents of the array 
+elements are indeterminate.
+
+You can initialize an array at the time of declaration by assigning 
+it a list of values enclosed in braces `{}`. These values must be 
+separated by commas, and **the compiler will determine the size of 
+the array based on the number of values** provided.
+
+```cpp
+int array[] = {1, 2, 3, 4, 5};
+```
+
+<Aside>
+You can only initialize the
+array with a list in the array
+declaration.
+</Aside>
+
+<Aside type="tip">
+You can **leave out the size 
+of the array when using a list 
+to initialize** the array in the 
+declaration. The array's size will 
+be the number of values in the 
+initialization list.
+</Aside>
+
+When creating an array of numeric values, 
+if you include the size of the array and 
+use an initialization list, any values left 
+out of the list will be set to 0. For example, 
+
+```cpp
+int my_array[5] = { 14 }; // 14, 0, 0, 0, 0
+```
+
+## Using Arrays
+
+In C++, the name of an array refers to the **memory address of 
+its first element**. This means that when you write the array's 
+name by itself, you're essentially 🫵 pointing to the starting 
+position of the array in memory.
+
+```cpp
+// A location in your computer like: 0x7ffc6b2fc1d0
+cout << array_name << endl;
+```
+
+To access individual elements, you use the array's name followed by 
+square brackets containing the element's index `[integer]`. The following 
+is an example of how to access elements in an array called `my_array`:
+
+```cpp
+my_array[0]
+my_array[1]
+my_array[2]
+```
+
+<Aside>
+One key characteristic of arrays in C++ is that they are 0-based, 
+meaning the first element is accessed at index 0, the second at 
+index 1, and so forth.
+</Aside>
+
+### Filling Numeric Arrays
+
+You can use a `for` loop to fill a non-character array with values:
+
+```cpp
+const int kSize = 4;
+int array[kSize];
+
+for (int i = 0; i < kSize; ++i) {
+  cout << "Enter the number for index " << i << endl;
+  cin >> array[i];
+}
+```
+
+### Printing Numeric Arrays
+
+You can also use a `for` loop to print a non-character array with values:
+
+```cpp
+for (int i = 0; i < kSize; ++i) {
+  cout << array[i] << endl;
+}
+```
+
+### Overstepping Array Bounds
+
+One of the most common and dangerous errors when working with arrays is 
+accessing elements outside their valid range.
+
+In C++, your **compiler will not produce an error** if you use an index 
+outside of `0` to `size - 1`. Instead, it will treat the invalid 
+index as a memory offset from the first element, potentially overwriting 
+data that belongs to other variables or even other running programs.
+
+This can lead to unpredictable behavior, crashes, or corrupted data.

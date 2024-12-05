@@ -155,6 +155,15 @@ export default defineConfig({
           ],
         },
         {
+          label: "Arrays",
+          items: [
+            {
+              label: "Basics",
+              slug: "arrays/basics",
+            },
+          ],
+        },
+        {
           label: "References",
           items: [
             {
