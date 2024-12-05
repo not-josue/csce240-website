@@ -148,6 +148,10 @@ export default defineConfig({
               label: "Separate Compilation",
               slug: "functions/separate-compilation",
             },
+            {
+              label: "Misc Topics",
+              slug: "functions/misc-topics",
+            },
           ],
         },
         {

@@ -1,3 +1,5 @@
+import { STD } from "@ts/constants";
+
 const header: string =
 `
 // Copyright 2024 CSCE240
@@ -160,7 +162,7 @@ const makefile: string =
 `
 # Variables
 compiler = g++
-flags = -Wall -std=c++17
+flags = -Wall -std=c++${STD}
 compile = $(compiler) $(flags) -c
 link = $(compiler) $(flags)
 
@@ -185,9 +187,9 @@ clean :
 const run: string =
 `
 make driver
-g++ -Wall -std=c++17 -c driver.cc
-g++ -Wall -std=c++17 -c calculator.cc
-g++ -Wall -std=c++17 driver.o calculator.o
+g++ -Wall -std=c++${STD} -c driver.cc
+g++ -Wall -std=c++${STD} -c calculator.cc
+g++ -Wall -std=c++${STD} driver.o calculator.o
 ./a.out
 ------------------------------------
 Welcome to the CSCE240 Calculator!!!

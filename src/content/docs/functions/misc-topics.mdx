@@ -1,0 +1,198 @@
+---
+title: Misc Topics
+description: Explore advanced C++ topics, including parameter passing methods (call by value and call by reference), recursive functions, function overloading, and default arguments.
+lastUpdated: true
+---
+
+This page covers a variety of important C++ topics that expand your understanding 
+of functions and their capabilities. You'll learn about **parameter passing methods**, 
+including **call by value** and **call by reference**, as well as explore the concepts of 
+**recursive functions**, **function overloading**, and **default arguments**.
+
+## Parameter Passing Methods
+
+In C++, functions can receive arguments through different methods, which determine how 
+changes to the arguments are handled:
+
+- **Call-by-Value**: A copy of the value is sent to the function. Any changes made to the 
+function's parameter **do not affect the original variable** outside the function.
+
+- **Call-by-Reference**: A reference to the original variable is sent to the function. 
+Changes made to the parameter directly **modify the variable passed** in the function call.
+
+### Relative Advantages
+
+**Call-by-Value**:
+
+- **Independence**: Functions are completely independent of the calling code since they work 
+with a copy of the data. Changes inside the function do not affect the original variables.
+
+- **Flexibility**: You can pass either variables or literal values as arguments, making it 
+versatile for scenarios where the function doesn't need to modify the original data.
+
+**Call-by-Reference**:
+
+- **Efficiency**: Passing a reference avoids creating a copy of the data, saving memory and 
+processing time, especially for large objects or arrays.
+
+- **Mutability**: It allows a function to directly update multiple variables in the calling 
+code, making it useful for tasks like swapping values or accumulating results.
+
+### Example
+
+To create a reference parameter, use the `&` symbol before a parameter in the function's parameter list. 
+This tells the compiler to pass the argument by reference.
+
+The following function swaps the values of two variables:
+
+```cpp title="driver.cc"
+// Copyright 2024 CSCE240
+
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
+void Swap(int &a, int &b) {
+  int temp = a;
+  a = b;
+  b = temp;
+}
+
+int main() {
+  int a = 5, b = 10;
+
+  Swap(a, b);
+
+  cout << a << endl;  // 10
+  cout << b << endl;  // 5
+
+  return 0;
+}
+```
+
+## Recursive Functions
+
+A *recursive function* is a function that **calls itself as part of its execution**. 
+This approach allows problems to be broken down into smaller, simpler subproblems, 
+which the function solves recursively.
+
+For a recursive function to terminate, it must:
+
+1. Include a **base case**, which is a condition where the recursion stops.
+
+2. Call “simpler” versions of itself, reducing the problem size in each step (the **inductive step**).
+
+### Example
+
+To better understand how recursive functions work, let's look at an example. In this 
+section, we'll implement a recursive function to calculate Fibonacci numbers, 
+demonstrating the base cases and inductive step required for recursion.
+
+The Fibonacci sequence is a series of numbers where each number is the sum of the 
+two preceding ones, starting from 0 and 1. The sequence begins as 0, 1, 1, 2, 3, 
+5, 8, and so on, growing indefinitely.
+
+```cpp title="driver.cc"
+// Copyright 2024 CSCE240
+
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
+// Recursive function to calculate Fibonacci numbers
+// The Fibonacci sequence starts as 0, 1, 1, 2, 3, 5, 8...
+int Fibo(int a) {
+  // Base Cases: Stop recursion when a is 0 or 1
+  if (a == 0) return 0;
+  if (a == 1) return 1;
+  // Inductive Step: Calculate Fibo(a - 1) + Fibo(a - 2)
+  return Fibo(a - 1) + Fibo(a - 2);
+}
+
+int main() {
+  // Test cases
+  cout << Fibo(0) << endl;  // 0
+  cout << Fibo(1) << endl;  // 1
+  cout << Fibo(2) << endl;  // 1
+  cout << Fibo(3) << endl;  // 2
+  cout << Fibo(4) << endl;  // 3
+
+  // Note: This recursive implementation is not efficient for large inputs
+  return 0;
+}
+```
+
+## Overloading Functions
+
+In C++, you can write multiple functions with the same name as long as their 
+**parameter lists are distinct**, **either by the type or the number of parameters**. 
+This concept, known as *function overloading*, allows you to create flexible 
+functions that handle different types or quantities of input without needing 
+unique names for each variation.
+
+import { Aside } from "@astrojs/starlight/components";
+
+<Aside>
+The `cout` object in C++ is a practical example of function overloading. 
+It uses multiple overloaded versions of the stream insertion operator 
+(`<<`) to handle different types of data.
+</Aside>
+
+### Example
+
+The following example shows an overloaded function that returns the largest number 
+out of the two arguments:
+
+```cpp title="driver.cc"
+// Copyright 2024 CSCE240
+
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
+int GetMax(int x, int y) { return x > y ? x : y; }
+
+// Overloaded
+double GetMax(double x, double y) { return x > y ? x : y; }
+
+int main() {
+  cout << GetMax(4, 5) << endl;      // 5
+  cout << GetMax(4.5, 6.5) << endl;  // 6.5
+
+  return 0;
+}
+```
+
+## Default Arguments
+
+Default arguments allow you to make your functions more versatile by **assigning 
+default values to parameters** in the function prototype. These defaults are **used 
+if the function is called with fewer arguments** than specified in the parameter list.
+
+### Key Points
+
+- **Prototype Placement**: Assign default values directly in the function prototype, 
+not in the function implementation.
+
+```cpp
+int Add(int x, int y = 0);
+```
+
+- **Order Matters**: Default arguments must be assigned from right to left in the parameter 
+list. Parameters without default values should appear first, while those with defaults 
+should come at the end.
+
+```cpp
+int Multiply(int a, int b, int c = 1, int d = 1);
+```
+
+- **Avoid Ambiguity**: Ensure your default arguments don't create confusion with overloaded functions, 
+as this can lead to errors during compilation. The following functions will cause confusion: 
+
+```cpp
+int Max(int, int, int = 0, int = 0);
+int Max(int, int);
+```
