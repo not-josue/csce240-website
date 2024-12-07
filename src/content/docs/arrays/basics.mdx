@@ -14,13 +14,13 @@ objects—they are a versatile way to manage collections of data.
 
 To declare an array use the following structure:
 
-```cpp
+```cpp showLineNumbers=false
 type variable_name [kSizeConstant];
 ```
 
 The following is an integer array that can hold up to 5 values:
 
-```cpp
+```cpp showLineNumbers=false
 const int kSize = 4;
 int array [kSize];
 ```
@@ -50,7 +50,7 @@ it a list of values enclosed in braces `{}`. These values must be
 separated by commas, and **the compiler will determine the size of 
 the array based on the number of values** provided.
 
-```cpp
+```cpp showLineNumbers=false
 int array[] = {1, 2, 3, 4, 5};
 ```
 
@@ -74,7 +74,7 @@ if you include the size of the array and
 use an initialization list, any values left 
 out of the list will be set to 0. For example, 
 
-```cpp
+```cpp showLineNumbers=false
 int my_array[5] = { 14 }; // 14, 0, 0, 0, 0
 ```
 
@@ -85,7 +85,7 @@ its first element**. This means that when you write the array's
 name by itself, you're essentially 🫵 pointing to the starting 
 position of the array in memory.
 
-```cpp
+```cpp showLineNumbers=false
 // A location in your computer like: 0x7ffc6b2fc1d0
 cout << array_name << endl;
 ```
@@ -94,7 +94,7 @@ To access individual elements, you use the array's name followed by
 square brackets containing the element's index `[integer]`. The following 
 is an example of how to access elements in an array called `my_array`:
 
-```cpp
+```cpp showLineNumbers=false
 my_array[0]
 my_array[1]
 my_array[2]
@@ -110,7 +110,7 @@ index 1, and so forth.
 
 You can use a `for` loop to fill a non-character array with values:
 
-```cpp
+```cpp showLineNumbers=false
 const int kSize = 4;
 int array[kSize];
 
@@ -124,7 +124,7 @@ for (int i = 0; i < kSize; ++i) {
 
 You can also use a `for` loop to print a non-character array with values:
 
-```cpp
+```cpp showLineNumbers=false
 for (int i = 0; i < kSize; ++i) {
   cout << array[i] << endl;
 }

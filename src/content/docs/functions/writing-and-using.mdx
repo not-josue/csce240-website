@@ -43,14 +43,14 @@ import { code } from "@ts/functions/writing";
 beginning of your program or in a header file. This tells the compiler what the function looks 
 like before its implementation.
 
-    ```cpp
+    ```cpp showLineNumbers=false
     int GetMin(int, int);
     ```
 
 2. **Write the Implementation**: Provide the actual code for the function, specifying how it performs 
 its task. This is usually done after the main function or in a separate source file.
 
-    ```cpp
+    ```cpp showLineNumbers=false
     int GetMin(int x, int y) { return x <= y ? x : y; }
     ```
 
@@ -97,13 +97,13 @@ It **serves as a promise to the compiler that the function will be implemented l
 
 - **Single Statement**: A prototype is a single statement and must end with a semicolon (`;`). For example:
 
-```cpp
+```cpp showLineNumbers=false
 int Multiply(int x, int y);
 ```
 
 - **Optional Parameter Names**: Naming the parameters in the prototype is optional, but including them can improve readability:
 
-```cpp
+```cpp showLineNumbers=false
 int Add(int, int);  // Valid
 int Add(int a, int b);  // Also valid and more descriptive
 ```
@@ -124,7 +124,7 @@ The implementation of a function provides the full definition, including how it 
 - **Named Parameters**: Parameters must be named in the function header so they can be referenced within the function body. 
 These parameters are local to the function, meaning they cannot be accessed outside of it.
 
-```cpp
+```cpp showLineNumbers=false
 int Add(int a, int b) {  // 'a' and 'b' are local to this function
   return a + b;
 }

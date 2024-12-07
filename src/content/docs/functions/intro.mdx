@@ -20,7 +20,7 @@ when working with functions in C++, along with examples to illustrate their use.
 values are used by the function to perform its task. For example, the 
 main functions you've written so far have taken no arguments, as shown below:
 
-```cpp title="driver.cc"
+```cpp title="driver.cc" 
 // Copyright 2024 CSCE2024
 int main() {
   // No arguments passed to main
@@ -30,7 +30,7 @@ int main() {
 
 However, functions can accept arguments to process specific data. For instance:
 
-```cpp
+```cpp showLineNumbers=false
 void PrintNumber(int x) { cout << x << endl; }
 ```
 
@@ -77,7 +77,7 @@ gives you the correct letter in the alphabet based on the value of `n`.
 The *name* of a function is its identifier, **used to call or reference the function**
 in code. It must be unique within the same scope.
 
-```cpp
+```cpp showLineNumbers=false
 // Add is the name
 int Add(int x, int y) { return x + y; }
 
@@ -90,7 +90,7 @@ void Greet() { cout << "Hello World" << endl; }
 *Parameters* are the **variables listed in the function definition that receive values 
 when the function is called**. They are like placeholders for the *arguments* passed to the function.
 
-```cpp
+```cpp showLineNumbers=false
 // x and y are the parameters
 int Add(int x, int y) { return x + y; }
 ```
@@ -102,7 +102,7 @@ The function *prototype* is a declaration of a function that **specifies the ret
 
 Function prototypes are found either above the `main` function or in a `header` file.
 
-```cpp
+```cpp showLineNumbers=false
 int Subtract(int x, int y);
 // OR
 int Subtract(int, int);
@@ -118,7 +118,7 @@ Remember to add the semicolon `;` at the end of the *prototype*.
 The *return type* of a function specifies **the type of value the function returns after execution**. 
 If a function doesn't return any value, the return type is `void`.
 
-```cpp
+```cpp showLineNumbers=false
 // int is the return type
 int Max(int x, int y) { return x >= y ? x : y; }
 // no return type
@@ -130,7 +130,7 @@ void ProductInfo() { cout << "Name:\nCategory:\nPrice:\nItem #:" << endl; }
 A function's *signature* consists of the **function's name and its parameter types 
 (but not the return type)**. It uniquely identifies a function.
 
-```cpp
+```cpp showLineNumbers=false
 // int and int are the signatures
 int Multiply(int x, int y);
 ```

@@ -15,7 +15,7 @@ alternative block is executed.
 
 An `if-else` statement in C++ follows this basic structure:
 
-```cpp
+```cpp showLineNumbers=false
 if (logical expression) {
   // Code to execute if condition is true
 } else {
@@ -26,7 +26,7 @@ if (logical expression) {
 The `else` block is optional in C++. If you only need to execute 
 code when the condition is `true`, you can omit the `else` statement:
 
-```cpp
+```cpp showLineNumbers=false
 if (condition) {
   // Code to execute if condition is true
 }
@@ -37,7 +37,7 @@ conditions. This structure allows your program to make more complex
 decisions by checking additional conditions inside the `if` or `else` blocks. 
 For example:
 
-```cpp
+```cpp showLineNumbers=false
 if (true) {
   // Do something...
   if (true) {
@@ -52,7 +52,7 @@ if (true) {
 
 If you have more than 2 cases you can use as many `else if` statements as you need:
 
-```cpp
+```cpp showLineNumbers=false
 if (condition1) {
   // Do something
 } else if (condition2) {
@@ -69,7 +69,7 @@ if (condition1) {
 You can find a list of general requirements that apply to a control structure like `if-else` statements in the [control structures page](./control-structures#style-requirements). 
 The following is an example of an `if-else` statement using code instead of placeholders:
 
-```cpp
+```cpp showLineNumbers=false
 if (account < price) {
   cout << "Insufficient funds" << endl;
 } else {
@@ -82,7 +82,7 @@ You can omit the braces if your code block does not contain an `else`
 statement and consists of only a single line. If the statement is short 
 enough, you can even place it all on one line:
 
-```cpp
+```cpp showLineNumbers=false
 if (highest_score) cout << "You have the #1 rank!" << endl;
 ```
 
@@ -99,15 +99,15 @@ import { code } from "@ts/control/if-else";
 
 The following is an example of an incorrectly placed opening brace:
 
-<Code lang="cpp" code={ code.wrongStyle1 } del={[1, 2]} />
+<Code lang="cpp" code={ code.wrongStyle1 } del={[1, 2]} showLineNumbers={false} />
   
 The next incorrect style shows an incorrectly placed `else` statement:
 
-<Code lang="cpp" code={ code.wrongStyle2 } del={[3, 4]} />
+<Code lang="cpp" code={ code.wrongStyle2 } del={[3, 4]} showLineNumbers={false} />
 
 The final incorrect style shows missing braces, unfortunately the error message does not mention missing braces on both statements:
 
-<Code lang="cpp" code={ code.wrongStyle3 } del={[1, 2, 3, 4]} />
+<Code lang="cpp" code={ code.wrongStyle3 } del={[1, 2, 3, 4]} showLineNumbers={false} />
 
 ## Ternary Operator
 
@@ -118,15 +118,15 @@ two operands**.
 The conditional operator (`?:`), also known as the ternary operator, is unique 
 because it takes three operands. The syntax is:
 
-```cpp
-condition ? true_action : false_action
+```cpp showLineNumbers=false
+condition ? true_action : false_action 
 ```
 
 <Aside>The **ternary operator** always returns a value and does not allow for multi-line operations.</Aside>
 
 They are useful for variables whose values require a condition:
 
-```cpp
+```cpp showLineNumbers=false
 int x = 1, y = 5;
 int max = (x > y) ? x : y;
 ```

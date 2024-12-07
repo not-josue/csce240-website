@@ -14,7 +14,7 @@ import { styleGuide } from "@ts/references/style";
 
 ## `Access Specifier Indent` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 Access specifiers like `public`, `protected`, and `private` should be indented by 1-space.
-```cpp title="myclass.h"
+```cpp title="myclass.h" showLineNumbers=false
 class MyClass {
  public:
   void Print() const;
@@ -29,7 +29,7 @@ Your **MAX** column length is 80.
 
 ## `Constant` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 Constants should be formatted with a lowercase `k` followed by `CamelCasing` the rest of the name.
-```cpp
+```cpp showLineNumbers=false
 const double kPie = 3.14;
 ```
 Error not detected by `cpplint`
@@ -48,43 +48,43 @@ Error not detected by `cpplint`
 
 ### `Do-While`
 
-<Code lang="shell" code={styleGuide.doWhileBraces} />
+<Code lang="cpp" code={styleGuide.doWhileBraces} showLineNumbers={false} />
 
 ### `For`
 
-<Code lang="shell" code={styleGuide.forLoops} />
+<Code lang="cpp" code={styleGuide.forLoops} showLineNumbers={false} />
 
 ### `If-Else`
 
 <Tabs>
 
 <TabItem label="If" icon="seti:cpp">
-    <Code lang="shell" code={styleGuide.ifNoElse} />
+    <Code lang="cpp" code={styleGuide.ifNoElse} showLineNumbers={false} />
 </TabItem>
 
 <TabItem label="If-Else" icon="seti:cpp">
-    <Code lang="shell" code={styleGuide.ifWithElse} />
+    <Code lang="cpp" code={styleGuide.ifWithElse} showLineNumbers={false} />
 </TabItem>
 
 <TabItem label="Nested" icon="seti:cpp">
-    <Code lang="shell" code={styleGuide.ifWithNested} />
+    <Code lang="cpp" code={styleGuide.ifWithNested} showLineNumbers={false} />
 </TabItem>
 
 </Tabs>
 
 ### `Switch`
 
-<Code lang="shell" code={styleGuide.switchBraces} />
+<Code lang="cpp" code={styleGuide.switchBraces} showLineNumbers={false} />
 
 ### `While`
 
-<Code lang="shell" code={styleGuide.whileBraces} />
+<Code lang="cpp" code={styleGuide.whileBraces} showLineNumbers={false} />
 
 [Reference to `cpplint` errors](./cpplint-reference#control-structures)
 
 ## `Copyright` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 The first line of each file should be authored with a comment in the following format `// Copyright <year> <name>`.
-```cpp
+```cpp showLineNumbers=false
 // Copyright 2024 CSCE240
 ```
 [Reference to `cpplint` error](./cpplint-reference#copyright)
@@ -108,11 +108,11 @@ one small line, you can place the closing brace on the same line.
 <Tabs>
 
 <TabItem label="Single-Line" icon="seti:cpp">
-    <Code lang="cpp" code={ styleGuide.funcBraces1 } />
+    <Code lang="cpp" code={ styleGuide.funcBraces1 } showLineNumbers={false} />
 </TabItem>
 
 <TabItem label="Multi-Line" icon="seti:cpp">
-    <Code lang="cpp" code={ styleGuide.funcBraces2 } />
+    <Code lang="cpp" code={ styleGuide.funcBraces2 } showLineNumbers={false} />
 </TabItem>
 
 </Tabs>
@@ -122,13 +122,13 @@ one small line, you can place the closing brace on the same line.
 ## `Header Guards` <Badge text="Falsely Detected" variant="success"  size="medium" aria-label="error falsely detected"/>
 You can disregard the error thrown as `cpplint` asks for a complete file path after `#ifndef` and after 
 `#endif`. Complete filepaths should **NOT** be used in this course.
-<Code lang="cpp" code={ styleGuide.headerGuards } />
+<Code lang="cpp" code={ styleGuide.headerGuards } showLineNumbers={false} />
 [Reference to `cpplint` error](./cpplint-reference#header-guards)
 
 ## `Include File` <Badge text="Falsely Detected" variant="success"  size="medium" aria-label="error falsely detected"/>
 You can disregard the error thrown as `cpplint` asks for a complete file path after `#include` instead of the 
 relative one that is used. Complete filepaths should **NOT** be used in this course.
-<Code lang="cpp" code={ styleGuide.includeFile } />
+<Code lang="cpp" code={ styleGuide.includeFile } showLineNumbers={false} />
 [Reference to `cpplint` error](./cpplint-reference#include-file)
 
 ## `Indentation` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
@@ -139,7 +139,7 @@ Error not detected by `cpplint`
 ## `Makefile` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 Your recipe commands should be indented with a `tab` not spaces. Copying and pasting code snippets may 
 produce this error as some code editors don't recognize a copied `tab`.
-<Code lang="cpp" code={ styleGuide.makeFile } />
+<Code lang="cpp" code={ styleGuide.makeFile } showLineNumbers={false} />
 
 [Reference to `cpplint` error](./cpplint-reference#makefile)
 
@@ -151,7 +151,7 @@ Every file should end with a blank line.
 
 ## `Variable` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 Variables should be named using `snake_case`.
-```cpp
+```cpp showLineNumbers=false
 int my_integer = 10;
 double my_double = 10.0;
 ```

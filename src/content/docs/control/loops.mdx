@@ -24,7 +24,7 @@ iterations depends on a dynamic condition rather than a fixed count**.
 
 The basic syntax of a `while` loop in C++ is as follows:
 
-```cpp
+```cpp showLineNumbers=false
 while (condition) {
   // Body of the loop
 }
@@ -43,7 +43,7 @@ Adding one will result in a syntax error or unintended behavior.
 - **Scope:** Variables declared inside the loop block are local to that block and cannot be accessed outside of it. 
 For example:
 
-```cpp
+```cpp showLineNumbers=false
 while (condition) {
   int x = 10;  // 'x' is only accessible within this block
 }
@@ -94,7 +94,7 @@ body must run at least once before checking the condition**.
 
 The basic syntax of a `do-while` loop in C++ is as follows:
 
-```cpp
+```cpp showLineNumbers=false
 do {
   // Body of the loop
 } while (condition);
@@ -136,7 +136,7 @@ compared to `while` or `do-while` loops in such scenarios.
 
 The basic syntax of a for loop in C++ is as follows:
 
-```cpp
+```cpp showLineNumbers=false
 for (initialization; condition; update) {
   // Body of the loop
 }
@@ -151,7 +151,7 @@ parenthesis. Adding one will cause errors or unintended behavior.
 statement. However, using braces is recommended for readability and to avoid 
 errors when modifying the loop.
 
-```cpp
+```cpp showLineNumbers=false
 for (int i = 0; i < 5; ++i)
   statement;  // No braces needed for a single line
 ```
@@ -159,7 +159,7 @@ for (int i = 0; i < 5; ++i)
 - **Local Scope:** Variables declared in the parenthesis are local to the loop block and 
 cannot be accessed outside of it. For example:
 
-```cpp
+```cpp showLineNumbers=false
 for (int i = 0; i < 5; ++i) {
   std::cout << i << std::endl;  // 'i' is accessible here
 }

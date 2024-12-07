@@ -1,0 +1,198 @@
+---
+title: C-Style Strings
+description: Understand the basics of C-style strings in C++, including how they are represented as null-terminated character arrays, how to safely manage their memory, and how they differ from the standard std::string class.
+lastUpdated: true
+---
+
+C-style strings are **arrays of characters terminated by a special null character** 
+(`'\0'`) that indicates where the string ends. Although you will mostly use and 
+see the `std::string` class in CSCE240, understanding C-style 
+strings is essential, as it's a topic you may be tested on in this course.
+
+## The String Class
+
+Before diving into C-style strings, let's briefly look at the more 
+modern `std::string` class provided by C++. The `std::string` class is 
+defined in the `<string>` header and offers convenient functionality 
+for handling text without manually managing memory or worrying about 
+null terminators.
+
+```cpp
+// Copyright 2024 CSCE240
+
+#include <iostream>
+#include <string> //  Include the string library
+
+using std::cout;
+using std::endl;
+using std::string;
+
+int main() {
+  string state = "South Carolina";
+
+  cout << state << endl; //  South Carolina
+
+  return 0;
+}
+```
+
+### Helpful Topics
+
+The following topics may or may not come up during coursework as 
+simply importing the `string` library and using the `string` object 
+from the Standard Library is all you really need to know.
+
+#### Concatenation
+
+You can use the addition `+` operator to combine strings: 
+
+```cpp showLineNumbers=false
+string first_name = "Johnny";
+string last_name = "Cage";
+
+string full_name = first_name + " " + last_name;
+
+cout << full_name << endl;  //  Johnny Cage
+```
+
+#### Pre-Built Functions
+
+The `string` object comes with functions which you can access using 
+dot (`.`) notation.
+
+- `append()` is a function that concatenates strings: 
+
+```cpp showLineNumbers=false
+string first_name = "Johnny";
+string last_name = "Cage";
+
+string full_name = first_name.append(" " + last_name);
+
+cout << full_name << endl;  //  Johnny Cage
+```
+
+- `length()` and `size()` `return` how many characters are in a `string`: 
+
+```cpp showLineNumbers=false
+string course = "CSCE240";
+
+cout << course.length() << endl;  // 7
+cout << course.size() << endl;    // 7
+```
+
+#### Access Strings
+
+You can access individual characters in `string` using bracket notation just 
+like you would with non-character arrays: 
+
+```cpp showLineNumbers=false
+string example = "hello world";
+
+cout << "First Letter: " << example[0] << endl;  // First Letter: h
+cout << "Last Letter: " << example[example.length() - 1]
+     << endl;  // Last Letter: d
+```
+
+## Char Arrays
+
+C-style strings are fundamentally implemented using `char` arrays, 
+which store a **sequence of characters in contiguous memory**. 
+Unlike `std::string`, which manages memory and length information 
+for you, a `char` array relies on a null terminator (`'\0'`) to mark 
+the end of the string.
+
+### Declaring and Initializing 
+
+You can declare and initialize a `char` array in the same manner as 
+non-character arrays:
+
+```cpp showLineNumbers=false
+const int kSize = 3;
+char array1[kSize];
+char array2[] = {'a', 'b', 'c', 'd'};
+```
+
+import { Aside } from "@astrojs/starlight/components";
+
+<Aside>
+You may not see this type of use throughout CSCE240 assignments or tests.
+</Aside>
+
+You can also initialize a `char` array by assigning it to a `string`:
+
+```cpp showLineNumbers=false
+char array[] = "How are you doing?";
+```
+
+<Aside>You may be tested on this type of implementation.</Aside>
+
+#### Null Terminator
+
+Here's an important detail about sizing and initialization: When you 
+initialize a `char` array to represent a C-style `string`, **the last element 
+must be the null terminator** (`'\0'`) to indicate the end of the string. 
+This means that if you declare an array with a fixed size, you need to 
+leave room for `'\0'`.
+
+```cpp showLineNumbers=false
+char arr[3] = "Hi";
+```
+
+`arr` becomes `{'H', 'i', '\0'}`, which is a valid null-terminated `string` of length `2`. 
+However, you cannot do:
+
+```cpp showLineNumbers=false
+char arr[3] = "Bye";
+```
+
+because `"Bye"` plus the `'\0'` terminator would require `4` characters.
+
+Similarly, when you use `string` literals to initialize a `char` array without specifying the size:
+
+```cpp showLineNumbers=false
+char greeting[] = "Hello";
+```
+
+the compiler counts the characters (`'H', 'e', 'l', 'l', 'o'`) plus the null 
+terminator (`'\0'`) and allocates enough space for all `6` characters. This 
+automatic inclusion of the null terminator makes it easier to work with 
+C-style strings, but you must keep it in mind **whenever you explicitly 
+declare the size of your char arrays**.
+
+## Printing
+
+If your `char` array is a valid C-style `string` (i.e., it includes a null terminator `'\0'`), 
+you can print it directly using `std::cout`:
+
+```cpp showLineNumbers=false
+char greeting[] = "Hello, World!";
+std::cout << greeting << std::endl;  //  Hello, World!
+```
+
+This works because `std::cout` treats a `char` array as a C-style `string` and will print 
+characters until it encounters the null terminator.
+
+### Example
+
+import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
+import { code } from "@ts/arrays/strings"
+
+Here is a simplified example of a concept you may be tested on.
+The following snippet shows how the null terminator stops `std::cout` from 
+printing a C-style `string`: 
+
+<Tabs>
+  
+<TabItem label="Driver" icon="rocket">
+  <Code title="driver.cc" lang="cpp" code={code.ex01Code}/>
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+  <Code lang="bash" code={code.ex01Term} mark={[1, 2]}/>
+</TabItem>
+  
+</Tabs>
+
+Since we placed a null terminator in the middle of the `string`, only `he` was 
+printed to the terminal.
+

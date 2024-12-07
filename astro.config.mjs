@@ -161,6 +161,14 @@ export default defineConfig({
               label: "Basics",
               slug: "arrays/basics",
             },
+            {
+              label: "C-Style Strings",
+              slug: "arrays/strings",
+            },
+            {
+              label: "Passing To Functions",
+              slug: "arrays/passing-to-functions",
+            },
           ],
         },
         {

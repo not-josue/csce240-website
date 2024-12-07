@@ -177,7 +177,7 @@ if the function is called with fewer arguments** than specified in the parameter
 - **Prototype Placement**: Assign default values directly in the function prototype, 
 not in the function implementation.
 
-```cpp
+```cpp showLineNumbers=false
 int Add(int x, int y = 0);
 ```
 
@@ -185,14 +185,14 @@ int Add(int x, int y = 0);
 list. Parameters without default values should appear first, while those with defaults 
 should come at the end.
 
-```cpp
+```cpp showLineNumbers=false
 int Multiply(int a, int b, int c = 1, int d = 1);
 ```
 
 - **Avoid Ambiguity**: Ensure your default arguments don't create confusion with overloaded functions, 
 as this can lead to errors during compilation. The following functions will cause confusion: 
 
-```cpp
+```cpp showLineNumbers=false
 int Max(int, int, int = 0, int = 0);
 int Max(int, int);
 ```

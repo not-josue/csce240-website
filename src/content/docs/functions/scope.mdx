@@ -18,7 +18,7 @@ Here are the main types of scopes you'll see in the course:
 Variables declared inside a block (enclosed by {}) are only accessible within that 
 block and its sub-blocks.
 
-```cpp
+```cpp showLineNumbers=false
 {
   int x = 10;  // x is accessible only inside this block
 }
@@ -48,7 +48,7 @@ int main() {
 
 Parameters named in a function implementation are accessible only within that function.
 
-```cpp
+```cpp showLineNumbers=false
 void example(int y) {
   // y is accessible only inside this function
 }
@@ -59,7 +59,7 @@ void example(int y) {
 Variables and methods defined within a class are accessible within the class. 
 Additional details, such as access modifiers (`private`, `public`, `protected`), will be discussed later.
 
-```cpp
+```cpp showLineNumbers=false
 class MyClass {
   int data_member_;  // Class scope
 };

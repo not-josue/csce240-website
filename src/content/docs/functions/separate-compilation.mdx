@@ -27,6 +27,7 @@ them accessible to multiple source files within a project.
 These ensure that the contents of the header file are included only once during compilation:
 
 ```cpp title="program.h"
+// Copyright 2024 CSCE240
 #ifndef PROJECT_PATH_FILENAME_H_
 #define PROJECT_PATH_FILENAME_H_
 
@@ -54,6 +55,7 @@ enhancing modularity and reusability in your code.
 declares the function prototypes. This ensures that the implementation matches the declarations.
 
 ```cpp title="source.cc"
+// Copyright 2024 CSCE240
 #include "header.h"
 
 int aFunction(int x, int y) {
@@ -142,7 +144,7 @@ The Driver will contain our `main` function so create a file called `driver.cc` 
 The final file to create is a `makefile`. Not using one becomes incredibly tedious as we would have to compile and 
 link various files. Add the following code to your `makefile`: 
 
-<Code title="driver.cc" lang="cpp" code={code.makefile} />
+<Code title="driver.cc" lang="makefile" code={code.makefile} />
 
 <Aside>
 Remember that when copying the `makefile` code snippet that some code editors don't recognize tabs. Use `backspace` 
