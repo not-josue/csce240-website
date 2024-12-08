@@ -4,4 +4,76 @@ description: Learn how to pass arrays as function arguments in C++, how to corre
 lastUpdated: true
 ---
 
-TODO
+Programming in Java during CSCE145 and CSCE146 got you used to 
+arrays that "know" their own size. In C++, things work differently.
+
+When passing an array to a function, you don't get the array's 
+size “for free.” Instead, **you have to provide the array's size 
+as a separate parameter**. This is because C++ doesn't store the 
+size of the array; it only knows where the array begins.
+
+The following snippet is a prototype of a function that doubles the 
+value of each element in an integer array:
+
+```cpp showLineNumbers=false
+void DoubleValues(int array[], int size);
+```
+
+Here's the implementation to the previous prototype:
+
+```cpp showLineNumbers=false
+void DoubleValues(int array[], int size) {
+  for (int i = 0; i < size; ++i) {
+    array[i] *= 2;
+  }
+}
+```
+
+Finally, this is an example of calling the function and using it on an 
+integer array:
+
+```cpp showLineNumbers=false
+const int kSize = 5;
+int array[kSize] = {1, 2, 3, 4, 5};
+
+DoubleValues(array, kSize);
+```
+
+## Constant Arrays
+
+Another new concept in C++ is making an array parameter constant. 
+By declaring an array parameter as `const`, **you guarantee that the 
+function won't alter the original array**. 
+
+This is particularly helpful for functions like `PrintArray` or `Search`,  
+where the goal is only to read and display the data, not modify it. Using `const` 
+also **communicates the function's behavior to other developers**, making it clear  
+that the array's contents remain unchanged after the function call.
+
+First we'll make a function prototype for a function that prints the values in 
+an integer array:
+
+```cpp showLineNumbers=false
+void PrintArray(const int[], int);
+```
+
+Now we'll add the implementation:
+
+```cpp showLineNumbers=false
+void PrintArray(const int array[], int size) {
+  for (int i = 0; i < size; ++i) {
+    cout << array[i] << endl;
+  }
+}
+```
+
+Finally, lets test the function on an integer array: 
+
+```cpp showLineNumbers=false
+const int kSize = 5;
+int array[kSize] = {1, 2, 3, 4, 5};
+
+PrintArray(array, kSize);
+```
+
+
