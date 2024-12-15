@@ -84,9 +84,31 @@
 
 ## Functions
 
-- [ ] Introduction
+- [x] Introduction
 
-- [ ] Using Functions
+- [x] Writing & Using
+
+- [x] Scope
+
+- [x] Separate Compilation
+
+- [x] Misc Topics
+
+## Arrays
+
+- [x] Basics
+
+- [x] C-Style Strings
+
+- [x] Passing To Functions
+
+- [ ] Algorithms
+
+- [ ] Multi-D
+
+## Pointers
+
+- [ ] Revisit the MergeSort Algorithm to optimize
 
 ## References
 

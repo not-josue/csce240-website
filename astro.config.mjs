@@ -169,6 +169,10 @@ export default defineConfig({
               label: "Passing To Functions",
               slug: "arrays/passing-to-functions",
             },
+            {
+              label: "Algorithms",
+              slug: "arrays/algorithms",
+            },
           ],
         },
         {

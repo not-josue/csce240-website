@@ -1,0 +1,621 @@
+---
+title: Array Algorithms
+description: Learn fundamental array algorithms in C++, including searching, sorting, and other common techniques to efficiently process and manipulate data.
+lastUpdated: true
+---
+
+Now that you've learned how to pass arrays into functions, let's 
+explore some common algorithms that may be useful for this course. 
+Luckily since **Java and C++ share similar syntax, many of the algorithms you 
+encountered in CSCE146 can be easily transferred over to C++** with 
+minor adjustments 🚀.
+
+To keep our code organized, lets create a massive project that holds all our 
+array algorithms. The project will be like a *code bank* where we can copy 
+and paste array algorithms to other projects as we need them.
+
+## Project Setup
+
+If you have something similar [to the suggested file structure from earlier in the tutorial](../welcome/overview#recommended-folder-structure), 
+then create a folder called `Arrays` or `Array Algorithms` where your `Tutorials` or `Practice` code are located. 
+I've gone ahead and listed the filenames that we will be using:
+
+import { Aside, FileTree, Code, Steps ,TabItem, Tabs } from "@astrojs/starlight/components"
+import { code } from "@ts/arrays/algorithms"
+
+<FileTree>
+
+- CSCE240
+    - Assignments
+        - ...
+    - Lectures
+        - ...
+    - Test
+        - ...
+    - Tutorials
+        - **Arrays**
+            - algorithms.cc
+            - algorithms.h
+            - driver.cc
+            - makefile
+        - ...
+
+</FileTree>
+
+Since we know the names of the files for the project, we can go ahead and write the scripts to 
+compile and link everything in our `makefile`:
+
+<Code title="makefile" lang="makefile" code={code.makefile} />
+
+## Searching
+
+In your header file, lets create a couple of prototypes for different searching algorithms. **This 
+is the only time I'll show the full header file**. Future additions will only show what code to add: 
+
+```cpp title="algorithms.h"
+// Copyright 2024 CSCE240
+
+#ifndef ALGORITHMS_H_
+#define ALGORITHMS_H_
+
+/* Searching Algorithms */
+
+// Linear
+
+int IndexOf(const int[], int, int);
+int IndexOf(const char[], char);  // char overload
+
+bool Contains(const int[], int, int);
+bool Contains(const char[], char);  // char overload
+
+// Binary
+
+bool BinaryContains(const int[], int, int);
+bool BinaryContains(const int[], int, int, int);  //  recursive helper function
+
+#endif
+```
+
+Now move over to your source file, `algorithms.cc`, to write the implementations.
+
+### Linear Search
+
+We'll first write the implementation for the linear search functions 
+since they are pretty straight forward. Starting from the first index 
+to the last index of the array, if the current value matches a target, 
+stop the loop and `return` something.
+
+#### `IndexOf`
+
+`IndexOf` is useful when you need to know where an element is located. We 
+`return` an integer which represents an index in the array or we `return -1` 
+which symbolizes that the target was not found.
+
+##### Numeric Function
+
+**This is the only time I'll show the complete source file**, future snippets will 
+only show the new code to add:
+
+```cpp title="algorithms.cc"
+// Copyright 2024 CSCE240
+
+#include "algorithms.h"
+
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
+/* Searching Algorithms */
+
+// Linear
+
+int IndexOf(const int array[], int size, int target) {
+  for (int i = 0; i < size; ++i) {
+    if (array[i] == target) return i;
+  }
+  return -1;
+}
+```
+
+##### Char Function
+
+You may have noticed from the prototype in the header file that we didn't require an integer for the 
+size. This is to show how you can use a different approach with `char` arrays. Instead 
+of iterating for a set number of times, you can use the null terminator `\0` as a 
+deciding factor for when to end iteration.
+
+```cpp title="algorithms.cc"
+//  Char Overload
+int IndexOf(const char array[], char target) {
+  int i = 0;
+  while (array[i] != '\0') {
+    if (array[i] == target) return i;
+    ++i;
+  }
+  return -1;
+}
+```
+
+##### Test
+
+We've completed the implementation of the `IndexOf` functions so we can now move to 
+`driver.cc` to test these functions. **This will be the only time the complete driver 
+will be shown**.
+
+<Tabs>
+
+<TabItem label="Driver" icon="rocket">
+    <Code title="driver.cc" lang="cpp" code={code.driverIndexOf}/>
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+    <Code lang="bash" code={code.testIndexOf} />
+</TabItem>
+
+</Tabs>
+
+Now that we've verified that the functions are working correctly, we can comment out the 
+`cout` lines so that we are only getting output for the functions we are testing instead 
+of everything.
+
+#### `Contains`
+
+`Contains` can be used when you need to know `if` an element exists in an array. While 
+iterating we `return true` if the target element is found. Otherwise we `return false` 
+at the end of the function.
+
+##### Numeric Function
+
+Move back to your source file, `algorithms.cc`, and add the implementation for the 
+`Contains` function:
+
+```cpp title="algorithms.cc"
+bool Contains(const int arr[], int size, int target) {
+  for (int i = 0; i < size; ++i) {
+    if (arr[i] == target) return true;
+  }
+  return false;
+}
+```
+
+##### Char Function
+
+Again we'll use the null terminator approach with the overloaded `char` function:
+
+```cpp title="algorithms.cc"
+bool Contains(const char array[], char target) {
+  int i = 0;
+  while (array[i] != '\0') {
+    if (array[i] == target) return true;
+    ++i;
+  }
+  return false;
+}
+```
+
+##### Test
+
+We can use the previously created arrays to also test the `Contains` functions:
+
+<Tabs>
+
+<TabItem label="Driver" icon="rocket">
+    <Code title="driver.cc" lang="cpp" code={code.driverContains} showLineNumbers={false} />
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+    <Code lang="bash" code={code.testContains} />
+</TabItem>
+
+</Tabs>
+
+Now that we know the functions work, we can also comment out every line utilizing `cout` and `arr2`.
+
+### Binary Search
+
+*Binary Search* is a faster approach to searching than the linear way as it looks to **divide 
+& conquer an array by halving it into smaller relevant sections**. If you need a refresher, you can 
+<a href="https://www.youtube.com/watch?v=MFhxShGxHWc" target="_blank" rel="noopener noreferrer">view this quick video by Fireship</a>.
+
+<Aside>
+A caveat with Binary Search is that though it is a much quicker searching algorithm, it requires 
+an array to be sorted.
+</Aside>
+
+I provided the Java version, which should be very similar to the code found in CSCE146, next to the 
+C++ version along with marks to show which lines have been changed. Add the C++ implementation to the 
+source file:
+
+<Tabs>
+
+<TabItem label="Java" icon="seti:java">
+    <Code title="SearchAlgorithms.java" lang="java" code={code.javaBinary} del={[1, 2]} />
+</TabItem>
+
+<TabItem label="C++" icon="seti:cpp">
+    <Code title="algorithms.cc" lang="cpp" code={code.cppBinary} ins={[1, 2]} />
+</TabItem>
+
+</Tabs>
+
+<Aside>
+Aside from language syntax, just two lines changed 🥳! The recursive helper function requires an ending index parameter. Since we don't 
+have the `.length` property in C++, we require the size of the array and subtract `1` from it.
+</Aside>
+
+#### Test
+
+Now to test our new function in the driver. Since `arr1` is already sorted, we can use it as a testing parameter:
+
+<Tabs>
+
+<TabItem label="Driver" icon="rocket">
+    <Code title="drive.cc" lang="cpp" code={code.driverBinary} showLineNumbers={false} />
+</TabItem>
+
+<TabItem label="Terminal" icon="laptop">
+    <Code lang="bash" code={code.testBinary} />
+</TabItem>
+
+</Tabs>
+
+Now that we've test all our Searching Algorithms you can comment out the `cout` statements, and `arr1`. We'll create 
+a new array in the next section.
+
+## Sorting
+
+As you learned in CSCE146, many programs require you to organize data. You'll probably get at least 1 assignment where 
+sorting a numeric array will either make or break your program. We'll go over four that you should be familiar with: Bubble Sort, 
+Selection Sort, Merge Sort, and Quick Sort. For each section we'll follow the same pattern: **Declare**, **Implement**, and **Test**. 
+We'll also look to sort our arrays using ascending order.
+
+### Utility Functions
+
+Before getting into the Sorting Algorithms, lets create a couple of utility functions to help with implementation and 
+testing. Most algorithms will look to swap elements in a similar way so we'll create a `Swap` function. We'll always need to 
+print our arrays to check that our functions are working, so we'll also create a `Print` function.
+
+<Steps>
+
+1. **Declare**
+
+    Go to your header file `algorithms.h` and declare the following utility functions:
+
+    ```cpp title="algorithms.h" showLineNumbers=false
+    /* Utility Algorithms */
+
+    void Print(int[], int);
+    void Swap(int[], int, int);
+    ```
+
+2. **Implement**
+
+    Now in our source file, `algorithms.cc`, add the implementation for each function:
+
+    ```cpp title="algorithms.cc"
+    void Swap(int array[], int i, int j) {
+      int temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+
+    void Print(int array[], int size) {
+      for (int i = 0; i < size; ++i) {
+        cout << array[i] << endl;
+      }
+    }
+    ```
+
+    <Aside>
+    We'll test these functions after we complete our first sorting algorithm.
+    </Aside>
+
+</Steps>
+
+### `BubbleSort`
+
+The Bubble Sort algorithm works by comparing each element in an array to the one beside it, then swapping them 
+if they are less than the current element. You start from the front of the array and work 
+your way to the end meaning that **the last indices are sorted before the beginning indices**. 
+If you prefer a visualized explanation, you can 
+<a href="https://www.youtube.com/watch?v=_t-yshdh_ow" target="_blank" rel="noopener noreferrer">view this short video by Boot Dev</a>.
+
+<Steps>
+
+1. **Declare**
+
+    Lets declare the BubbleSort Function in our header file first:
+
+    ```cpp title="algorithms.h" showLineNumbers=false
+    /* Sorting Algorithms */
+
+    void BubbleSort(int[], int);
+    ```
+
+2. **Implement**
+
+    Next we define the implementation to the BubbleSort Function in the source file: 
+
+    ```cpp title="algorithms.cc"
+    /* Sorting Algorithms */
+
+    void BubbleSort(int array[], int size) {
+      bool has_swapped = true;
+
+      while (has_swapped) {
+        has_swapped = false;
+
+        for (int i = 0; i < size - 1; ++i) {
+          if (array[i] > array[i + 1]) {
+            Swap(array, i, i + 1);
+            has_swapped = true;
+          }
+        }
+        --size;
+      }
+    }
+    ```
+
+3. **Test**
+
+    The final step is to test our functions in the driver file:
+
+    <Tabs>
+
+    <TabItem label="Driver" icon="rocket">
+        <Code title="drive.cc" lang="cpp" code={code.driverBubble} showLineNumbers={false} />
+    </TabItem>
+
+    <TabItem label="Terminal" icon="laptop">
+        <Code lang="bash" code={code.testBubble} />
+    </TabItem>
+
+    </Tabs>
+
+</Steps>
+
+### `SelectionSort`
+
+The Selection Sort algorithm is another one of the starter sorting algorithms. How it works is 
+that you **assume that the current indexed element contains the smallest element**. You then 
+**compare the current smallest element to the rest of the elements in the array**, updating the index 
+with the smallest element as you need to.
+
+At the end of the loop, if the current smallest or largest index has changed, then you know that 
+a swap must be made. The difference between this and the Bubble Sort algorithm is that you **first 
+sort the beginning elements**, **then you sort the ending elements**. If you prefer to watch a video, 
+<a href="https://www.youtube.com/watch?v=g-PGLbMth_g" target="_blank" rel="noopener noreferrer">Michael Sambol created a short video to help explain the Selection Sort algorithm</a>.
+
+<Steps>
+
+1. **Declare**
+
+    First we'll declare the `SelectionSort` function in our header file:
+
+    ```cpp title="algorithms.h" showLineNumbers=false
+    void SelectionSort(int[], int);
+    ```
+
+2. **Implement**
+
+    Next we'll add the implementation in the source file:
+
+    ```cpp
+    void SelectionSort(int array[], int size) {
+      for (int i = 0; i < size - 1; ++i) {
+        int smallest_index = i;
+        for (int j = i + 1; j < size; ++j) {
+          if (array[smallest_index] > array[j]) smallest_index = j;
+        }
+        if (smallest_index != i) Swap(array, i, smallest_index);
+      }
+    }
+    ```
+3. **Test**
+
+    As always, lets test the function to see if it works as intended:
+
+    <Tabs>
+
+    <TabItem label="Driver" icon="rocket">
+        <Code title="drive.cc" lang="cpp" code={code.driverSelection} showLineNumbers={false} />
+    </TabItem>
+
+    <TabItem label="Terminal" icon="laptop">
+        <Code lang="bash" code={code.testSelection} />
+    </TabItem>
+
+    </Tabs>
+
+</Steps>
+
+### `MergeSort`
+
+The first advanced sorting algorithm learned in CSCE146 is the Merge Sorting algorithm. 
+Merge Sort is a divide-and-conquer algorithm that **splits an array into smaller subarrays**, 
+**sorts each subarray**, and then **merges the sorted subarrays back together**.
+
+Here's a quick 
+<a href="https://www.youtube.com/watch?v=rQ2h0ljTdNU" target="_blank" rel="noopener noreferrer">video by Boot Dev</a> 
+if you need more of a visual explanation.
+
+<Steps>
+
+1. **Declare**
+
+    Just like in CSCE146, we'll declare the primary function to call in the `main` function along with a 
+    utility function that will only be called in the `MergeSort` function.
+
+    ```cpp title="algorithms.h" showLineNumbers=false
+    void MergeSort(int[], int);
+    void Merge(int[], int[], int, int[], int);
+    ```
+
+2. **Implement**
+
+    Now we'll move on to defining the implementation. Java code from CSCE146 will be provided along with a 
+    C++ version. First are the `MergeSort` functions:
+
+    <Tabs>
+
+        <TabItem label="Java" icon="seti:java">
+            <Code title="SortingAlgorithms.java" lang="java" code={code.javaMergeSort} del={[1, 3, 14, 15, 31, 33, 34]}/>
+        </TabItem>
+
+        <TabItem label="C++" icon="seti:cpp">
+            <Code title="algorithms.cc" lang="cpp" code={code.cppMergeSort} ins={[1, 13, 14, 34, 35]}/>
+        </TabItem>
+
+    </Tabs>
+
+    Next are the utility `Merge` functions:
+
+    <Tabs>
+
+        <TabItem label="Java" icon="seti:java">
+            <Code title="SortingAlgorithms.java" lang="java" code={code.javaMerge} del={[1, 3, 4]}/>
+        </TabItem>
+
+        <TabItem label="C++" icon="seti:cpp">
+            <Code title="algorithms.cc" lang="cpp" code={code.cppMerge} ins={[1, 2]}/>
+        </TabItem>
+
+    </Tabs>
+
+    <Aside type="caution">
+    This implementation of MergeSort uses stack-allocated arrays (`int left[]` and `int right[]`) for simplicity 
+    and to align with the current tutorial section on arrays. While this approach is straightforward and easy to 
+    understand, it can be **further optimized by using dynamic memory allocation with pointers**.
+    </Aside>
+
+    <Aside>
+    Dynamic memory allows for greater flexibility and efficiency, especially when working with large datasets, 
+    as it **avoids excessive stack memory usage**. In the upcoming section on pointers, we'll revisit this algorithm 
+    to show how **dynamic allocation can make the implementation more robust and scalable**.
+    </Aside>
+
+3. **Test**
+
+    Finally, we replace the previous function called with the new one in the driver:
+
+    <Tabs>
+
+    <TabItem label="Driver" icon="rocket">
+        <Code title="drive.cc" lang="cpp" code={code.driverMerge} showLineNumbers={false} />
+    </TabItem>
+
+    <TabItem label="Terminal" icon="laptop">
+        <Code lang="bash" code={code.testMerge} />
+    </TabItem>
+
+    </Tabs>
+
+</Steps>
+
+### `QuickSort`
+
+The last sorting algorithm we'll look at is `QuickSort`. Quick Sort is a divide-and-conquer 
+algorithm that **selects a "pivot" element**, **then rearranges the array so that all elements 
+less than the pivot are on one side**, and **all elements greater than the pivot are on the other**. 
+It then recursively sorts these smaller partitions, resulting in a fully sorted array with 
+efficient average-case performance.
+
+If you prefer a visual explanation, you can look at 
+<a href="https://www.youtube.com/watch?v=XE4VP_8Y0BU" target="_blank" rel="noopener noreferrer">a short video by Computerphile</a> 
+
+<Steps>
+
+1. **Declare**
+
+    Just like in CSCE146, we'll declare a primary function to call along with two utility functions that 
+    will only be called in the primary function:
+
+    ```cpp title="algorithms.h" showLineNumbers=false
+    void QuickSort(int[], int);
+    void Quick(int[], int, int);
+    int Partition(int[], int, int);
+    ```
+
+2. **Implement**
+
+    Now we move to the source file and add the implementation. First the primary function 
+    `QuickSort` which consists of calling a utility function with an array, the beginning 
+    index, and the ending index as the parameters.
+
+    The difference is the added `size` parameter which we need to get the last index of the array 
+    to call the utility function:
+
+    <Tabs>
+
+        <TabItem label="Java" icon="seti:java">
+            <Code title="SortingAlgorithms.java" lang="java" code={code.javaQuickSort} del={[1, 2]}/>
+        </TabItem>
+
+        <TabItem label="C++" icon="seti:cpp">
+            <Code title="algorithms.cc" lang="cpp" code={code.cppQuickSort} ins={[1, 2]}/>
+        </TabItem>
+
+    </Tabs>
+
+    Next we define the implementation for the `Quick` function we just called in the primary function. 
+    There are no changes in implementation from Java to C++.
+
+    The `Quick` function is the core of the `QuickSort` algorithm, **implementing the recursive divide-and-conquer approach**.
+    It works by calling the `Partition` function to **divide the array into two parts around a pivot element and 
+    recursively calling itself to sort the left and right partitions**.
+
+    <Tabs>
+
+        <TabItem label="Java" icon="seti:java">
+            <Code title="SortingAlgorithms.java" lang="java" code={code.javaQuick} />
+        </TabItem>
+
+        <TabItem label="C++" icon="seti:cpp">
+            <Code title="algorithms.cc" lang="cpp" code={code.cppQuick} />
+        </TabItem>
+
+    </Tabs>
+
+    The last function to implement is the utility `Partition` function. The `Partition` function **rearranges 
+    the elements in the specified subarray around a pivot element**. It selects the last element as the 
+    pivot and ensures that smaller elements are placed to the left and larger elements are placed to the right.
+
+    Again, the implementation is the same between both languages:
+
+    <Tabs>
+
+        <TabItem label="Java" icon="seti:java">
+            <Code title="SortingAlgorithms.java" lang="java" code={code.javaPartition} />
+        </TabItem>
+
+        <TabItem label="C++" icon="seti:cpp">
+            <Code title="algorithms.cc" lang="cpp" code={code.cppPartition} />
+        </TabItem>
+
+    </Tabs>
+
+3. **Test**
+
+    Finally, we can conduct our final sorting test in the driver file:
+
+    <Tabs>
+
+    <TabItem label="Driver" icon="rocket">
+        <Code title="drive.cc" lang="cpp" code={code.driverQuick} showLineNumbers={false} />
+    </TabItem>
+
+    <TabItem label="Terminal" icon="laptop">
+        <Code lang="bash" code={code.testQuick} />
+    </TabItem>
+
+    </Tabs>
+
+</Steps>
+
+
+
+
+
+
+
