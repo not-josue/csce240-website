@@ -1,0 +1,111 @@
+---
+title: What Are Pointers?
+description: Discover what pointers are in C++, learn how they reference memory addresses, and understand why they’re essential for more advanced programming techniques.
+lastUpdated: true
+---
+
+import { Aside } from "@astrojs/starlight/components"
+
+A pointer in C++ is a variable that **stores the memory address of another variable 
+rather than a direct value**. In other words, pointers 🫵 “point” to specific locations 
+in memory, enabling you to work with data more flexibly.
+
+## Why Point?
+
+Pointers provide a powerful way to interact with memory and data in your programs. 
+Instead of working only with copies of data, you can **refer directly to the original 
+values** stored in memory. This allows you to:
+
+- **Avoid Unnecessary Copies**: Rather than duplicating large amounts of data, pointers 
+let you pass around references to existing memory. This makes your program more efficient, 
+especially when dealing with complex data structures or large datasets.
+
+- **Dynamic Memory Management**: Pointers enable you to request, use, and release memory at 
+runtime. This flexibility is crucial for creating data structures that can grow or shrink as 
+needed, rather than relying solely on fixed-size arrays or predefined memory allocations.
+
+- **Complex Data Structures**: Linked lists, trees, and other advanced structures rely heavily 
+on pointers. They let you link pieces of data stored in different memory locations, forming 
+flexible relationships without being confined to a single block of contiguous memory.
+
+## Declaring A Pointer
+
+When declaring a pointer, **you must specify the type of value it will point to**. This is because 
+**pointers are strongly typed**—an integer pointer holds the address of an `int`, while a `double` 
+pointer holds the address of a `double`, and so on. The type matters since it affects how the 
+data is accessed and interpreted in memory.
+
+To declare a pointer, write the data type of the value you want it to point to, followed by 
+an asterisk (`*`), then the pointer's name. For example:
+
+```cpp showLineNumbers=false
+int *ptr;  //  will hold the address of an integer 
+```
+
+If you're declaring multiple variables in one statement, be careful 
+with the placement of asterisks. Each pointer name must be preceded 
+by an asterisk to make it clear which variables are pointers and which are not:
+
+```cpp showLineNumbers=false
+int *x, y;   // x is a pointer to int, y is an int
+int *w, *z;  // w and z are both pointers to int
+```
+
+## The `&` And `*` Operators
+
+In C++, two important operators are closely associated with pointers: 
+the **reference operator** (`&`) and the **dereference operator** (`*`).
+
+- **Reference Operator** (`&`): The `&` symbol, when placed before a variable's name, 
+returns the address of that variable in memory. For example:
+
+```cpp showLineNumbers=false
+int x = 3;
+int *xptr = &x;  // xptr now holds the address of x
+```
+
+<Aside>
+Here, `xptr` is not the value stored in `x`, but the memory location where `x` is stored.
+</Aside>
+
+- **Dereference Operator** (`*`): The `*` symbol, when placed before a pointer's name, 
+returns the value at the memory address stored in that pointer. This is called 
+“dereferencing” the pointer. For example:
+
+```cpp showLineNumbers=false
+*xptr += 5;  // Adds 5 to the value xptr points to (which is x)
+std::cout << x << std::endl;  // This will print 8, since x was modified through xptr
+```
+
+### Type Matching
+
+As mentioned before, **a pointer's type must match the type of the variable it 
+points to**. Unlike non-pointer variables (where you can often assign values of 
+different types and rely on implicit conversions), pointers must point to a 
+compatible type. For example:
+
+```cpp showLineNumbers=false
+int x = 3;
+int *xptr = &x;  // OK: xptr points to an int
+
+double y = 7.4;
+double *yptr = &y;  // OK: yptr points to a double
+
+x = y;      // Legal: an int can hold a double (with truncation)
+xptr = yptr;  // Error: cannot assign a double* to an int*
+```
+
+### Printing Pointers
+
+When you print a pointer using `std::cout`, you see the memory address it holds 
+(often displayed in hexadecimal). Printing `&ptr` shows the address of the pointer 
+itself, and dereferencing the pointer (`*ptr`) prints the value stored at that address:
+
+```cpp showLineNumbers=false
+int x = 10;
+int *ptr = &x;
+
+std::cout << ptr << std::endl;   // Prints address of x, e.g., 0x7ffc48cb398c
+std::cout << &ptr << std::endl;  // Prints address of ptr, e.g., 0x7ffcb7d14dd0
+std::cout << *ptr << std::endl;  // Prints value at ptr, which is 10
+```

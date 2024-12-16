@@ -180,6 +180,15 @@ export default defineConfig({
           ],
         },
         {
+          label: "Pointers",
+          items: [
+            {
+              label: "What Are They?",
+              slug: "pointers/what-are-they",
+            },
+          ],
+        },
+        {
           label: "References",
           items: [
             {
