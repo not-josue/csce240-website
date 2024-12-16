@@ -173,6 +173,10 @@ export default defineConfig({
               label: "Algorithms",
               slug: "arrays/algorithms",
             },
+            {
+              label: "Multi-Dimensional",
+              slug: "arrays/multi-dimensional",
+            },
           ],
         },
         {
