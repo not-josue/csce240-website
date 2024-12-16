@@ -4,15 +4,14 @@ description: Explore common Cpplint errors, how to fix them, acceptable errors, 
 lastUpdated: true
 ---
 
+import { Aside, Badge, Code } from "@astrojs/starlight/components";
+import { errors } from "@ts/constants";
+
 This page provides a list of common `cpplint` errors, along with 
 links to the correct styling approach. Understanding these errors will 
 help you debug and improve your code to meet the Google C++ Style 
 Guide requirements. Use this reference to identify and resolve 
 style issues efficiently.
-
-import { Aside, Badge, Code } from "@astrojs/starlight/components";
-import { errors } from "@ts/constants";
-
 
 ## `Access Specifier Indent` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 <Code lang="shell"  code={ errors.accessSpecifierError }/>

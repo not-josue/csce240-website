@@ -36,7 +36,7 @@ const terminal: string =
 `
 cpplint driver.cc
 Done processing driver.cc
-g++ -Wall -std=c++17 driver.cc
+g++ -Wall -std=c++${STD} driver.cc
 ./a.out
 1 -> 3 -> 5 -> 7 -> 9
 2 -> 4 -> 6 -> 8 -> 10

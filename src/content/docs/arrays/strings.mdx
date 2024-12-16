@@ -4,6 +4,9 @@ description: Understand the basics of C-style strings in C++, including how they
 lastUpdated: true
 ---
 
+import { Aside, Code, TabItem, Tabs } from "@astrojs/starlight/components";
+import { code } from "@ts/arrays/strings"
+
 C-style strings are **arrays of characters terminated by a special null character** 
 (`'\0'`) that indicates where the string ends. Although you will mostly use and 
 see the `std::string` class in CSCE240, understanding C-style 
@@ -112,8 +115,6 @@ char array1[kSize];
 char array2[] = {'a', 'b', 'c', 'd'};
 ```
 
-import { Aside } from "@astrojs/starlight/components";
-
 <Aside>
 You may not see this type of use throughout CSCE240 assignments or tests.
 </Aside>
@@ -173,9 +174,6 @@ This works because `std::cout` treats a `char` array as a C-style `string` and w
 characters until it encounters the null terminator.
 
 ### Example
-
-import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
-import { code } from "@ts/arrays/strings"
 
 Here is a simplified example of a concept you may be tested on.
 The following snippet shows how the null terminator stops `std::cout` from 

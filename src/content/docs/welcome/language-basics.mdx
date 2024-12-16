@@ -4,6 +4,9 @@ description: Discover the building blocks of C++, from classes and functions to 
 lastUpdated: true
 ---
 
+import { Aside, Code, FileTree } from '@astrojs/starlight/components';
+import { code } from "@ts/welcome/basics"
+
 In C++, the fundamental building blocks of any program are **functions** and **classes**. Functions allow you to define 
 **reusable blocks of code** that perform specific tasks, while classes provide a way to organize and **structure data 
 and behavior**. Understanding these two concepts is key to mastering C++ and creating **efficient, modular programs**.
@@ -16,9 +19,6 @@ the **entry point of every program**. All your code will be written inside this 
 As your programs grow larger, you'll want to organize your code by **separating it into different functions**. This allows for 
 better structure, reusability, and readability. Later on, you'll also learn how to place these functions in separate files to 
 keep your projects **organized and manageable**.
-
-import { Code } from '@astrojs/starlight/components';
-import { code } from "@ts/welcome/basics"
 
 <Code code={code.functions} lang="cpp" title="driver.cc"/>
 
@@ -70,8 +70,6 @@ following command:
 <Code code={code.compile} lang="bash"/>
 
 This will generate an **object file** (e.g., `driver.o`) that is ready for the next step in the process.
-
-import { Aside, FileTree } from '@astrojs/starlight/components';
 
 <Aside>Remember that your location in the terminal has to be in the same folder as your code!</Aside>
 

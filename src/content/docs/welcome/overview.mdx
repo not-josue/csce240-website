@@ -4,6 +4,9 @@ description: Learn how this website can help you excel in learning C++ and being
 lastUpdated: true
 ---
 
+import { Code, FileTree, TabItem, Tabs } from '@astrojs/starlight/components';
+import { code } from "@ts/welcome/overview"
+
 👋 **Hello, USC!** This website was created to support fellow students at the **University of South Carolina** who are currently taking, or planning to 
 take, **CSCE240: Advanced Programming Techniques**. Just as **CSCE145** and **CSCE146** have dedicated websites, I felt that **CSCE240** deserved 
 one too!
@@ -18,9 +21,6 @@ in the course is presented with straightforward explanations, often drawing on c
 You'll also find code snippets which you can copy into your editor, complete with expected terminal outputs for verification. Below are examples 
 of 4 files to paste code in, along with the expected terminal output. 😊 Don't worry if you don't understand the code or the filenames, we'll get to 
 that later!
-
-import { Code, TabItem, Tabs } from '@astrojs/starlight/components';
-import { code } from "@ts/welcome/overview"
 
 <Tabs>
 <TabItem label="Makefile" icon="seti:makefile">
@@ -44,8 +44,6 @@ import { code } from "@ts/welcome/overview"
 
 To keep your code organized throughout the semester, the following folder structure is recommended for this course. While not mandatory, 
 using this structure can make navigating and managing your files much easier as the class progresses.
-
-import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree> 
 

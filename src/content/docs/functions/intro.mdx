@@ -4,6 +4,9 @@ description: Learn the basics of functions in C++, including terminology, and th
 lastUpdated: true
 ---
 
+import { Aside, Code } from "@astrojs/starlight/components";
+import { errors } from "@ts/constants";
+
 A function in C++ is a **list of instructions designed to perform a 
 specific task**. Functions help organize your code, making it easier 
 to read, maintain, and reuse. For example, the `main` function, which 
@@ -62,8 +65,6 @@ char GetLetter(int n) {
   return 'a' + (n - 1) % 26;
 }
 ```
-
-import { Aside } from "@astrojs/starlight/components";
 
 <Aside>
 In C++, adding a `char` and an `int` works because characters are internally stored as numbers (ASCII codes). 
@@ -156,9 +157,6 @@ These are the styling patterns shown in the previous code snippets:
 - If short enough and only a single line, the function declaration and implementation can be written on a single line.
 
 - No blank lines occur after the function declaration or before the closing brace.
-
-import { Code } from "@astrojs/starlight/components";
-import { errors } from "@ts/constants";
 
 These are some of the errors thrown by `cpplint` when something is off with the way you styled a function: 
 

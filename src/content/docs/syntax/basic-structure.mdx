@@ -4,6 +4,9 @@ descriptions: Learn the beginning basic structure of a C++ file in CSCE240.
 lastUpdated: true
 ---
 
+import { code } from "@ts/syntax/basic";
+import { Aside, Code, Tabs, TabItem } from "@astrojs/starlight/components";
+
 Every C++ program follows a basic structure that serves as its foundation. 
 This includes **adding comments** to document your code, using **preprocessor 
 directives** to set up the program, and writing the **main function** where 
@@ -28,9 +31,6 @@ allows the programmer to control the flow of the program.
 You'll write your code inside 
 this function, making it the starting place for any task your program performs.
 The `main` function will usually be found in a file called `driver.cc`.
-
-import { Aside, Code } from "@astrojs/starlight/components";
-import { code } from "@ts/syntax/basic";
 
 <Code title="driver.cc" lang="cpp" code={code.main} />
 
@@ -126,8 +126,6 @@ of it like the `System.out.println()` of C++.
 
 Since `endl` is part of the std namespace, you need to reference it with 
 `std::endl` unless you've declared it globally with `using std::endl;`. For example:
-
-import { Tabs, TabItem } from "@astrojs/starlight/components";
 
 <Tabs>
 

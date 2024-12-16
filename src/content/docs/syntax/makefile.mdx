@@ -4,6 +4,10 @@ description: Learn how to create and use a Makefile to automate the compilation 
 lastUpdated: true
 ---
 
+import { Aside, Code, Steps ,TabItem, Tabs  } from "@astrojs/starlight/components";
+import { errors } from "@ts/constants";
+import { code } from "@ts/syntax/makefile";
+
 `make` is a utility that helps **keep your object code and executable 
 files up-to-date**. It **automates the compilation** process by checking 
 dependencies and only recompiling files that have changed.
@@ -49,9 +53,6 @@ It consists of three main parts:
 target: Prerequisite(s)
     recipe command(s)
 ```
-
-import { Aside, Code } from "@astrojs/starlight/components";
-import { errors } from "@ts/constants";
 
 <Aside>
 The line(s) containing recipe command(s) must
@@ -107,9 +108,6 @@ create separate rules to compile individual source files, link them into an
 executable, and even 🚀 run the program.
 
 The following updates the makefile to compile, link, and execute a program:
-
-import { Steps ,TabItem, Tabs } from "@astrojs/starlight/components";
-import { code } from "@ts/syntax/makefile";
 
 <Tabs>
 

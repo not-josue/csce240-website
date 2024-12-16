@@ -4,6 +4,10 @@ description: Learn how to use separate compilation in C++ by combining makefiles
 lastUpdated: true
 ---
 
+import { Aside, Code } from "@astrojs/starlight/components";
+import { code } from "@ts/functions/separate";
+import { errors } from "@ts/constants";
+
 To create truly reusable functions, their implementations need to be written 
 in a separate file that does not contain a `main` function. This approach, known 
 as **separate compilation**, allows you to organize your project into multiple 
@@ -37,8 +41,6 @@ void anotherFunction();
 
 #endif
 ```
-
-import { Aside } from "@astrojs/starlight/components";
 
 <Aside title="Header Guards">You can think of those statements like: "if not defined," then "define this header", finally "end my if statement"</Aside>
 
@@ -94,9 +96,6 @@ Lets take the previous Calculator program from the [Writing and Using page](./wr
 
 Create a file called `calculator.h` and add the function prototypes:
 
-import { Code } from "@astrojs/starlight/components";
-import { code } from "@ts/functions/separate";
-
 <Code title="calculator.h" lang="cpp" code={code.header} />
 
 Checking the file with `cpplint` will throw the following error:
@@ -150,8 +149,6 @@ link various files. Add the following code to your `makefile`:
 Remember that when copying the `makefile` code snippet that some code editors don't recognize tabs. Use `backspace` 
 to reset each recipe line then enter `tab` to give them the proper indentation. The following error is thrown when this is 
 the case:
-
-import { errors } from "@ts/constants";
 
 <Code lang="shell" code={errors.makefileError}/>
 </Aside>

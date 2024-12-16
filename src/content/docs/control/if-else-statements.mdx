@@ -4,6 +4,9 @@ description: Learn how to use if-else statements in C++ to make decisions and ex
 lastUpdated: true
 ---
 
+import { Aside, Code } from "@astrojs/starlight/components";
+import { code } from "@ts/control/if-else";
+
 The `if-else` statement allows a program to **choose between 
 two paths based on a condition**. If the condition evaluates 
 to `true`, one block of code is executed; otherwise, the 
@@ -86,16 +89,11 @@ enough, you can even place it all on one line:
 if (highest_score) cout << "You have the #1 rank!" << endl;
 ```
 
-import { Aside } from "@astrojs/starlight/components";
-
 <Aside type="caution">
 Keep in mind that omitting braces can lead to errors if additional lines are added to the block later.
 </Aside>
 
 ### Incorrect Styles
-
-import { Code } from "@astrojs/starlight/components";
-import { code } from "@ts/control/if-else";
 
 The following is an example of an incorrectly placed opening brace:
 

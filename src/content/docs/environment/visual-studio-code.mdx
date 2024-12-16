@@ -4,6 +4,9 @@ description: Learn to setup Visual Studio Code to handle Google Style requiremen
 lastUpdated: true
 ---
 
+import { Aside, Code, FileTree, Steps, TabItem, Tabs } from "@astrojs/starlight/components";
+import { code } from "@ts/environment/vscode";
+
 While you're free to use any code editor you're comfortable with, I highly recommend using 
 <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual 
 Studio Code</a>. It's lightweight, beginner-friendly, and comes with powerful extensions 
@@ -20,9 +23,6 @@ be the first to appear in the search results with over 70 million downloads.
 
 {/* Extensions Image */}
 ![the recommended VSCode extensions for C++](@assets/editor/extensions.webp)
-
-import { Aside, Code, Steps } from "@astrojs/starlight/components";
-import { code } from "@ts/environment/vscode";
  
 ## Auto-Formatter
 
@@ -92,8 +92,6 @@ is **C_Cpp: Clang_format_style** and its value should be `file`
 ## Testing
 
 Create a file called `test.cc` in the **root folder**. The following should be your current file structure:
-
-import { FileTree, TabItem, Tabs } from "@astrojs/starlight/components";
 
 <FileTree>
 
