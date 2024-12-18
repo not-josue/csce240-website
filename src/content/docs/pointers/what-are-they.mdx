@@ -109,3 +109,37 @@ std::cout << ptr << std::endl;   // Prints address of x, e.g., 0x7ffc48cb398c
 std::cout << &ptr << std::endl;  // Prints address of ptr, e.g., 0x7ffcb7d14dd0
 std::cout << *ptr << std::endl;  // Prints value at ptr, which is 10
 ```
+
+## Const Qualifier
+
+In C++, the `const` keyword can be applied to pointers in different ways, controlling 
+whether the pointer itself is constant, the data it points to is constant, or both. 
+This adds another layer of safety and clarity to your code:
+
+1. **Constant Pointer to Non-Constant Data**
+
+```cpp showLineNumbers=false
+int *const x;
+```
+
+Here, `x` must always point to the same address after it's initialized. You can't 
+make `x` point somewhere else, but you can still change the value stored at that address.
+
+2. **Pointer to Constant Data**
+
+```cpp showLineNumbers=false
+const int *x;
+```
+
+This pointer can point to different addresses, but the data it points to cannot 
+be modified through `x`. It's a promise not to alter the data, even though `x` itself 
+isn't fixed to one location.
+
+3. **Constant Pointer to Constant Data**
+
+```cpp showLineNumbers=false
+const int *const x;
+```
+
+In this case, `x` is both constant and points to constant data. You can't change where `x` 
+points, nor can you modify the value at that location.

@@ -92,7 +92,7 @@
 
 - [x] Separate Compilation
 
-- [x] Misc Topics
+- [x] Misc. Topics
 
 ## Arrays
 
@@ -102,13 +102,39 @@
 
 - [x] Passing To Functions
 
-- [ ] Algorithms
+- [x] Algorithms
 
-- [ ] Multi-D
+- [x] Multi-D
 
 ## Pointers
 
-- [ ] Revisit the MergeSort Algorithm to optimize
+- [x] What Are They?
+
+- [ ] With Arrays
+
+- [ ] With Functions
+
+- [ ] Revisit the MergeSort Algorithm to optimize during Functions
+
+## Classes
+
+- [ ] Structs
+
+- [ ] Namespaces
+
+- [ ] Basics
+
+- [ ] Composition
+
+- [ ] Inheritance
+
+- [ ] Polymorphism
+
+## Templates
+
+- [ ] Template Functions
+
+- [ ] Template Classes
 
 ## References
 

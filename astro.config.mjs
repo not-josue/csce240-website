@@ -186,6 +186,10 @@ export default defineConfig({
               label: "What Are They?",
               slug: "pointers/what-are-they",
             },
+            {
+              label: "With Arrays",
+              slug: "pointers/with-arrays",
+            },
           ],
         },
         {

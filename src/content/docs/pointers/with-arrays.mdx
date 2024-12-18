@@ -1,0 +1,162 @@
+---
+title: Pointers With Arrays
+description: Learn how pointers interact with arrays in C++, including how arrays decay into pointers, using pointer arithmetic, and iterating through arrays more flexibly and efficiently.
+lastUpdated: true
+---
+
+import { Aside, Code } from "@astrojs/starlight/components"
+
+Pointers and arrays are closely related in C++. 
+When you use a pointer to reference an array, the 
+**pointer effectively points to the array's first element**.
+
+Once you have a pointer to the start of an array, you can 
+use **pointer arithmetic to move through it**, or even use the 
+subscript operator (`[]`) just like you would with a normal 
+array.
+
+## Decaying Arrays
+
+Unlike regular variables, you typically don't use the reference
+operator (`&`) to obtain the address of an array. In most contexts, 
+the **name of an array already decays into a pointer to its first 
+element**. This means that writing something like:
+
+```cpp showLineNumbers=false
+const int kSize = 5;
+int array[kSize] = {1, 2, 3, 4, 5};
+int *ptr = array;
+```
+
+is sufficient to give `ptr` the starting address of the array. You 
+don't need to write `&arr[0]` (though it's valid) because using the 
+array's name by itself inherently provides the address of its first element.
+
+## Pointer Arithmetic
+
+In C++, **pointer arithmetic allows you to move through an array without 
+explicitly using indices**. Since an array name “decays” to a pointer 
+that points to its first element, you can increment, decrement, or 
+add integer values to the pointer to change which element it references.
+
+- **Incrementing a Pointer** (`ptr++`): Moves the pointer to the next element in the array.
+
+- **Decrementing a Pointer** (`ptr--`): Moves the pointer to the previous element in the array.
+
+Here's an example illustrating pointer arithmetic with an array:
+
+```cpp title="driver.cc"
+#include <iostream>
+using std::cout;
+using std::endl;
+
+int main() {
+  const int kSize = 5;
+  int array[kSize] = {1, 2, 3, 4, 5};
+  int *ptr = array;  // ptr points to array[0]
+
+  // Print all elements using subscript notation on the pointer
+  for (int i = 0; i < kSize; ++i) {
+    cout << ptr[i] << endl;
+  }
+
+  // Move the pointer forward two positions
+  ++ptr;  // Now ptr points to array[1]
+  ++ptr;  // Now ptr points to array[2]
+
+  // Dereference ptr to get the current element
+  cout << *ptr << endl;  // Prints 3
+
+  return 0;
+}
+```
+
+## Array Of Pointers
+
+Since arrays can store any type of elements, including pointers, 
+it's perfectly valid to create an array of pointers. For example:
+
+```cpp showLineNumbers=false
+int *x[5]; // Declares an array of 5 pointers to integers
+```
+
+In this declaration, each element of `x` is a pointer to an `int`. 
+This can be useful in scenarios where you need to manage a list 
+of dynamically allocated memory blocks, or when you're storing a 
+list of words (C-style strings) as pointers to `char`, rather than 
+using a two-dimensional array.
+
+## New And Delete
+
+In C++, you can allocate memory at run-time rather than at compile-time. 
+This approach is known as **dynamic memory allocation**, and it allows you 
+to **create arrays whose size isn't known until the program is running**. 
+To achieve this flexibility, C++ provides two key operators: `new` and `delete`.
+
+- `new` **Operator**:
+Allocates memory on the heap and returns a pointer to the newly allocated space. 
+If the allocation fails, it returns `nullptr`.
+
+```cpp showLineNumbers=false
+int *arr = new int[10]; // Allocates space for 10 ints
+if (arr == nullptr) {
+    // Handle allocation failure
+}
+```
+
+- `delete` **Operator**:
+Frees the memory previously allocated by `new`. When freeing arrays, use `delete[]` 
+followed by the pointer name. This ensures that the correct amount of memory is released.
+
+```cpp showLineNumbers=false
+delete[] arr; // Frees the array allocated by new
+arr = nullptr; // Good practice to set the pointer to nullptr after deleting
+```
+
+### Resizing An Array Dynamically
+
+Standard arrays have a fixed size, but you can simulate “resizing” by allocating a new, 
+larger array and then copying the old elements over before deleting the old array:
+
+```cpp title="driver.cc"
+#include <iostream>
+using std::cout;
+using std::endl;
+
+int main() {
+  const int kSize = 5;
+  int *array = new int[kSize]{1, 2, 3, 4, 5};
+
+  //  doubling the size is common
+  const int kNewSize = kSize * 2;
+  int *temp = new int[kNewSize];
+
+  //  iterate and fill temp
+  for (int i = 0; i < kSize; ++i) {
+    temp[i] = array[i];
+  }
+
+  delete[] array;
+  array = temp;
+
+  //  remaining elements are 0
+  for (int i = 0; i < kNewSize; ++i) {
+    cout << array[i] << " ";
+  }
+  cout << endl;
+
+  //  you can clean up at the end of your program
+  delete[] array;
+  array = nullptr;
+
+  return 0;
+}
+```
+
+The program produces the following output:
+
+```bash mark={1, 2}
+g++ -Wall -std=c++17 driver.cc
+./a.out
+1 2 3 4 5 0 0 0 0 0
+```
