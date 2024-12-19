@@ -110,11 +110,11 @@
 
 - [x] What Are They?
 
-- [ ] With Arrays
+- [x] With Arrays
 
-- [ ] With Functions
+- [x] With Functions
 
-- [ ] Revisit the MergeSort Algorithm to optimize during Functions
+- [x] Revisit the MergeSort Algorithm to optimize during Functions
 
 ## Classes
 

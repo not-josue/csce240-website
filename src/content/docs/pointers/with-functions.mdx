@@ -1,0 +1,86 @@
+---
+title: Pointers With Functions
+description: Learn how to use pointers with functions in C++, including passing pointers as parameters, returning pointers from functions, and understanding common use cases and best practices.
+lastUpdated: true
+---
+
+import { Aside, Code, Steps, TabItem, Tabs } from "@astrojs/starlight/components"
+import { code } from "@ts/pointers/with-functions"
+
+Using a pointer as a function parameter offers the **same advantages 
+as using call-by-reference parameters**. By passing the address of a 
+variable, you can modify its value directly within the function, 
+saving space and allowing the caller's data to be changed without 
+returning a new value. For example:
+
+```cpp showLineNumbers=false
+int Square(int *x) {
+  *x *= *x;  // Modify the value at the pointer's address
+  return *x;
+}
+
+//  Square(&variable) <- remember reference operator
+```
+
+Here, `x` is a pointer to an integer. Calling `Square(&num)` will modify `num` in place.
+
+<Aside>
+When using arrays as arguments, you can **just use the array name** since it will decay into a pointer.
+
+In CSCE240, **most functions with pointers as parameters will likely involve arrays** so you 
+may not run into a case where you have to remember to call a function using the reference operator before the variable.
+</Aside>
+
+## Why Point Over Reference
+
+While call-by-reference (using references) and call-by-pointer (using pointers) 
+both allow in-place modifications, pointers offer more flexibility. For instance, 
+you can:
+
+- **Reassign Pointers**: Change what a pointer points to at runtime, allowing dynamic 
+behavior not possible with a simple reference.
+
+- **Work With Dynamically Allocated Memory**: Allocate, deallocate, and manage memory on the fly.
+
+## Example
+
+As mentioned in the [Algorithms Page](../arrays/algorithms#mergesort), lets refactor the `MergeSort` algorithm 
+using what we've learned about pointers. We'll also create a new `Print` function with a pointer to test the 
+function.
+
+<Steps>
+
+1. **Create Driver File**
+
+    Create a file called `driver.cc`. We'll be making everything in one file since we're only 
+    implementing a couple of functions:
+
+    <Code title="driver.cc" lang="cpp" code={code.step1} />
+
+2. **Add Function Implementation**
+
+    Under the `main` function, lets first add the implementation for the primary function that will be called, `MergeSort`. 
+    Highlighted are the newly added or changed lines:
+
+    <Code title="driver.cc" lang="cpp" code={code.step2MergeSort} ins={[1, 13, 14, 34, 35]}  />
+
+    Next we'll add the implementation for `Merge`, the helper function:
+
+    <Code title="driver.cc" lang="cpp" code={code.step2Merge} ins={[1, 2]} />
+
+    Finally, let's add the implementation for the `Print` function:
+
+    <Code title="driver.cc" lang="cpp" code={code.step2Print} ins={[1]} />
+
+3. **Test Functions**
+
+    The last step is to test all the functions we've created:
+
+    <Code title="driver.cc" lang="cpp" code={code.step3} mark={[1, 2]} />
+
+</Steps>
+
+<Aside title="Challenge" type="tip">
+Update all the array algorithms from the [Algorithms Page](../arrays/algorithms) using pointers.
+</Aside>
+

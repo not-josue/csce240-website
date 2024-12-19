@@ -190,6 +190,10 @@ export default defineConfig({
               label: "With Arrays",
               slug: "pointers/with-arrays",
             },
+            {
+              label: "With Functions",
+              slug: "pointers/with-functions",
+            },
           ],
         },
         {
