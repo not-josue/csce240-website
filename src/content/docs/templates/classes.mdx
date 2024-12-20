@@ -1,0 +1,139 @@
+---
+title: Template Classes
+description: Learn how to create and use template classes in C++, allowing you to define data structures and objects that work with any data type while maintaining strong type safety.
+lastUpdated: true
+---
+
+import { Aside, Code, Steps, TabItem, Tabs } from "@astrojs/starlight/components"
+import { code } from "@ts/templates/classes"
+
+Template classes provide a way to **create data structures and objects 
+that are independent of the data types they hold**. Much like template 
+functions, template classes allow you to write the logic for a single, 
+generic class without tying it to a specific type.
+
+Like in CSCE146, this approach is used to create container classes—such 
+as arrays, vectors, lists, stacks, queues, and strings—that can work 
+with any type of element.
+
+<Aside>
+You may or may not have an assignment dealing with Template Classes 
+but you will probably be asked about them in the Final Exam.
+</Aside>
+
+## Syntax
+
+Defining a template class in C++ is conceptually similar to defining a 
+template function. You begin with a `template` directive, then declare 
+one or more type parameters inside angle brackets:
+
+```cpp title="myclass.h" showLineNumbers=false
+template <class T>
+class MyClass {
+ public:
+  void MyFunc() { cout << "hello" << endl; }
+  void AnotherFunc() {
+    // do something
+  }
+
+ private:
+  // data members
+};
+```
+
+<Aside>
+Notice how the functions were implemented in the header file. Though there 
+are ways to separate function implementation in a separate source file, 
+this will not be covered in this tutorial.
+</Aside>
+
+### Instantiating A Template Class
+
+To create an object of a template class, specify the type you want to use 
+in angle brackets when declaring your object:
+
+```cpp title="driver.cc" showLineNumbers=false
+MyClass<int> intObject;
+MyClass<std::string> strObject;
+
+intObject.MyFunc();
+```
+
+## Example
+
+You may remember creating a Generic Dynamic Array in CSCE146. Lets create one 
+for CSCE240 using template classes.
+
+<Steps>
+
+1. **Create Header**
+
+    Create you header file, write your header guards, and import everything you 
+    need. This dynamic array will keep track of its current size, and capacity and 
+    the class will be defined in a namespace called `csce_240`:
+
+    <Code title="darray.h" lang="cpp" code={code.step1} />
+
+2. **Constructors and Destructor**
+
+    Lets create a constructor for the class. We'll make the initial capacity 10 and 
+    double it whenever we need to resize.
+
+    We'll also create a copy constructor and fill the array with the new elements. We 
+    also need a destructor since we're using a pointer as a data member:
+
+    <Code title="darray.h" lang="cpp" code={code.step2} />
+
+
+3. **Accessors and Operator**
+
+    Next we'll define Getters for the size and capacity of the array:
+
+    <Code title="darray.h" lang="cpp" code={code.step3Acc} />
+
+    Since we have a pointer as a data member, we also need to overload the assignment 
+    operator:
+
+    <Code title="darray.h" lang="cpp" code={code.step3Op} />
+
+4. **Utility Functions**
+
+    The first utility function to define is a function to print all the elements that were 
+    added to the array. We can keep this function public since its especially useful for testing:
+
+    <Code title="darray.h" lang="cpp" code={code.step4Print} />
+
+    We need to implement a way to add elements to the array, but we also have to consider 
+    how it will resize. How the array grows is something we can move to the private section 
+    of our class. It is a function that should only be called when necessary and an object 
+    should not have access to it:
+
+    **Public `Add`**
+
+    <Code title="darray.h" lang="cpp" code={code.step4Add} />
+
+    **Private `Resize`**
+
+    <Code title="darray.h" lang="cpp" code={code.step4Resize} />
+
+5. **Test**
+
+    Create a driver file, include the header file, and use the new class we created. We'll add a 
+    couple of elements to an array then print it. We'll then test the copy constructor and the 
+    overloaded assignment operator:
+
+    <Tabs>
+
+        <TabItem label="Driver" icon="rocket">
+            <Code title="driver.cc" lang="cpp" code={code.step5Test} />
+        </TabItem>
+
+        <TabItem label="Terminal" icon="laptop">
+            <Code lang="bash" code={code.step5Term} mark={[1, 2]} />
+        </TabItem>
+
+    </Tabs>
+
+</Steps>
+
+

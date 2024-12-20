@@ -203,6 +203,10 @@ export default defineConfig({
               label: "Template Functions",
               slug: "templates/functions",
             },
+            {
+              label: "Template Classes",
+              slug: "templates/classes",
+            },
           ],
         },
         {
