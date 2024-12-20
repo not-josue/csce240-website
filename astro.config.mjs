@@ -197,6 +197,15 @@ export default defineConfig({
           ],
         },
         {
+          label: "Templates",
+          items: [
+            {
+              label: "Template Functions",
+              slug: "templates/functions",
+            },
+          ],
+        },
+        {
           label: "References",
           items: [
             {

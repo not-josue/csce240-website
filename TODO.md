@@ -132,7 +132,7 @@
 
 ## Templates
 
-- [ ] Template Functions
+- [x] Template Functions
 
 - [ ] Template Classes
 
@@ -141,4 +141,3 @@
 - [ ] Cpplint Reference
 
 - [ ] Google Style Reference
-
