@@ -1,6 +1,73 @@
 ---
 title: Structs
-description: TODO
+description: Discover how to use struct in C++ to group related variables under a single name, providing a simple way to organize and manage structured data in your programs.
 lastUpdated: true
 ---
 
+import { Aside } from "@astrojs/starlight/components"
+
+Before diving fully into classes, let's take a quick look at 
+structs in C++. A `struct` is a way to group related variables 
+(often called members) under one name, making it easier to 
+manage and pass around complex data. In many ways, structs 
+are similar to classes—so similar, in fact, that **the main 
+difference is that struct members are public by default**, 
+whereas **class members are private by default**.
+
+<Aside>
+You will most likely not get an assignment involving structs, 
+but you will want to know the key difference for exams.
+</Aside>
+
+## Syntax
+
+A `struct` in C++ is declared similarly to a class. Here's the 
+basic syntax:
+
+```cpp showLineNumbers=false
+struct StructureName {
+  // Data Members
+  // Member Functions
+};
+```
+
+You can explicitly specify access specifiers—such as `public`, `private`, 
+or `protected`—just as you would in a class. However, if you omit them, 
+the contents of a struct default to `public` access:
+
+```cpp showLineNumbers=false
+struct Example {
+ public:
+  int x;  // Public by default
+  void DoSomething() {
+    // Function implementation
+  }
+
+ private:
+  int y;  // This member is explicitly private
+};
+```
+
+<Aside title="Google Style">
+Note that the access specifiers `public` and `private` are single-spaced. 
+This will also be a style requirement when creating Classes for assignments.
+</Aside>
+
+You can then create an object of the `struct` to access its data members and 
+functions. If you are using a structure or a reference to a structure, you use 
+the dot operator to access its data and functions:
+
+```cpp showLineNumbers=false
+Example ex;
+ex.DoSomething();
+cout << ex.x << endl;
+```
+
+If you are using a pointer to a structure, then you use the arrow operator 
+to access its data and functions:
+
+```cpp showLineNumbers=false
+Example* ptr;
+ptr->DoSomething();
+ptr->x;
+```

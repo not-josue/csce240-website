@@ -203,6 +203,10 @@ export default defineConfig({
               label: "OOP",
               slug: "classes/oop",
             },
+            {
+              label: "Structs",
+              slug: "classes/structs",
+            },
           ],
         },
         {

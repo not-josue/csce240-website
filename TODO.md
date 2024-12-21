@@ -120,7 +120,7 @@
 
 - [x] OOP
 
-- [ ] Structs
+- [x] Structs
 
 - [ ] Namespaces
 
