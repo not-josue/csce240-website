@@ -118,6 +118,8 @@
 
 ## Classes
 
+- [x] OOP
+
 - [ ] Structs
 
 - [ ] Namespaces
@@ -134,7 +136,7 @@
 
 - [x] Template Functions
 
-- [ ] Template Classes
+- [x] Template Classes
 
 ## References
 

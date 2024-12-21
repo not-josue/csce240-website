@@ -197,6 +197,15 @@ export default defineConfig({
           ],
         },
         {
+          label: "Classes",
+          items: [
+            {
+              label: "OOP",
+              slug: "classes/oop",
+            },
+          ],
+        },
+        {
           label: "Templates",
           items: [
             {
