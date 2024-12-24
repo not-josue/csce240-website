@@ -13,14 +13,32 @@ code adheres to the required standards, helping you write clean, readable, and m
 programs. Use this as a guide to meet the course's styling expectations.
 
 ## `Access Specifier Indent` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
-Access specifiers like `public`, `protected`, and `private` should be indented by 1-space.
-```cpp title="myclass.h" showLineNumbers=false
-class MyClass {
- public:
-  void Print() const;
+Access specifiers like `public`, `protected`, and `private` should be indented by 1-space. You should NOT have a 
+blank line after an access specifier.
+<Code lang="cpp" code={styleGuide.accessSpecifier} showLineNumbers={false} />
+[Reference to `cpplint` error](./cpplint-reference#access-specifier-indent)
+
+## `Class Blank Space` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+There should NOT be a blank line after the class name line or before the closing brace line.
+<Code lang="cpp" code={styleGuide.classBlankSpace} showLineNumbers={false} />
+[Reference to `cpplint` error](./cpplint-reference#class-blank-space)
+
+## `Class Data Member` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
+The name of the data member should ALWAYS end with an underscore (`_`).
+```cpp showLineNumbers=false
+int data_;
+string name_;
+```
+Error not detected by `cpplint`
+
+## `Class Name` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
+The name of your class should be capitalized, and should follow CamelCase rules.
+```cpp showLineNumbers=false
+class MyCamelClass {
+  // Members
 };
 ```
-[Reference to `cpplint` error](./cpplint-reference#access-specifier-indent)
+Error not detected by `cpplint`
 
 ## `Column Length` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 Your **MAX** column length is 80.
@@ -89,7 +107,7 @@ The first line of each file should be authored with a comment in the following f
 ```
 [Reference to `cpplint` error](./cpplint-reference#copyright)
 
-## `Function` <Badge text="Mostly Detected" variant="success"  size="medium" aria-label="error detected"/>
+## `Function` <Badge text="Mostly Detected" variant="caution"  size="medium" aria-label="error mostly detected"/>
 - The name of the function should start with a capitalized letter and casing should follow CamelCase rules. This is not caught by `cpplint`.
 
 <Aside>The `main` function is an exception and should **ALWAYS** be written as `main()`.</Aside>

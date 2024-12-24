@@ -1,0 +1,418 @@
+---
+title: Class Basics
+description: Learn the fundamental terminology and structure of classes in C++, including how to declare and define class members, organize your code, and create basic objects—without delving into advanced topics like composition, inheritance, or polymorphism.
+lastUpdated: true
+---
+
+import { Aside, Code, Steps, TabItem, Tabs } from "@astrojs/starlight/components"
+import { errors } from "@ts/constants"
+
+Classes are one of the core building blocks of Object-Oriented 
+Programming (OOP) in C++. Much like structs, **a class bundles data 
+(called members) with the functions (called member functions)** 
+that operate on that data. However, **classes default to private access**, 
+giving you more control over how data is accessed and modified. 
+
+In this page, we'll focus on the fundamental terminology and structure of 
+classes, see some straightforward examples, and learn how to declare and 
+organize class members—leaving advanced topics like composition, 
+inheritance, and polymorphism for later pages.
+
+## Basic Terminology
+
+When working with classes, you'll typically organize your code in a way 
+that mirrors how you separate functions into headers, source code, and a 
+driver file. Here are some key terms to keep in mind:
+
+- **Class Definition**: Declares the structure of the class, including its name, 
+data members, and member function signatures. This is normally placed in a 
+header file (`.h`).
+
+- **Class Implementation**: Contains the definitions (bodies) of the member 
+functions declared in the class. This is typically stored in a source file (`.cc`).
+
+- **Member**: Refers to both the variables (data members) and the 
+functions (member functions) that belong to a class.
+
+## Access Specifiers
+
+A class in C++ can have its members (both data and functions) 
+declared under different access specifiers. These specifiers 
+determine who or what can directly access those members:
+
+- **Public**: Members declared in this section can be accessed by 
+any code that can see the class, including other classes, 
+functions, and class objects/pointers.
+
+- **Private**: Members are accessible only within the class itself and 
+by functions or classes declared as “friends.” Code outside of these 
+contexts cannot access private members directly.
+
+- **Protected**: Similar to private, but also grants direct access to 
+classes that inherit from this class. Derived classes can directly 
+access protected members, but external code cannot.
+
+Organizing members under the appropriate **access specifiers promotes 
+encapsulation**, helps prevent unintended usage, and enhances overall 
+code maintainability:
+
+```cpp title="header.h" showLineNumbers=false
+class ClassName {
+ public:
+  //  Members (variables, functions)
+ private:
+  //  Members (variables, functions)
+};
+```
+
+### Design Pattern 
+
+As you experienced in CSCE146, the basic design pattern when creating a class 
+is to privatize data members along with utility functions, and to publicize 
+functions that have access to those data members along with a function to 
+construct an instance of the Class:
+
+```cpp title="header.h" showLineNumbers=false
+class ClassName {
+ public: 
+  //  Constructor
+  ClassName();
+  //  Getters and Setters
+  int GetSomething() const { return data; }
+ private:
+  int data_;
+  //  Utility Functions
+};
+```
+
+## Class Terminology
+
+These are a couple of terms you may be familiar with from CSCE146:
+
+- **Object**: A variable of a class type. When you declare something 
+like `MyClass obj;`, `obj` is an object of type `MyClass`.
+
+- **Instantiate**: The act of creating an object (or instance) of a class. 
+In other words, you “instantiate” a class by declaring a variable of 
+that class type.
+
+- **Constructor**: A special function with the same name as the class. 
+It may take parameters, but cannot return a value (not even `void`). 
+The constructor is automatically called whenever you instantiate 
+an object of the class, allowing you to initialize members or set 
+up resources needed by the class.
+
+### Constructors
+
+In C++, constructors are **special member functions that initialize 
+new objects of a class**. Besides the basic constructor you've already 
+encountered in CSCE146, there are a few additional types and concepts 
+worth understanding:
+
+#### Default Constructor
+
+A constructor that can be called with no arguments. If you don't 
+explicitly write any constructors, the compiler provides a default 
+one for you. For example:
+
+```cpp title="header.h" showLineNumbers=false
+class MyClass {
+ public:
+  MyClass();
+};
+```
+
+#### Overloaded Constructor
+
+You can also create a constructor that accepts parameters that initialize your 
+data members:
+
+```cpp title="header.h" showLineNumbers=false
+class MyClass {
+ public:
+  MyClass(int, int, string);
+};
+```
+
+##### Default Parameters
+
+When you define default parameters for a constructor, the compiler uses those defaults 
+if no arguments (or fewer than expected) are passed during object creation.
+This makes the constructor callable with zero or fewer arguments, as long as defaults 
+are provided for the missing parameters:
+
+```cpp title="header.h" showLineNumbers=false
+class MyClass {
+ public:
+  MyClass(int = 0, int = 0, string = "none");
+};
+```
+
+#### Copy Constructor
+
+A constructor that creates a copy of an existing object. This is 
+particularly important if your class contains pointers as data 
+members and needs to manage its own copies of dynamically allocated 
+resources:
+
+```cpp title="header.h" showLineNumbers=false
+class MyClass {
+ public:
+  MyClass(const MyClass& obj) {
+    // Copy constructor code
+    // e.g., copying dynamically allocated resources
+  }
+};
+```
+
+#### `explicit` Keyword
+
+If a constructor accepts one parameter, it can be called implicitly, 
+allowing unintended type conversions. Marking such a constructor 
+`explicit` ensures it is not used for implicit conversions:
+
+```cpp title="header.h" showLineNumbers=false
+class MyClass {
+ public:
+  explicit MyClass(int value) {
+    // This constructor cannot be called implicitly with an int
+  }
+  int data_;
+};
+```
+
+Here is an example of what can happen if you omit the `explicit` keyword. It 
+is what we mean by implicitly calling the constructor when it is not 
+intended:
+
+```cpp title="driver.cc" showLineNumbers=false
+// Implicitly creating a MyClass object from an int
+MyClass obj = 42;  // This line will compile and call the constructor
+cout << "obj.data_ = " << obj.data_ << endl;
+```
+
+**What Happens Here?**
+
+1. **Implicit Casting**: The statement `MyClass obj = 42;` implicitly casts the integer 
+`42` to a `MyClass` object. The compiler sees that `MyClass` has a constructor 
+accepting an `int`, so it automatically calls that constructor.
+
+2. **Potential Confusion**: This can be surprising or confusing if you 
+didn't intend to allow an `int` to be converted into a `MyClass` object. 
+It also opens the door for accidental errors in more complex code.
+
+<Aside>
+By adding the `explicit` keyword, you would prevent the code from compiling if 
+there was an attempt to implicitly call the constructor for `MyClass`.
+</Aside>
+
+### Destructor
+
+A destructor is a **special member function in C++ with the same name 
+as the class but preceded by a tilde** (`~`). It cannot take any 
+parameters or return a value. The destructor is **automatically called 
+when an object goes out of scope or is explicitly deleted**, making it 
+an ideal place to release resources or perform any necessary cleanup tasks:
+
+```cpp title="header.h" showLineNumbers=false
+class MyClass {
+ public:
+  MyClass() {
+    // Constructor: initialize members
+  }
+  ~MyClass() {
+    // Destructor: Clean up resources here
+  }
+};
+```
+
+<Aside title="Static Objects Exception">
+Static objects have a program-long or 
+block-long lifetime. Their destructors are still called automatically 
+at the end of the program's execution or when the block containing 
+them exits, but their timing can be slightly different from non-static objects.
+</Aside>
+
+### Constructor & Destructor
+
+It can be easy to mix up the timing and behavior of constructors 
+and destructors when you're first getting started. Here are the 
+key differences and rules to remember:
+
+1. **Constructor Timing**
+
+    - **Instantiation**: A constructor is called immediately when an object is created.
+
+    - **Global Objects**: The constructors for global objects are called before `main()` 
+    begins.
+
+2. **Destructor Timing**
+
+    - **Scope Ends**: A destructor is called as soon as the program leaves the scope 
+    of the object.
+
+    - **Static Objects**: If an object has static storage class, its destructor is called 
+    once the program leaves `main()`, rather than when it goes out of scope.
+
+3. **Stack Model (LIFO)**
+
+    - In general, local objects follow a Last In, First Out pattern, similar to a stack. 
+    The most recently created object is the first one to be destroyed when scope ends.
+
+### Member Functions
+
+Classes in C++ can contain different types of member functions, 
+each serving a particular role. Typically, these functions help
+manage access to private data, or perform internal tasks. These are the same 
+type of functions you learned in CSCE146:
+
+1. **Accessor Functions (Get Functions)**
+
+    - A public function that returns the value of a private data member.
+
+    - These functions are usually very short so you can write the implementation 
+    in a header file.
+
+```cpp title="header.h" showLineNumbers=false
+int GetData() const { return data_; }
+```
+
+<Aside>
+Notice that `const` was used after the parenthesis, now that we are using 
+classes, you will have to define functions that way if they don't alter data.
+</Aside>
+
+2. **Mutator Function (Set Function)**
+
+    - A public function that modifies the value of a private data member.
+
+    - Implementation will be written in a source file.
+
+```cpp title="header.h" showLineNumbers=false
+void SetData(int value);
+```
+
+3. **Utility Function**
+
+    - A private member function that performs internal tasks for 
+    other member functions.
+
+    - Implementation will be written in a source file.
+
+```cpp title="header.h" showLineNumbers=false
+class Example {
+ private:
+  int data_;
+  void HelperFunction() {
+    // Perform some internal calculation
+  }
+
+ public:
+  void DoWork() {
+    // DoWork can call HelperFunction internally
+    HelperFunction();
+  }
+};
+```
+
+#### Writing Implementation
+
+When you define a member function outside of the 
+class definition in a separate source file, 
+you must tie that function back to its class using the scope 
+resolution operator (`::`). This tells the compiler which class 
+the function belongs to:
+
+```cpp title="source.cc" showLineNumbers=false
+void Example::HelperFunction() {
+  // Do Something
+}
+```
+
+Here, `Example` is the class name, and `HelperFunction` is the function name. 
+The `::` operator ensures the compiler associates `HelperFunction` with `Example`, 
+rather than treating it as a free-standing function.
+
+### Objects 
+
+Once you've defined a class, creating an object is as 
+straightforward as declaring any other variable. However,
+accessing that object's members can vary depending on whether 
+you're using an object instance directly or working through a pointer:
+
+1. **Direct Object Declaration**
+
+```cpp title="driver.cc" showLineNumbers=false
+School s1;          // Declare an object of type School
+s1.SetName("USC");  // Access public members with the dot operator
+```
+
+2. **Pointer to an Object**
+
+```cpp title="driver.cc" showLineNumbers=false
+School* sptr = new School;   // Dynamically allocate a School object
+sptr->SetEnrollment(35000);  // Access members with the arrow operator (->)
+delete sptr;  // Don’t forget to free dynamically allocated memory
+sptr = nullptr;
+```
+
+    - **Dot Operator** (`.`): Used to access members of a directly 
+    declared (non-pointer) object.
+
+    - **Arrow Operator** (`->`): Used to access members via a pointer to an object.
+
+## Style Requirements
+
+There are a couple of tedious Google Style Requirements when 
+creating classes. Some are caught by `cpplint` and some are not:
+
+1. **Class Name**
+
+    A class name should be capitalized and should follow CamelCasing if more than 
+    one word. You should also have a space between the name and opening brace.
+
+    ```cpp showLineNumbers=false
+    class MyClass { };
+    ```
+
+    <Aside type="danger">
+    These are cases where `cpplint` does not catch these styling errors.
+    </Aside>
+
+2. **Redundant Blank Lines**
+
+    There should NOT be a blank line after the class name and before the closing brace.
+
+    ```cpp showLineNumbers=false
+    class MyClass {
+      MyClass();  // This line should NOT be empty
+
+      int data_;  // This line should NOT be empty
+    };
+    ```
+
+    `cpplint` throws a couple of whitespace errors if your class is has this styling 
+    error:
+
+    <Code lang="shell" code={errors.classBlankSpaceError} />
+
+3. **Access Specifier Spacing**
+
+    Access specifiers like `public`, `private` and `protected` should be single spaced NOT double 
+    spaced. There should NOT be a blank line after the access specifier. These are the whitespace/indent 
+    errors thrown by `cpplint`:
+
+    <Code lang="shell" code={errors.classSpecifierError} />
+
+4. **Data Member Name**
+
+    The name of data members should ALWAYS end with an underscore (`_`).
+
+    ```cpp title="header.h" showLineNumbers=false
+    int data_;
+    string name_;
+    ```
+
+    <Aside type="danger">
+    This is another styling error not caught by `cpplint`.
+    </Aside>

@@ -7,6 +7,23 @@ const accessSpecifierError: string =
 public: should be indented +1 space inside class MyClass  [whitespace/indent] [3]
 `;
 
+const classBlankSpaceError: string =
+`
+Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
+Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+`
+
+const classSpecifierError: string =
+`
+public: should be indented +1 space inside class ClassName  [whitespace/indent] [3]
+Do not leave a blank line after "public:"  [whitespace/blank_line] [3]
+private: should be indented +1 space inside class ClassName  [whitespace/indent] [3]
+Do not leave a blank line after "private:"  [whitespace/blank_line] [3]
+protected: should be indented +1 space inside class ClassName  [whitespace/indent] [3]
+Do not leave a blank line after "protected:"  [whitespace/blank_line] [3]
+`
+
 const controlStructuresError: string =
 `
 # General Errors
@@ -69,10 +86,11 @@ const notDetected: string =
 Done processing driver.cc
 `;
 
-const errors: { accessSpecifierError: string, columnError: string, controlStructuresError: string,
+const errors: { classBlankSpaceError: string, classSpecifierError: string, 
+    columnError: string, controlStructuresError: string,
     copyrightError: string, functionError: string, headerGuardsError: string, includeFileError: string,
     makefileError:string, newlineError: string, notDetected: string, } =
-{ accessSpecifierError, controlStructuresError, columnError, copyrightError, functionError,
+{ classBlankSpaceError, classSpecifierError, controlStructuresError, columnError, copyrightError, functionError,
     headerGuardsError, includeFileError, makefileError, newlineError, notDetected, };
 
 export { STD, errors };

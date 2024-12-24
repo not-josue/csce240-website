@@ -122,11 +122,11 @@
 
 - [x] Structs
 
-- [ ] Namespaces
-
-- [ ] Basics
+- [x] Basics
 
 - [ ] Composition
+
+- [ ] Namespaces
 
 - [ ] Inheritance
 

@@ -19,9 +19,10 @@ class DynamicArray {
  public:
   // TODO
  private:
-  int size;
-  int capacity;
-  T* array;
+  int size_;
+  int capacity_;
+  T* array_;
+};
 
 }  // namespace csce_240
 
@@ -31,37 +32,37 @@ class DynamicArray {
 const step2: string =
 `
 // constructor
-DynamicArray() : size(0), capacity(10), array(new T[capacity]) {}
+DynamicArray() : size_(0), capacity_(10), array_(new T[capacity_]) {}
 // copy constructor
 DynamicArray(const DynamicArray& el)
-    : size(el.size), capacity(el.capacity), array(new T[capacity]) {
-  for (int i = 0; i < size; ++i) {
-    array[i] = el.array[i];
+    : size_(el.size_), capacity_(el.capacity_), array_(new T[capacity_]) {
+  for (int i = 0; i < size_; ++i) {
+    array_[i] = el.array_[i];
   }
 }
 // destructor
 ~DynamicArray() {
-  if (array != nullptr) delete[] array;
+  if (array_ != nullptr) delete[] array_;
 }
 `
 
 const step3Acc: string =
 `
-int GetSize() const { return size; }
-int GetCapacity() const { return capacity; }
+int GetSize() const { return size_; }
+int GetCapacity() const { return capacity_; }
 `
 
 const step3Op: string =
 `
 // operator overload
 DynamicArray& operator=(const DynamicArray& el) {
-  size = el.size;
-  capacity = el.capacity;
+  size_ = el.size_;
+  capacity_ = el.capacity_;
 
-  delete[] array;
+  delete[] array_;
 
-  for (int i = 0; i < size; ++i) {
-    array[i] = el.array[i];
+  for (int i = 0; i < size_; ++i) {
+    array_[i] = el.array_[i];
   }
 
   return *this;
@@ -72,14 +73,14 @@ const step4Add: string =
 `
 // public utilities
 void Add(T el) {
-  if (size == capacity) {
-    Resize();
-    array[size] = el;
-    capacity *= 2;
-    ++size;
+  if (size_ == capacity_) {
+    Resize_();
+    array_[size_] = el;
+    capacity_ *= 2;
+    ++size_;
   } else {
-    array[size] = el;
-    ++size;
+    array_[size_] = el;
+    ++size_;
   }
 }
 `
@@ -87,24 +88,24 @@ void Add(T el) {
 const step4Resize: string =
 `
 // private utilities
-void Resize() {
-  T* temp = new T[capacity * 2];
+void Resize_() {
+  T* temp = new T[capacity_ * 2];
 
   // fill array
-  for (int i = 0; i < size; ++i) {
-    temp[i] = array[i];
+  for (int i = 0; i < size_; ++i) {
+    temp[i] = array_[i];
   }
 
-  delete[] array;
-  array = temp;
+  delete[] array_;
+  array_ = temp;
 }
 `
 
 const step4Print: string =
 `
 void Print() const {
-  for (int i = 0; i < size; ++i) {
-    cout << array[i] << " ";
+  for (int i = 0; i < size_; ++i) {
+    cout << array_[i] << " ";
   }
   cout << endl;
 }

@@ -1,3 +1,27 @@
+const accessSpecifier: string =
+`
+class MyClass {
+ public:
+  void Print() const;
+ private:
+  int data;
+};
+`
+
+const classBlankSpace: string =
+`
+class MyClass {
+ public:
+  MyClass();  //  Not blank
+  ~MyClass();
+  int GetData() const { return data; }
+
+ private:
+  int data;
+  void HelperFunction();  //  Not blank
+};
+`
+
 const columnLength: string =
 `
 // Copyright 2024 CSCE240
@@ -150,8 +174,10 @@ while (condition) {
 `;
 
 const styleGuide: { columnLength: string, doWhileBraces: string, forLoops: string, funcBraces1: string, funcBraces2: string, headerGuards: string, ifNoElse: string, ifWithElse: string, 
-ifWithNested: string, includeFile: string,  indentation: string, makeFile: string, switchBraces: string, whileBraces: string, } =
+ifWithNested: string, includeFile: string,  indentation: string, makeFile: string, switchBraces: string, whileBraces: string, 
+accessSpecifier: string, classBlankSpace: string,
+} =
 { columnLength, doWhileBraces, forLoops, funcBraces1, funcBraces2, headerGuards, ifNoElse, ifWithElse, ifWithNested, includeFile, 
-  indentation, makeFile, switchBraces, whileBraces, };
+  indentation, makeFile, switchBraces, whileBraces, accessSpecifier, classBlankSpace, };
 
 export { styleGuide };

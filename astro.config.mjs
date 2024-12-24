@@ -207,6 +207,10 @@ export default defineConfig({
               label: "Structs",
               slug: "classes/structs",
             },
+            {
+              label: "Basics",
+              slug: "classes/basics",
+            },
           ],
         },
         {
