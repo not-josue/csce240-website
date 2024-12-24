@@ -1,0 +1,248 @@
+---
+title: Basic Example
+description: Walk through a step-by-step example of creating a simple C++ class and testing it in a driver program, reinforcing concepts like class structure, member functions, and object usage.
+lastUpdated: true
+---
+
+import { Aside, Code, Steps, TabItem, Tabs } from "@astrojs/starlight/components"
+import { code } from "@ts/classes/basic-example"
+
+We're going to walk through the entire process of defining and using a 
+class in C++. In this example, we'll create a `Character` class, 
+write its member function implementations, and then test our class in a 
+driver program. You'll see how these components are organized into separate files:
+
+1. `character.h`: Header file containing the class definition.
+
+2. `character.cc`: Source file where we implement the member functions.
+
+3. `driver.cc`: Driver file to test and demonstrate our class.
+
+4. `makefile`: A script that automates compiling and linking the program.
+
+## Step 1. Create Makefile
+
+    Since we already know the names of our files, lets first create our `makefile`:
+
+    <Code title="makefile" lang="makefile" code={code.step1} />
+
+## Step 2. Create Header File
+
+    Next lets define our `Character` class in `character.h`. Don't worry if you don't 
+    understand some of the code, we'll be going over each section:
+
+    <Code title="character.h" lang="cpp" code={code.step2Base} />
+
+    ### Data Members
+
+    Under the `private` accessor, we've added a couple of basic stats for our class along 
+    with a pointer that acts like an inventory:
+
+    <Code title="character.h" lang="cpp" code={code.step2Data} />
+
+    ### Constructor
+
+   Our constructor uses default parameters, **allowing objects to 
+   be created with or without arguments**. We've also declared it as `explicit` 
+   to prevent unintended implicit conversions—specifically, creating a 
+   `Character` object by assigning it a `string` (e.g., `Character v = "Villain";`).
+
+   Because one of the constructor's parameters is a `string`, the `explicit` 
+   keyword ensures an object is only constructed when we explicitly call the 
+   constructor, rather than through an automatic type conversion:
+
+    ```cpp title="character.h" showLineNumbers=false
+    // Constructor name, hp, attack, defense
+    explicit Character(string = "none", int = 0, int = 0, int = 0);
+    ```
+
+    ### Copy Constructor
+
+    The copy constructor is **used when creating a new object by passing an 
+    existing object of the same class**. In this class, we have a dynamic 
+    data member (a pointer), so it's **important to create a copy constructor 
+    that allocates new memory for the copy**. Otherwise, multiple objects 
+    would **end up sharing the same pointer and point to the same memory**—leading 
+    to issues like double-deletion and data corruption:
+
+    ```cpp title="character.h" showLineNumbers=false
+    // Copy Constructor
+    Character(const Character&);
+    ```
+    
+    ### Destructor
+
+    Because our class contains a pointer data member, a **destructor is needed 
+    to properly release any dynamically allocated memory**. In this example, 
+    the destructor checks whether `bag_` is pointing to an allocated array. 
+    If so, it calls `delete[]` to free the memory. Since the implementation 
+    is brief, we've included it directly in the header:
+
+    ```cpp title="character.h" showLineNumbers=false
+    // Destructor
+    ~Character() {
+      if (bag_ != nullptr) delete[] bag_;
+    }
+    ```
+
+    <Aside type="caution">
+    If you have a data member that is a pointer, you should **ALWAYS write a customized copy constructor**, **and 
+    a customized destructor**. There is one more rule that will be added in the next lesson.
+    </Aside>
+    
+    ### Accessor Functions
+
+    Just like the destructor, our Getter Functions contain very little code so we can write the 
+    implementation in the header file:
+
+    ```cpp title="character.h" showLineNumbers=false
+    // Accessors
+    string GetName() const { return name_; }
+    int GetHp() const { return hp_; }
+    int GetAtk() const { return attack_; }
+    int GetDef() const { return defense_; }
+    ```
+
+    ### Mutator Functions
+
+    Our Setter functions require a bit of conditional statements so we'll usually only define them 
+    in the header file:
+
+    ```cpp title="character.h" showLineNumbers=false
+    // Mutators
+    void SetName(string);
+    void SetHp(int);
+    void SetAtk(int);
+    void SetDef(int);
+    ```
+
+    ### Utility Functions
+
+    Since we have an inventory, we need to write a function to add items. 
+    After adding items, we can write a function to print 
+    the contents of the `bag_`:
+
+    ```cpp title="character.h" showLineNumbers=false
+    // Utilities
+    void AddToBag(string);
+    void PrintBag() const;
+    ```
+
+## Step 3. Create Source File
+
+    Lets move to `character.cc` to write the implementation for our class. Instead 
+    of feeding you the entire document, we'll go over each section.
+
+    ### Setup
+
+    First we setup the document by importing what we need:
+
+    <Code title="character.cc" lang="cpp" code={code.step3Import} />
+
+    ### Mutators
+
+    We'll first write our mutators since we can use them in the constructor. They're 
+    all pretty similar in requiring a simple condition:
+
+    <Code title="character.cc" lang="cpp" code={code.step3Setters} />
+
+    ### Constructor
+
+    We can now use our mutators in the constructor to initialize some data members with 
+    any arguments passed. Any data member dealing with the Character's inventory will be 
+    initialized manually:
+
+    <Code title="character.cc" lang="cpp" code={code.step3Con} />
+
+    ### Copy Constructor
+
+    For the copy constructor, we assign most data members of the new class to the data members 
+    of the object's data members. We then iterate to pass the contents of the inventory from one 
+    class to the new class:
+
+    <Code title="character.cc" lang="cpp" code={code.step3Copy} />
+
+    ### AddToBag
+
+    To add an item to our inventory, we first check to see that the passed value is not an empty 
+    `string` and that our inventory is not full. We then assign it to an index and updated the size:
+
+    <Code title="character.cc" lang="cpp" code={code.step3Add} />
+
+    ### Print
+
+    To print our inventory we first check if the inventory is empty. Then if it contains items we 
+    iterate and print each element:
+
+    <Code title="character.cc" lang="cpp" code={code.step3Print} />
+
+## Step 4. Test
+
+    ### Default Constructor
+
+    Finally we move to the driver file. Lets first check that our constructor works without any 
+    arguments. This will be the only time I'll show the complete driver:
+
+    <Tabs>
+
+        <TabItem label="Driver" icon="rocket">
+            <Code title="driver.cc" lang="cpp" code={code.step4Default} />
+        </TabItem>
+
+        <TabItem label="Terminal" icon="laptop">
+            <Code lang="bash" code={code.step4DefaultTerm} />
+        </TabItem>
+
+    </Tabs>
+
+    ### Overloaded Constructor
+
+    Next we'll check to see that our constructor works when passing parameters. I'll only show the 
+    results for the new tests instead of the entire output:
+
+    <Tabs>
+
+        <TabItem label="Driver" icon="rocket">
+            <Code title="driver.cc" lang="cpp" code={code.step4Over} />
+        </TabItem>
+
+        <TabItem label="Terminal" icon="laptop">
+            <Code lang="shell" code={code.step4OverTerm} />
+        </TabItem>
+
+    </Tabs>
+
+    ### Copy Constructor
+
+    Now we'll test the copy constructor by passing the previously made `Character b` object. We'll alter the 
+    data in the new `Character c` to make sure the contents in `Character b` are not altered:
+
+    <Tabs>
+
+        <TabItem label="Driver" icon="rocket">
+            <Code title="driver.cc" lang="cpp" code={code.step4Copy} />
+        </TabItem>
+
+        <TabItem label="Terminal" icon="laptop">
+            <Code lang="shell" code={code.step4CopyTerm} />
+        </TabItem>
+
+    </Tabs>
+
+    ### Inventory
+
+    Finally we test our inventory system. We'll add some items, then test that our conditional 
+    statement is working by trying to pass an empty `string`, and by trying to add an item when the 
+    inventory is full:
+
+    <Tabs>
+
+        <TabItem label="Driver" icon="rocket">
+            <Code title="driver.cc" lang="cpp" code={code.step4Bag} />
+        </TabItem>
+
+        <TabItem label="Terminal" icon="laptop">
+            <Code lang="shell" code={code.step4BagTerm} />
+        </TabItem>
+
+    </Tabs>

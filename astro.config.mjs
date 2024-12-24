@@ -212,8 +212,8 @@ export default defineConfig({
               slug: "classes/basics",
             },
             {
-              label: "Composition",
-              slug: "classes/composition",
+              label: "Basic Example",
+              slug: "classes/basic-example",
             },
           ],
         },
