@@ -2,11 +2,6 @@
 const STD: number = 17;
 
 // cpplint errors
-const accessSpecifierError: string =
-`
-public: should be indented +1 space inside class MyClass  [whitespace/indent] [3]
-`;
-
 const classBlankSpaceError: string =
 `
 Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
