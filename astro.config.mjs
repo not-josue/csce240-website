@@ -211,6 +211,10 @@ export default defineConfig({
               label: "Basics",
               slug: "classes/basics",
             },
+            {
+              label: "Composition",
+              slug: "classes/composition",
+            },
           ],
         },
         {
