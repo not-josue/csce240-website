@@ -1,0 +1,406 @@
+---
+title: Composition
+description: Explore how composition is used in C++ to build classes from smaller components, and learn additional advanced features like constant functions, constant objects, initializer lists, friends of a class, operator overloading, and function chaining to write cleaner and more maintainable code.
+lastUpdated: true
+---
+
+import { Aside } from "@astrojs/starlight/components"
+
+Composition is a fundamental concept in C++ that allows you to build 
+complex classes by combining smaller, more specialized classes. In 
+this section, we'll explore how composition works and why it's a 
+powerful way to design and organize your code.
+
+We'll also cover several advanced topics that weren't discussed in 
+the previous lesson, such as the **principle of least privilege**, **constant 
+functions**, **constant objects**, **initializer lists**, **friends of a class**, 
+**operator overloading**, and how to **chain function calls**.
+
+## What Is Composition?
+
+In C++, **composition refers to a “has-a” relationship between classes**. 
+One class, say Class `A`, includes one or more objects of another class, 
+Class `B`, as its data members. This allows Class `A` to leverage Class B's 
+functionality without needing to know or depend on how Class `B` does its job.
+
+### Key Points
+
+1. **"Has-A" Relationship**
+
+    - If Class `A` “has a” Class `B`, it means `A` has `B` as a data member.
+
+    - Example: A `Car` class might have an `Engine` object, a `Transmission` 
+    object, and so on.
+
+2. **Independence of Implementation**
+
+    - Class `A` doesn't care how Class `B` does its job; it only cares that `B` 
+    provides certain capabilities.
+
+    - This keeps the two classes more loosely coupled and easier to maintain.
+
+3. **Include the Header**
+
+    - In Class A's header, include Class B's header so you can declare `B` objects in `A`.
+
+```cpp title="header.cc" showLineNumbers=false
+#include "B.h"  // Path to Class B’s header
+
+class A {
+ private:
+  B objB;  // A has-a B
+  // ...
+};
+```
+
+4. **Separate Object Code**
+
+    - Ensure Class B's implementation (its `.cc` file) is compiled and linked 
+    in the final project alongside Class `A`.
+
+    - Class `A` will call B's functions through `objB`, but it doesn't need to worry 
+    about the details in B's `.cc`.
+
+### UML Diagram
+
+The following figure shows a UML Diagram of a "has-a" relationship between classes. A diagram similar to 
+this is likely to show up on an exam. The key difference between other diagrams is that a **diamond 
+like shape is attached to the line**.
+
+![A UML Diagram showing a "has-a" relationship between two classes](@assets/classes/composition_uml.webp)
+
+## More About Classes
+
+This section delves deeper into several class-related features that 
+may have been mentioned before, but not fully explored. These details 
+will help you refine how you design and interact with classes, improving 
+both code clarity and reliability.
+
+### Principle Of Least Privilege 
+
+Now that your classes are going to interact with each other, 
+it's important to decide what data and behaviors should be 
+visible or modifiable by outside code. **The Principle of 
+Least Privilege** states that functions, classes, and **other 
+parts of your program should be given only the minimum access 
+rights needed to do their jobs—no more**.
+
+To adhere to this principle in C++, you'll often:
+
+- Mark data members and functions as `private` or `protected` unless they need 
+to be accessed externally.
+
+- Use the `const` keyword liberally—to declare variables, parameters, 
+member functions, and even entire objects as constant—whenever their 
+values or behaviors should not change.
+
+### Constant Functions 
+
+A constant member function is declared with the keyword `const` at 
+the end of its signature (in both the prototype and the implementation). 
+Marking a member function as `const` promises the compiler—and other 
+developers—that this function will not modify the object's state.
+
+It also means the function cannot call any non-const member functions, 
+ensuring the object's data remains unchanged.
+
+We label it when defining our class in the header file:
+
+```cpp title="header.h" showLineNumbers=false
+class Character {
+ public:
+  int GetHp() const;
+
+ private:
+  int hp_;
+};
+```
+
+We also label the function `const` when we write the implementation in 
+a source file:
+
+```cpp title="source.cc" showLineNumbers=false
+int Character::GetHp() const { return hp_; }
+```
+
+#### When Is This Useful?
+
+- **Read-Only Access**: If a function's purpose is simply to inspect or 
+retrieve data without altering it—like a “getter” method—declaring 
+it as `const` clearly expresses its intent and enforces it at compile time.
+
+- **Error Prevention**: If you accidentally try to modify the object's data 
+inside a `const` function, the compiler will generate an error, catching 
+potential bugs early.
+
+- **Better Design**: Declaring functions as `const` whenever possible helps you 
+follow the **Principle of Least Privilege**, making your code more predictable 
+and easier to maintain.
+
+### Constant Objects 
+
+Just like you can declare a `const int` or `const double`, you can also 
+declare an entire object as `const`. Although this scenario probably won't appear 
+in an assignment, it's a concept that may come up in an exam.
+
+- **Immutable State**: A constant object cannot be modified after it is created. 
+Any attempt to change its data members will result in a compiler error.
+
+- **Calling Only Const Member Functions**: Because a constant object must remain 
+unchanged, it can only call constant member functions—those declared with the 
+`const` keyword at the end of their signatures.
+
+```cpp title="driver.cc" showLineNumbers=false
+int main() {
+  const Character hero;
+  int hp = hero.GetHp();  // Allowed since its a constant function
+  hero.SetHp(200);        // Error cannot call non-constant function
+
+  return 0;
+}
+```
+
+### Initializer List
+
+In C++, an initializer list allows you to initialize your class members 
+before the constructor's body executes. It appears after the constructor's 
+parameter list, starting with a colon (`:`) and followed by a comma-separated 
+list of initializations. For example:
+
+```cpp title="source.cc" showLineNumbers=false
+Character::Character(string name, int health) : name_(name), health_(health) {
+  // Constructor body
+};
+```
+
+#### Why Use An Initializer List?
+
+1. **Order of Initialization**: Members are initialized in the order 
+they're declared in the class, not the order they appear in the 
+list. Using an initializer list clarifies that order and can help 
+avoid issues when you depend on one member being initialized before another.
+
+2. **Immutable Members**: If you have `const` data members or references, you must 
+use an initializer list to set their values.
+
+3. **Efficiency**: Initializing members directly is often more efficient 
+than assigning to them in the constructor body because it avoids 
+unnecessary default constructions or assignments.
+
+### Friends 
+
+In C++, you can designate non-member functions or other classes 
+as “friends” to grant them direct access to your class's `private` 
+data members. This mechanism is especially **useful for operator 
+overloading** in situations where the operator can't be defined as 
+a member function, such as the stream insertion (`<<`) or extraction (`>>`) 
+operators.
+
+Here's an example that uses a friend function to overload the `<<` operator 
+for printing:
+
+```cpp title="header.h" showLineNumbers=false
+#include <iostream>
+#include <string>
+
+using std::cout;
+using std::endl;
+using std::ostream;
+using std::string;
+
+class Character {
+ public:
+  friend ostream &operator<<(ostream &whereto, const Character &c) {
+    whereto << "Name: " << c.name_ << endl;
+    whereto << "Hp: " << c.hp_;
+    return whereto;
+  }
+
+ private:
+  string name_;
+  int hp_;
+};
+```
+
+Here's a breakdown of the `friend` function:
+
+1. **Operator Function**
+
+- The `&operator<<` function is an overloaded operator that customizes 
+how the `<<` operator behaves for a user-defined class. By default, the 
+`<<` operator is used to output data (e.g., to `std::cout`), but it doesn't 
+know how to handle objects of custom types like `Character`.
+
+- `operator<<`: The `<<` operator is overloaded as a non-member function.
+
+2. **Friend Declaration**
+
+- The `friend` declaration appears inside the Character class 
+but outside of any member function.
+
+- The `friend` keyword tells the compiler that the `operator<<` 
+function is allowed to access the private members (`name_` and `hp_`) of `Character`.
+
+3. **Ostream**
+
+- The `ostream` class, part of the Standard Library, is used for output streaming in C++. 
+It represents output destinations like the console (`std::cout`) or files.
+
+- It is used as the first parameter of the `operator<<` function to specify where 
+the data should be sent.
+
+- By returning the `ostream` reference, the function allows chained calls:
+
+```cpp showLineNumbers=false
+cout << hero << " is ready for battle!" << endl;
+```
+
+- You must include `<iostream>` and use `std::ostream` or `using std::ostream;` to use it.
+
+<Aside>
+This may remind you of the `ToString` functions you wrote in Java during CSCE146.
+</Aside>
+
+#### Key Points
+
+1. **Declaring A Friend**
+
+- By prefixing `friend` to the function prototype, you explicitly grant the function 
+access to the class's private members.
+
+- This is critical when overloading certain operators (like `<<` and `>>`) that cannot 
+be defined as member functions in a straightforward way.
+
+2. **Other Uses Of Friend**
+
+- The `friend` keyword can also be used to allow another class direct 
+access to this class's `private` data, even if it's not a child class.
+
+- In other words, you can declare `friend class SomeOtherClass;` in the 
+same way you declare friend functions.
+
+3. **Properties Of Friends**
+
+- **Given, Not Taken**: The class itself must explicitly name the function or 
+class as a `friend`; you cannot request friendship from outside.
+
+- **Not Symmetric**: If Class `A` declares a `friend` function or class, that `friend` 
+does not automatically treat `A` as a `friend`.
+
+- **Not Transitive**: If Class `A` is friends with Class `B`, and Class `B` is friends with 
+Class `C`, Class `A` is not automatically friends with Class `C`.
+
+### Overloaded Operators
+
+In C++, you can overload many built-in operators to work with 
+your custom classes. Generally, you declare the overloaded 
+operator as a member function **if (and only if) the left  
+operand of the operator is an object of your class**. 
+
+For operators where the left operand is not an object of your class 
+(for example, the stream insertion operator `<<`, where the left operand is `std::ostream`), 
+you must define it as a friend function (like the previous section).
+
+#### The Rule Of Three
+
+If you worked through the [Basic Example in the previous lesson](./basic-example), 
+you saw that **having a pointer as a data member required you to 
+customize a copy constructor and to customize a destructor**. The final 
+requirement when you have a pointer as a data member is that you 
+overload the assignment operator:
+
+We first define it in a header file:
+
+```cpp title="header.h" showLineNumbers=false
+class Character {
+ public:
+  Character& operator=(const Character&);
+
+ private:
+  string name_;
+  string* bag_;
+  int bag_size;
+};
+```
+
+We `return` a reference so we can mimic built-in types in chaining assignments, 
+and to avoid unnecessary copying of objects:
+
+```cpp showLineNumbers=false
+Character a, b, c;
+a = b = c;
+```
+
+Then we write the implementation in a source file. If you remember the example 
+code for a customized copy constructor in the previous lesson, then this code 
+will look very similar. **The key difference is that the assignment operator 
+is being called on an existing object, so we have to delete the current 
+pointer members to release memory**.
+
+```cpp title="source.cc" showLineNumbers=false
+Character& Character::operator=(const Character& c) {
+  name_ = c.name_;
+  bag_size_ = c.bag_size_;
+
+  // Here is the difference between a copy constructor
+  if (bag_ != nullptr) {
+    delete[] bag_;
+  }
+
+  bag_ = new string[bag_size_];
+
+  for (int i = 0; i < bag_size_; ++i) {
+    bag_[i] = c.bag_[i];
+  }
+
+  return *this;
+}
+```
+
+**Key Rule To Remember**
+
+If you have a pointer that is a data member, you should always 
+create the following:
+
+1. **Copy Constructor**: so each new object allocates its own copy of the data
+
+2. **Destructor**: to release the dynamically allocated memory
+
+3. **Overload Assignment Operator**: so that assigning one object to another correctly 
+copies the data
+
+### Chaining Functions
+
+Function chaining allows you to call multiple member functions in succession, 
+using the dot notation to produce clean, fluent code. To enable this, **each 
+method returns a reference to the current object** (typically `*this`), rather 
+than returning `void`.
+
+The implementation is included with the class definition only for example purposes:
+
+```cpp title="header.h" showLineNumbers=false
+class Character {
+ public:
+  Character& SetName(string name) {
+    if (name != "") {
+      name_ = name;
+    } else {
+      name_ = "none";
+    }
+
+    return *this;
+  }
+
+  void PrintName() const {
+    cout << name_ << endl;
+  }
+};
+```
+
+Now we would have the option to set a character's name and immediately print 
+it after:
+
+```cpp title="driver.cc" showLineNumbers=false
+Character c;
+c.SetName("Zidane").PrintName();
+```

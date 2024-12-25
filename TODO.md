@@ -124,13 +124,21 @@
 
 - [x] Basics
 
-- [ ] Composition
+- [x] Basic Example
+
+- [x] Composition
+
+- [ ] Composition Example
 
 - [ ] Namespaces
 
 - [ ] Inheritance
 
+- [ ] Inheritance Example
+
 - [ ] Polymorphism
+
+- [ ] Polymorphism Example
 
 ## Templates
 
