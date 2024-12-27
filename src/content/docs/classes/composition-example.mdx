@@ -1,0 +1,451 @@
+---
+title: Composition Example
+description: Walk through an example project illustrating how to implement and use composition in C++ by creating multiple classes that work together, demonstrating real-world usage and best practices.
+lastUpdated: true
+---
+
+import { Aside, Code, FileTree, Steps, TabItem, Tabs, } from "@astrojs/starlight/components"
+import { code } from "@ts/classes/composition-example"
+
+We're going to walk through an example of composition in C++ by creating a `Character` class—much like one you might 
+find in a video game. This `Character` will contain a `Weapon` and a collection of `Potion` objects, both of which are 
+separate classes that will be used within `Character`.
+
+If you followed along with the [Basic Example tutorial](./basic-example), some of the code here may look familiar. Rather than modifying 
+your existing files, however, it's best to create a new folder for this tutorial, ensuring you can experiment without 
+affecting your previous work.
+
+## Step 1. Create Files
+
+Here are all the files that will be used in the project:
+
+<FileTree>
+
+- CSCE240
+    - **Composition Example**
+        - character.cc
+        - character.h
+        - driver.cc
+        - makefile
+        - potion.cc
+        - potion.h
+        - weapon.cc
+        - weapon.h
+
+</FileTree>
+
+## Step 2. Makefile
+
+Since we know all the names of the files, we can go ahead and create a `makefile` to 
+compile and link our program:
+
+```makefile title="makefile"
+character.o : character.cc character.h
+	g++ -Wall -std=c++17 -c character.cc
+
+potion.o : potion.cc potion.h
+	g++ -Wall -std=c++17 -c potion.cc
+
+weapon.o : weapon.cc weapon.h
+	g++ -Wall -std=c++17 -c weapon.cc
+
+driver.o : driver.cc character.h potion.h weapon.h
+	g++ -Wall -std=c++17 -c driver.cc
+
+driver: driver.o character.o potion.o weapon.o
+	g++ -Wall -std=c++17 driver.o character.o potion.o weapon.o
+	./a.out
+
+clean :
+	rm *.o a.out
+```
+
+## Step 3. Weapon Class
+
+The first class we'll create is the `Weapon` class. It will contain a name and a type which will 
+be of type `string`, and an attack power which will be represented by an integer.
+
+### Define Header
+
+We'll first move to `weapon.h` to define the `Weapon` class. If you look at the mutator functions, 
+you will see that we are returning a reference to a `Weapon` instead of the usual `void`. This is 
+to show you an example of chaining functions and is a theme you will find throughout the rest of the project:
+
+<Code title="weapon.h" lang="cpp" code={code.weaponHeader} />
+
+### Implement Members
+
+Now we'll go to `weapon.cc` to write the implementation for the member functions. The first code we write 
+are the imports, and what we'll be using:
+
+```cpp title="weapon.cc" showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#include "weapon.h"
+
+#include <iostream>
+
+using std::cout;
+using std::ostream;
+```
+
+#### Mutators
+
+Next lets write the implementation for the mutator functions. This is so we can use them in our constructor:
+
+<Code title="weapon.cc" lang="cpp" code={code.weaponMutators} />
+
+#### Constructor & Friend
+
+Now we just have to write the implementation for the constructor, and our `friend`, `operator<<`:
+
+```cpp title="weapon.cc"
+// Constructor
+Weapon::Weapon(string n, string t, int p) { SetName(n).SetType(t).SetPower(p); }
+
+// Friend
+ostream& operator<<(ostream& whereto, const Weapon& w) {
+  cout << w.name_ << " +" << w.power_ << " " << w.type_;
+  return whereto;
+}
+```
+
+## Step 4. Potion Class
+
+The second small class to create is the `Potion` class. It will have a name, which will be either "potion" or 
+"super potion", and a healing power, either `20` or `40`. Our `Character` will have an array of these to use 
+to heal when they need to.
+
+### Define Header
+
+We'll start by defining the class in `potion.h`. A slight difference in this class is that it has a mutator 
+function as `private` instead of `public`. This is because the power of the `Potion` is tied to its name, and 
+we don't want to just be able to change the power to any integer other than `20` and `40`:
+
+<Code title="potion.h" lang="cpp" code={code.potionHeader} />
+
+### Implement Members
+
+Now we move to `potion.cc` to write the implementation for our class. Like every other class, we first import, and 
+use what we need:
+
+```cpp title="potion.cc" showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#include "potion.h"
+
+#include <iostream>
+
+using std::cout;
+using std::endl;
+using std::ostream;
+```
+
+#### Mutators
+
+Since the power of the `Potion` is tied to its name, every time there's a name change, then there's a chance that we 
+have to change the power of the `Potion`. This is the only place where we'll call the `SetPower` function:
+
+<Code title="potion.cc" lang="cpp" code={code.potionMutators} />
+
+#### Constructor & Friend
+
+The final bit of implementation is the constructor and the `friend` functions. The constructor only calls the `SetName` 
+function since it also initializes the power of our `Potion` and the `friend` function looks similar to the one in the 
+`Weapon` class:
+
+```cpp title="potion.cc"
+// Constructor
+Potion::Potion(string n) { SetName(n); }
+
+// Friend
+ostream& operator<<(ostream& whereto, const Potion& p) {
+  cout << p.name_ << " +" << p.power_;
+  return whereto;
+}
+```
+
+## Step 5. Character Class
+
+The final class we'll create is the `Character` class. It will utilize the previous two classes we created. We'll give it 
+a name, health points, a `Weapon`, and an array of `Potion` objects.
+
+### Define Header
+
+The imports for this class are different from the other classes because **it needs to import the header files of other classes 
+to create objects of them**:
+
+```cpp title="character.h" showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#ifndef CHARACTER_H_
+#define CHARACTER_H_
+
+#include <ostream>
+#include <string>
+
+#include "potion.h"
+#include "weapon.h"
+
+using std::ostream;
+using std::string;
+```
+
+Another difference is that since we have a pointer as a data member, we must **customize a copy constructor 
+and a destructor**, and we must also **overload the assignment operator**. Since the destructor is a very short function, lets include 
+the implementation in the header file:
+
+<Code title="character.h" lang="cpp" code={code.characterHeader} />
+
+### Implement Members
+
+Now its time to write the implementation for the final class. We'll first import and use what we need:
+
+```cpp title="character.cc" showLineNumbers=false
+// Copyright 2024 CSCE 240
+
+#include "character.h"
+
+#include <iostream>
+
+#include "potion.h"
+#include "weapon.h"
+
+using std::cout;
+using std::endl;
+using std::ostream;
+```
+
+#### Mutators
+
+Like the previous two classes we'll write the mutator functions first so that we can use them in the constructor:
+
+<Code title="character.cc" lang="cpp" code={code.characterMutators} />
+
+#### Constructor
+
+We'll then use some of those mutators in our constructor. This constructor shows how **you can use an initializer list 
+in your constructor**. Be warned however that if you have many items in that list, the auto-styling (if you're using it) 
+makes the code harder to read:
+
+```cpp title="character.cc"
+// Constructor
+Character::Character(string n, int h, const Weapon& w) : weapon_(w) {
+  SetName(n).SetHp(h);
+
+  bag_capacity_ = 5;
+  bag_ = new Potion[bag_capacity_];
+  current_bag_size = 0;
+}
+```
+
+#### Copy Constructor
+
+The customized copy constructor is our second requirement when having a pointer as a data member. We're creating a new 
+`Character` object by passing another `Character` object as the argument. We simply assign the new Character's data 
+members to that of the argued one. For our pointer, we create a copy of each element since we don't want to point to 
+the same memory address:
+
+<Code title="character.cc" lang="cpp" code={code.characterCopy} />
+
+<Aside>
+You can use an initializer list for all non-pointer data members if you want. Go ahead and change the code if you want 
+some practice.
+</Aside>
+
+#### PrintBag & Friend
+
+Just like the previous two classes, lets write a way for `cout` to handle our `Character` objects. The chosen format is:
+
+```cpp showLineNumbers=false
+// Name Hp
+// Weapon
+// Bag
+```
+
+To achieve this structure, we're first going to need a way to print the contents of our bag. The `PrintBag` function 
+first checks to see if there is anything in the bag, then runs a `for` loop and prints each `Potion` to the terminal. 
+Since we've already written a way for `cout` to handle a `Potion` object, we can simply refer to the index of `bag_`:
+
+```cpp title="character.cc"
+void Character::PrintBag() const {
+  if (current_bag_size == 0) {
+    cout << "Your Bag is Empty" << endl;
+    return;
+  } else {
+    for (int i = 0; i < current_bag_size; ++i) {
+      cout << bag_[i] << " ";
+    }
+    cout << endl;
+  }
+}
+```
+
+We can now use the `PrintBag` function to write the implementation for our `friend` function. Just like `Potion`, we've 
+already written a way for `cout` to handle a `Weapon` object:
+
+```cpp title="character.cc"
+// Friend
+ostream& operator<<(ostream& whereto, const Character& c) {
+  cout << c.name_ << " " << c.hp_ << endl;
+  cout << c.weapon_ << endl;
+  c.PrintBag();
+  return whereto;
+}
+```
+
+#### Overload Assignment
+
+The final requirement when having a pointer as a data member is that we have to overload the assignment operator (`=`). 
+The code will look very similar to that of the copy constructor with a difference being that **since we're using it on an 
+object that has already been created**, **we must release the previously allocated memory by deleting the old array**:
+
+<Code title="character.cc" lang="cpp" code={code.characterOperator} />
+
+#### Bag Functions
+
+The final functions we have to write all deal with inventory management. We want to be able to add a `Potion`, and use a 
+`Potion` along with printing the contents of our inventory (which we've already written).
+
+Adding a `Potion` simply requires us checking to see if the inventory is full, assigning it to an index if it isn't, and finally 
+updating the current count:
+
+```cpp title="character.cc"
+// Bag Functions
+void Character::AddToBag(Potion p) {
+  if (current_bag_size == bag_capacity_) {
+    cout << "Your Bag is Full" << endl;
+    return;
+  }
+
+  bag_[current_bag_size] = p;
+  ++current_bag_size;
+}
+```
+
+When attempting to use a `Potion`, we run into a couple of obstacles. We have to check if the `Character` has a `Potion`, if the 
+`Character` is below full health (`100` from the mutator function), and if we pass all those checks, we have to re-adjust the array 
+to sort of remove the object.
+
+<Aside>
+**These functions contain default parameters in the header file meaning they will always be called** and by default will always search 
+for a "potion" if no other arguments are given ("super potion" would be the other accepted type of `Potion`).
+</Aside>
+
+We'll first create a search function that returns the index of the found object, or `-1` if the object is not found:
+
+```cpp title="character.cc"
+int Character::IndexOf(string s) const {
+  for (int i = 0; i < current_bag_size; ++i) {
+    if (s == bag_[i].GetName()) return i;
+  }
+  // Not Found
+  return -1;
+}
+```
+
+Next we use the `IndexOf` function to adjust the array. How we adjust the array is **not always by overwriting an element**, **but 
+sometimes by just ignoring it**. Take a look at the bottom of the function where we adjust the array. 
+
+If the `Character` only has 
+one potion, `i` would equal `0`. `0` is not less than the `current size - 1 = 0`, meaning that the `for` does not execute. However, 
+the **current size of the bag is decremented meaning that any calls to a "bag function" immediately gets returned without iteration**. 
+If the `Character` were to add another `Potion`, that value would just get rewritten:
+
+<Code title="character.cc" lang="cpp" code={code.characterUsePotion} />
+
+## Step 6. Test Classes
+
+We can finally go to `driver.cc` to test and finalize our project. When completing assignments, you'll probably want to test each 
+class before moving on to the next, but for demonstration purposes, we're going to test them together.
+
+
+### Potion & Weapon
+
+    We should first test the first classes we built, `Potion` and `Weapon`. This is the only time the full driver will be shown, 
+    the tests that follow will only show what to add to the `main` function:
+
+    <Tabs>
+
+        <TabItem label="Driver" icon="rocket">
+            <Code title="driver.cc" lang="cpp" code={code.test1} />
+        </TabItem>
+
+        <TabItem label="Terminal" icon="laptop">
+            <Code lang="bash" code={code.term1} />
+        </TabItem>
+
+    </Tabs>
+
+### Character Constructor
+
+    Comment out or remove the previous `cout` statements. Lets create a custom `Character` by passing a name, health points, and 
+    the `Weapon` object we previously created. By printing the `Character` object we'll be also testing the `friend` function and the 
+    `PrintBag` function:
+
+    <Tabs>
+
+        <TabItem label="Driver" icon="rocket">
+            <Code title="driver.cc" lang="cpp" code={code.test2} />
+        </TabItem>
+
+        <TabItem label="Terminal" icon="laptop">
+            <Code lang="bash" code={code.term2} />
+        </TabItem>
+
+    </Tabs>
+
+### Bag Functions
+
+    Right under the previous code, we'll test adding potions and using them:
+
+    <Tabs>
+
+        <TabItem label="Driver" icon="rocket">
+            <Code title="driver.cc" lang="cpp" code={code.test3} />
+        </TabItem>
+
+        <TabItem label="Terminal" icon="laptop">
+            <Code lang="bash" code={code.term3} />
+        </TabItem>
+
+    </Tabs>
+
+### Copy Constructor
+
+    Comment out or delete the previous bag functions. Lets now test the copy constructor 
+    to see if our pointers are different from each other:
+
+    <Tabs>
+
+        <TabItem label="Driver" icon="rocket">
+            <Code title="driver.cc" lang="cpp" code={code.test4} />
+        </TabItem>
+
+        <TabItem label="Terminal" icon="laptop">
+            <Code lang="bash" code={code.term4} />
+        </TabItem>
+
+    </Tabs>
+
+### Assignment Operator 
+
+The last test we'll do in this tutorial is the assignment operator. Just like the copy constructor, 
+we're checking to see that both pointers are different from each other. We're just changing one line from 
+the previous code:
+
+<Tabs>
+
+    <TabItem label="Driver" icon="rocket">
+        <Code title="driver.cc" lang="cpp" code={code.test5} />
+    </TabItem>
+
+    <TabItem label="Terminal" icon="laptop">
+        <Code lang="bash" code={code.term5} />
+    </TabItem>
+
+</Tabs>
+
+<Aside>
+Feel free to continue to test this project by creating various characters with different attributes.
+</Aside>

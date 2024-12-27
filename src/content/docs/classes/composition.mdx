@@ -210,7 +210,7 @@ using std::string;
 
 class Character {
  public:
-  friend ostream &operator<<(ostream &whereto, const Character &c) {
+  friend ostream& operator<<(ostream& whereto, const Character& c) {
     whereto << "Name: " << c.name_ << endl;
     whereto << "Hp: " << c.hp_;
     return whereto;
@@ -260,6 +260,16 @@ cout << hero << " is ready for battle!" << endl;
 <Aside>
 This may remind you of the `ToString` functions you wrote in Java during CSCE146.
 </Aside>
+
+Unlike other functions, if you want to write the implementation, you do not tie the 
+function to the class because it is not a member function. You also omit the `friend` keyword:
+
+```cpp title="source.cc" showLineNumbers=false
+ostream& operator<<(ostream& whereto, const Character& c) {
+  // Implementation...
+  return whereto;
+}
+```
 
 #### Key Points
 
@@ -372,8 +382,8 @@ copies the data
 ### Chaining Functions
 
 Function chaining allows you to call multiple member functions in succession, 
-using the dot notation to produce clean, fluent code. To enable this, **each 
-method returns a reference to the current object** (typically `*this`), rather 
+using the dot operator to produce clean, fluent code. To enable this, make a 
+**function `return` a reference to the current object** (typically `*this`), rather 
 than returning `void`.
 
 The implementation is included with the class definition only for example purposes:

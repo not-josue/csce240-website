@@ -128,7 +128,7 @@
 
 - [x] Composition
 
-- [ ] Composition Example
+- [x] Composition Example
 
 - [ ] Namespaces
 
