@@ -8,6 +8,8 @@ A Technical Documentation Website that teaches the C++ concepts learned in CSCE2
 npm create astro@latest -- --template starlight
 ```
 
+![A mockup of the website in different viewport](./csce240-mockup.png)
+
 ## Details
 
 - [Astro](https://astro.build/) - web framework
@@ -43,5 +45,7 @@ npm create astro@latest -- --template starlight
 - [Inkscape](https://inkscape.org/) - graphic design
 
 - [Starlight](https://starlight.astro.build/) - astro technical documentation template
+
+- [TechSini](https://techsini.com/) - website mockup
 
 - [TinyPNG](https://tinypng.com/) - image compression
