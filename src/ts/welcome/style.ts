@@ -68,7 +68,19 @@ int main() {
 }
 `;
 
-const code : {braces: string, bracesErrors: string, copyright: string, copyrightError: string, indent: string, newline: string, columnLength: string, columnError: string} = 
-{braces, bracesErrors, copyright, copyrightError, indent, newline, columnLength, columnError};
+const comment: string =
+`
+int counter = 0;  // Keep track of ...
+`
+
+const commentError: string =
+`
+cpplint driver.cc
+At least two spaces is best between code and comments  [whitespace/comments] [2]
+`
+
+const code : {braces: string, bracesErrors: string, copyright: string, copyrightError: string, indent: string, newline: string, 
+  columnLength: string, columnError: string, comment: string, commentError: string } = 
+{braces, bracesErrors, copyright, copyrightError, indent, newline, columnLength, columnError, comment, commentError,};
 
 export {code};

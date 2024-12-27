@@ -223,6 +223,10 @@ export default defineConfig({
               label: "Composition Example",
               slug: "classes/composition-example",
             },
+            {
+              label: "Namespaces",
+              slug: "classes/namespaces",
+            },
           ],
         },
         {

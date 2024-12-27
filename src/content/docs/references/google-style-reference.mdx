@@ -45,6 +45,14 @@ Your **MAX** column length is 80.
 <Code lang="cpp"  code={ styleGuide.columnLength }/>
 [Reference to `cpplint` error](./cpplint-reference#column-length)
 
+## `Commenting` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
+If you use a comment in a line that contains code, you need to have at least two spaces between code 
+and comment.
+```cpp showLineNumbers=false
+int counter = 0;  // Counter for something...
+```
+[Reference to `cpplint` error](./cpplint-reference#commenting)
+
 ## `Constant` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
 Constants should be formatted with a lowercase `k` followed by `CamelCasing` the rest of the name.
 ```cpp showLineNumbers=false
@@ -160,6 +168,18 @@ produce this error as some code editors don't recognize a copied `tab`.
 <Code lang="cpp" code={ styleGuide.makeFile } showLineNumbers={false} />
 
 [Reference to `cpplint` error](./cpplint-reference#makefile)
+
+## `Namespace` <Badge text="Not Detected" variant="danger"  size="medium" aria-label="error not detected"/>
+You should use lowercase letters when naming a `namespace` and should follow snake_case notation. The 
+ending brace should contain a comment stating `namespace` and the name of the `namespace`.
+```cpp showLineNumbers=false
+namespace csce240_program {
+  
+  // Class, etc.
+
+}  // namespace csce240_program
+```
+Error not detected by `cpplint`
 
 ## `Newline Character` <Badge text="Detected" variant="success"  size="medium" aria-label="error detected"/>
 Every file should end with a blank line.

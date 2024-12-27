@@ -1,0 +1,113 @@
+---
+title: Namespaces
+description: Learn how to use namespaces in C++ to organize code, avoid naming collisions, and structure larger programs more effectively.
+lastUpdated: true
+---
+
+import { Aside } from "@astrojs/starlight/components"
+
+Before diving into Inheritance, it's helpful to understand namespaces, 
+as you may encounter them in upcoming assignments. In C++, **a namespace 
+is a way to group multiple definitions—such as classes, functions, and 
+variables—under a named umbrella**. This approach helps you **avoid naming 
+conflicts** and clearly distinguishes different pieces of code, even if 
+they share the same identifier.
+
+```cpp showLineNumbers=false
+namespace name {
+
+  // All grouped definitions go here
+
+}  // namespace name
+```
+
+## Accessing Items
+
+Similar to how you've been using `cout`, `endl`, and other classes in your driver file, you have 
+three different ways to access the code you've written in a namespace:
+
+1. **Qualified Name**
+
+For one time use cases like when you use `std::cout` inside of `main`:
+
+```cpp showLineNumbers=false
+csce240::ItemName x;
+```
+
+2. **Using Individual Items**
+
+For multiple uses just like `using std::cout`:
+
+```cpp showLineNumbers=false
+using csce240::ItemName;
+ItemName x;  // Direct use after the using declaration
+```
+
+3. **Using Entire Namespace**
+
+When you want to import everything:
+
+```cpp showLineNumbers=false
+using namespace csce240;
+// Now everything under csce240 can be referenced directly
+```
+
+## Example
+
+This is an example of how your header file should look. Your header guards and import come 
+before the namespace:
+
+```cpp showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#ifndef EXAMPLE_H_
+#define EXAMPLE_H_
+
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
+namespace csce240 {
+
+// Class
+
+}  // namespace csce240
+
+#endif
+```
+
+Your source file is structured the same in that you import everything first, then 
+you write your member implementation inside the namespace:
+
+```cpp showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
+namespace csce240 {
+
+// Implementation
+
+}  // namespace csce240
+
+#endif
+```
+
+## Google Style
+
+There are a couple of Google Style requirements when creating namespaces:
+
+1. The names of a `namespace` should be in lowercase letters and should follow snake_case notation.
+
+2. You should comment `namespace` and the name of your `namespace` after the 
+ending brace. Since an ending brace is code, you need to use at least two 
+spaces between code and comment to adhere to the Google Style Guide for 
+commenting in the same line as code (mentioned in the [welcome page that introduced you to style requirements](../welcome/style-requirements#commenting)).
+
+<Aside type="danger">
+These are errors not caught by `cpplint`.
+</Aside>

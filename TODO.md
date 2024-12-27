@@ -130,7 +130,7 @@
 
 - [x] Composition Example
 
-- [ ] Namespaces
+- [x] Namespaces
 
 - [ ] Inheritance
 
@@ -148,6 +148,6 @@
 
 ## References
 
-- [ ] Cpplint Reference
+- [x] Cpplint Reference
 
-- [ ] Google Style Reference
+- [x] Google Style Reference

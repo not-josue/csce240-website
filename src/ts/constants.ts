@@ -81,11 +81,16 @@ const notDetected: string =
 Done processing driver.cc
 `;
 
+const commentError: string =
+`
+At least two spaces is best between code and comments  [whitespace/comments] [2]
+`
+
 const errors: { classBlankSpaceError: string, classSpecifierError: string, 
     columnError: string, controlStructuresError: string,
     copyrightError: string, functionError: string, headerGuardsError: string, includeFileError: string,
-    makefileError:string, newlineError: string, notDetected: string, } =
+    makefileError:string, newlineError: string, notDetected: string, commentError: string, } =
 { classBlankSpaceError, classSpecifierError, controlStructuresError, columnError, copyrightError, functionError,
-    headerGuardsError, includeFileError, makefileError, newlineError, notDetected, };
+    headerGuardsError, includeFileError, makefileError, newlineError, notDetected, commentError, };
 
 export { STD, errors };
