@@ -132,7 +132,7 @@
 
 - [x] Namespaces
 
-- [ ] Inheritance
+- [x] Inheritance
 
 - [ ] Inheritance Example
 

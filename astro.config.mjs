@@ -227,6 +227,10 @@ export default defineConfig({
               label: "Namespaces",
               slug: "classes/namespaces",
             },
+            {
+              label: "Inheritance",
+              slug: "classes/inheritance",
+            },
           ],
         },
         {

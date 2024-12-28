@@ -1,0 +1,588 @@
+---
+title: Inheritance
+description: Learn how to utilize inheritance in C++ to extend classes, reuse code, and create hierarchies that reflect real-world relationships between objects.
+lastUpdated: true
+---
+
+import { Aside, Card, Tabs, TabItem } from "@astrojs/starlight/components"
+
+Inheritance establishes an “is-a” relationship, where a **derived class “is a”
+ specialized form of the base class**. For example, a `Warrior` class is a 
+ specialized form of a `Character` class in a game, adding or overriding features 
+ (e.g., unique weapons) while retaining everything common to all characters.
+
+ **Key Terms**
+
+ - **Base (Parent) Class**: The existing class whose members are inherited.
+
+ - **Derived (Child) Class**: The specialized class that inherits from the base class.
+
+ ## Why Inherit?
+
+1. **Code Reuse**: You don't have to rewrite every piece of logic that already 
+exists in the base class.
+
+2. **Extend Functionality**: You can add new attributes or methods—or override 
+existing ones—without modifying the original class.
+
+3. **Maintainability**: Changes to common features can be made in the base class, 
+automatically affecting all derived classes.
+
+## How To Inherit
+
+When you define a derived class, you specify which base class it inherits from, 
+along with the inheritance type (e.g., `public`, `protected`, or `private`). A 
+common pattern is:
+
+
+ ```cpp showLineNumbers=false
+ #include "parent.h"
+
+ class ChildClass : public ParentClass {
+    // State and Behavior
+ };
+ ```
+
+ ## Types Of Inheritance
+
+1. **Public Inheritance** (`class Derived : public Base`)
+
+    - Public members of `Base` remain public in Derived.
+
+    - Protected members of `Base` remain protected in Derived.
+
+    - Private members of `Base` are not accessible by Derived 
+    (unless via friend or member functions).
+
+![A diagram showing how members from a base class transfer to a derived class publicly](@assets/classes/public_inheritance.webp)
+
+2. **Protected Inheritance** (`class Derived : protected Base`)
+
+    - Public and protected members of `Base` become protected in Derived.
+
+    - Private members of `Base` are still inaccessible.
+
+![A diagram showing how members from a base class transfer to a derived class protected](@assets/classes/protected_inheritance.webp)
+
+3. **Private Inheritance** (`class Derived : private Base`)
+
+    - Public and protected members of `Base` become private in Derived.
+
+    - Private members of `Base` are still inaccessible.
+
+![A diagram showing how members from a base class transfer to a derived class privately](@assets/classes/private_inheritance.webp)
+
+## UML Diagram
+
+The following is an example of a UML Diagram that you may be asked to identify during 
+an exam. The key detail to remember is that you have a straight lined arrow pointing to the 
+parent class:
+
+![An inheritance UML showing that the Warrior and Mage classes are also Characters](@assets/classes/inheritance_uml.webp)
+
+## Exercises
+
+Here are some exercises to help you understand how access specifiers work in inheritance. These exercises are very similar to 
+problems you may find in an exam.
+
+### Single Level
+
+These problems contain a single parent and child class.
+
+#### Public Inheritance
+
+The `Parent` class is publicly inherited by the `Child` class in this scenario:
+
+```cpp showLineNumbers=false
+class Parent {
+ public:
+  void Print() const;
+ protected:
+  bool Contains(int) const;
+ private:
+  int x_;
+};
+```
+
+```cpp showLineNumbers=false
+class Child : public Parent {
+ public:
+  void GetY() const;
+ protected:
+  int IndexOf(int) const;
+ private:
+  int y_;
+};
+```
+
+<Tabs>
+
+    <TabItem label="Questions" icon="pencil">
+    <Card title="Question 1" icon="star">
+    What does `IndexOf()` from the `Child` class have direct access to?
+    </Card>
+
+    <Card title="Question 2" icon="puzzle">
+    What does an object of the `Child` class have direct access to?
+    </Card>
+    </TabItem>
+
+    <TabItem label="Answers" icon="approve-check">
+    <Card title="Answer 1" icon="seti:todo">
+    - **Parent**: everything except `int x_`
+
+    - **Child**: everything
+    </Card>
+
+    <Card title="Answer 2" icon="seti:todo">
+    - **Parent**: `Print()`
+
+    - **Child**: `GetY()`
+    </Card>
+    </TabItem>
+
+</Tabs>
+
+#### Protected Inheritance
+
+The `Parent` class is inherited by the `Child` class using `protected` inheritance:
+
+```cpp showLineNumbers=false
+class Parent {
+ public:
+  void Print() const;
+ protected:
+  bool Contains(int) const;
+ private:
+  int x_;
+};
+```
+
+```cpp showLineNumbers=false
+class Child : protected Parent {
+ public:
+  void GetY() const;
+ protected:
+  int IndexOf(int) const;
+ private:
+  int y_;
+};
+```
+
+<Tabs>
+
+    <TabItem label="Questions" icon="pencil">
+    <Card title="Question 1" icon="star">
+    What does `IndexOf()` from the `Child` class have direct access to?
+    </Card>
+
+    <Card title="Question 2" icon="puzzle">
+    What does an object of the `Child` class have direct access to?
+    </Card>
+    </TabItem>
+
+    <TabItem label="Answers" icon="approve-check">
+    <Card title="Answer 1" icon="seti:todo">
+    - **Parent**: everything except `int x_`
+
+    - **Child**: everything
+    </Card>
+
+    <Card title="Answer 2" icon="seti:todo">
+    - **Parent**: nothing
+
+    - **Child**: `GetY()`
+    </Card>
+    </TabItem>
+
+</Tabs>
+
+#### Private Inheritance
+
+The `Parent` class is privately inherited by the `Child` class in this scenario:
+
+```cpp showLineNumbers=false
+class Parent {
+ public:
+  void Print() const;
+ protected:
+  bool Contains(int) const;
+ private:
+  int x_;
+};
+```
+
+```cpp showLineNumbers=false
+class Child : private Parent {
+ public:
+  void GetY() const;
+ protected:
+  int IndexOf(int) const;
+ private:
+  int y_;
+};
+```
+
+<Tabs>
+
+    <TabItem label="Questions" icon="pencil">
+    <Card title="Question 1" icon="star">
+    What does `IndexOf()` from the `Child` class have direct access to?
+    </Card>
+
+    <Card title="Question 2" icon="puzzle">
+    What does an object of the `Child` class have direct access to?
+    </Card>
+    </TabItem>
+
+    <TabItem label="Answers" icon="approve-check">
+    <Card title="Answer 1" icon="seti:todo">
+    - **Parent**: everything except `int x_`
+
+    - **Child**: everything
+    </Card>
+
+    <Card title="Answer 2" icon="seti:todo">
+    - **Parent**: nothing
+
+    - **Child**: `GetY()`
+    </Card>
+    </TabItem>
+
+</Tabs>
+
+### Second Level
+
+These exercises use a parent class called `A1`, a child class called `A2`, and a grandchild class called 
+`A3`.
+
+#### Public Inheritance
+
+In this scenario, the `A2` class inherits the `A1` class publicly, and the `A3` class 
+inherits the `A2` class publicly:
+
+```cpp showLineNumbers=false
+class A1 {
+ public:
+  void Print() const;
+ protected:
+  bool Contains(int) const;
+ private:
+  int x_;
+};
+```
+
+```cpp showLineNumbers=false
+class A2 : public A1 {
+ public:
+  void GetY() const;
+ protected:
+  int IndexOf(int) const;
+ private:
+  int y_;
+};
+```
+
+```cpp showLineNumbers=false
+class A3 : public A2 {
+ public:
+  void GetZ() const;
+ protected:
+  void Swap(int);
+ private:
+  int z_;
+};
+```
+
+<Tabs>
+
+    <TabItem label="Questions" icon="pencil">
+    <Card title="Question 1" icon="pen">
+    What does `Swap()` from the `A3` class have direct access to?
+    </Card>
+
+    <Card title="Question 2" icon="random">
+    What does an object of class `A3` have direct access to?
+    </Card>
+    </TabItem>
+
+    <TabItem label="Answers" icon="approve-check">
+    <Card title="Answer 1" icon="seti:todo">
+    - **A1**: everything except `int x_`
+
+    - **A2**: everything except `int y_`
+
+    - **A3**: everything
+    </Card>
+
+    <Card title="Answer 2" icon="seti:todo">
+    - **A1**: `Print()`
+
+    - **A2**: `GetY()`
+
+    - **A3**: `GetZ()`
+    </Card>
+    </TabItem>
+
+</Tabs>
+
+#### Protected Inheritance
+
+In this scenario, the `A2` class inherits the `A1` class with a `protected` accessor, and the `A3` class 
+inherits the `A2` class publicly:
+
+```cpp showLineNumbers=false
+class A1 {
+ public:
+  void Print() const;
+ protected:
+  bool Contains(int) const;
+ private:
+  int x_;
+};
+```
+
+```cpp showLineNumbers=false
+class A2 : protected A1 {
+ public:
+  void GetY() const;
+ protected:
+  int IndexOf(int) const;
+ private:
+  int y_;
+};
+```
+
+```cpp showLineNumbers=false
+class A3 : public A2 {
+ public:
+  void GetZ() const;
+ protected:
+  void Swap(int);
+ private:
+  int z_;
+};
+```
+
+<Tabs>
+
+    <TabItem label="Questions" icon="pencil">
+    <Card title="Question 1" icon="pen">
+    What does `Swap()` from the `A3` class have direct access to?
+    </Card>
+
+    <Card title="Question 2" icon="random">
+    What does an object of class `A3` have direct access to?
+    </Card>
+    </TabItem>
+
+    <TabItem label="Answers" icon="approve-check">
+    <Card title="Answer 1" icon="seti:todo">
+    - **A1**: everything except `int x_`
+
+    - **A2**: everything except `int y_`
+
+    - **A3**: everything
+    </Card>
+
+    <Card title="Answer 2" icon="seti:todo">
+    - **A1**: nothing
+
+    - **A2**: `GetY()`
+
+    - **A3**: `GetZ()`
+    </Card>
+    </TabItem>
+
+</Tabs>
+
+#### Private Inheritance
+
+In this scenario, the `A2` class inherits the `A1` class privately, and the `A3` class 
+inherits the `A2` class publicly:
+
+```cpp showLineNumbers=false
+class A1 {
+ public:
+  void Print() const;
+ protected:
+  bool Contains(int) const;
+ private:
+  int x_;
+};
+```
+
+```cpp showLineNumbers=false
+class A2 : protected A1 {
+ public:
+  void GetY() const;
+ protected:
+  int IndexOf(int) const;
+ private:
+  int y_;
+};
+```
+
+```cpp showLineNumbers=false
+class A3 : public A2 {
+ public:
+  void GetZ() const;
+ protected:
+  void Swap(int);
+ private:
+  int z_;
+};
+```
+
+<Tabs>
+
+    <TabItem label="Questions" icon="pencil">
+    <Card title="Question 1" icon="pen">
+    What does `Swap()` from the `A3` class have direct access to?
+    </Card>
+
+    <Card title="Question 2" icon="random">
+    What does an object of class `A3` have direct access to?
+    </Card>
+    </TabItem>
+
+    <TabItem label="Answers" icon="approve-check">
+    <Card title="Answer 1" icon="seti:todo">
+    - **A1**: nothing
+
+    - **A2**: everything except `int y_`
+
+    - **A3**: everything
+    </Card>
+
+    <Card title="Answer 2" icon="seti:todo">
+    - **A1**: nothing
+
+    - **A2**: `GetY()`
+
+    - **A3**: `GetZ()`
+    </Card>
+    </TabItem>
+
+</Tabs>
+
+## Inheritance Mechanics
+
+When you instantiate an object of a derived class, **the base class 
+constructor is called first**, **followed by the derived class constructor**. 
+This ensures that all inherited data members and functionality are 
+properly initialized before the derived class adds or modifies anything.
+
+### Specifying The Base Constructor
+
+You can control how the base class constructor is called by explicitly 
+invoking it in the member initializer list of the derived class constructor. 
+For example:
+
+```cpp showLineNumbers=false
+class Derived : public Base {
+ public:
+  Derived() : Base() { 
+    // Constructor Body
+  }
+};
+```
+
+1. **Base Constructor Call**
+
+- In this snippet, `Derived()` calls the base constructor `Base()` in its initializer list 
+before executing its own constructor body.
+
+- If you omit this call, the compiler will look for a default constructor in the base 
+class—or fail to compile if no suitable constructor exists.
+
+2. **Order Of Execution**
+
+- The base class constructor runs first, initializing everything inherited.
+
+- The derived class constructor runs next, completing any additional setup for the derived class.
+
+## Redefining Functions
+
+In C++, if a derived class redefines (or shadows) a non-virtual function from the base 
+class using the same signature, the **compiler binds to that function at compile time** 
+(also known as static binding). This is different from overloading, where functions 
+in the same scope have distinct signatures (e.g., different parameter types or counts).
+
+```cpp showLineNumbers=false
+class Base {
+ public:
+  void Show();
+};
+
+class Derived : public Base {
+ public:
+  // Redefines the Show function
+  void Show();
+
+  // Explicitly call the Base version
+  void CallOldShow() {
+    Base::Show();
+  }
+};
+```
+
+### Key Points
+
+1. **Compile-Time Binding**: Since the function is non-virtual (which will be covered in Polymorphism), 
+the base or derived version is chosen at compile time based on the variable's declared type.
+
+2. **Different from Overloading**: Overloading requires different signatures, whereas redefining retains 
+the same signature as the base class.
+
+3. **Calling the Base Version**: To invoke the base class implementation from within the derived class, 
+use the scope resolution operator:
+
+```cpp showLineNumbers=false
+BaseClassName::FunctionName(arguments);
+```
+
+## Multiple Inheritance
+
+Multiple inheritance allows a child class to be derived from two or more base classes. 
+While you probably won't use multiple inheritance in your assignments, it is a concept 
+you might encounter on an exam.
+
+### What Is Multiple Inheritance?
+
+In C++, multiple inheritance is when a class inherits from two or more base classes:
+
+```cpp showLineNumbers=false
+class Base1 {
+ public:
+  void Function:();
+};
+
+class Base2 {
+ public:
+  void AnotherFunc();
+};
+
+class Derived : public Base1, public Base2 {
+ public:
+  void MoreFunc();
+}
+```
+
+### Possible Issues
+
+1. **Ambiguity**:
+If two base classes share a common ancestor, the derived class may inherit multiple 
+versions of the same member, causing ambiguity.
+
+2. **Name Conflicts**:
+If two base classes have members (e.g., functions) with the same name, the derived 
+class must explicitly specify which version to use.
+
+### Use Cases
+
+- **Use When**:  The base classes represent independent behaviors that don't overlap.
+
+- **Do Not Use When**: The base classes share significant overlap or are tightly coupled, 
+as this leads to unnecessary complexity and ambiguity. In such cases, consider using 
+composition or a single inheritance hierarchy instead.
