@@ -231,6 +231,10 @@ export default defineConfig({
               label: "Inheritance",
               slug: "classes/inheritance",
             },
+            {
+              label: "Inheritance Example",
+              slug: "classes/inheritance-example",
+            },
           ],
         },
         {

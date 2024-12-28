@@ -40,7 +40,7 @@ Since we know all the names of the files, we can go ahead and create a `makefile
 compile and link our program:
 
 ```makefile title="makefile"
-character.o : character.cc character.h
+character.o : character.cc character.h potion.h weapon.h
 	g++ -Wall -std=c++17 -c character.cc
 
 potion.o : potion.cc potion.h
@@ -53,7 +53,7 @@ driver.o : driver.cc character.h potion.h weapon.h
 	g++ -Wall -std=c++17 -c driver.cc
 
 driver: driver.o character.o potion.o weapon.o
-	g++ -Wall -std=c++17 driver.o character.o potion.o weapon.o
+	g++ -Wall -std=c++17 $^
 	./a.out
 
 clean :
@@ -105,7 +105,7 @@ Weapon::Weapon(string n, string t, int p) { SetName(n).SetType(t).SetPower(p); }
 
 // Friend
 ostream& operator<<(ostream& whereto, const Weapon& w) {
-  cout << w.name_ << " +" << w.power_ << " " << w.type_;
+  whereto << w.name_ << " +" << w.power_ << " " << w.type_;
   return whereto;
 }
 ```
@@ -160,7 +160,7 @@ Potion::Potion(string n) { SetName(n); }
 
 // Friend
 ostream& operator<<(ostream& whereto, const Potion& p) {
-  cout << p.name_ << " +" << p.power_;
+  whereto << p.name_ << " +" << p.power_;
   return whereto;
 }
 ```
@@ -287,8 +287,8 @@ already written a way for `cout` to handle a `Weapon` object:
 ```cpp title="character.cc"
 // Friend
 ostream& operator<<(ostream& whereto, const Character& c) {
-  cout << c.name_ << " " << c.hp_ << endl;
-  cout << c.weapon_ << endl;
+  whereto << c.name_ << " " << c.hp_ << endl;
+  whereto << c.weapon_ << endl;
   c.PrintBag();
   return whereto;
 }

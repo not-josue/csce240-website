@@ -1,0 +1,329 @@
+---
+title: Inheritance Example
+description: Walk through a hands-on example of creating and using inheritance in C++, illustrating how to extend a base class, add specialized features in a derived class, and demonstrate best practices for code reuse.
+lastUpdate: true
+---
+
+import { Code, FileTree, TabItem, Tabs, } from "@astrojs/starlight/components"
+import { code } from "@ts/classes/inheritance-example"
+
+This tutorial builds on the code from the [Composition Example project](./composition-example). To keep 
+things organized—and avoid making changes to your existing files—it's best to 
+copy the Composition Example into a new folder before proceeding. From there, 
+you'll transform parts of that codebase to illustrate inheritance in action: 
+creating derived classes to specialize the `Character` class.
+
+## Step 1. Create Files
+
+We're going to make three new classes: `Mage`, `Thief`, and `Warrior` that will extend the `Character` class.
+Create a header file and a source file for each class. Below shows every file in the project with the new 
+files highlighted:
+
+<FileTree>
+
+- CSCE240
+    - Inheritance Example
+        - character.cc
+        - character.h
+        - driver.cc
+        - **mage.cc**
+        - **mage.h**
+        - makefile
+        - potion.cc
+        - potion.h
+        - **thief.cc**
+        - **thief.h**
+        - **warrior.cc**
+        - **warrior.h**
+        - weapon.cc
+        - weapon.h
+
+</FileTree>
+
+## Step 2. Update Makefile
+
+Since we've added new files to the project, we must make sure to compile and link the new files to the existing ones. Include 
+the new files in the `makefile` compiling and linking scripts:
+
+```makefile title="makefile"
+character.o : character.cc character.h potion.h weapon.h
+	g++ -Wall -std=c++17 -c character.cc
+
+mage.o : mage.cc mage.h character.h
+	g++ -Wall -std=c++17 -c mage.cc
+
+potion.o : potion.cc potion.h
+	g++ -Wall -std=c++17 -c potion.cc
+
+thief.o : thief.cc thief.h character.h
+	g++ -Wall -std=c++17 -c thief.cc
+
+warrior.o : warrior.cc warrior.h character.h
+	g++ -Wall -std=c++17 -c warrior.cc
+
+weapon.o : weapon.cc weapon.h
+	g++ -Wall -std=c++17 -c weapon.cc
+
+driver.o : driver.cc character.h mage.h potion.h thief.h warrior.h weapon.h
+	g++ -Wall -std=c++17 -c driver.cc
+
+driver: driver.o character.o mage.o potion.o thief.o warrior.o weapon.o
+	g++ -Wall -std=c++17 $^
+	./a.out
+
+clean :
+	rm *.o a.out
+```
+
+## Step 3. Mage Class
+
+The first class we're going to create is the `Mage` class. We're going to 
+create the constructor, customize `operator<<`, and redefine the `SetWeapon()` function.
+The rest of the new classes will be designed in the same way.
+
+### Define Header
+
+We'll first move to `mage.h` to define the class. These new classes will be much shorter 
+than our `Character` class since we have a nice base to handle most situations:
+
+<Code title="mage.h" lang="cpp" code={code.mageHeader} />
+
+### Implement Members
+
+Next we'll move to `mage.cc` to write the implementation for our functions. We'll first bring in 
+everything we need:
+
+```cpp title="mage.cc" showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#include "mage.h"
+
+#include <iostream>
+
+#include "weapon.h"
+
+using std::cout;
+using std::endl;
+using std::ostream;
+```
+
+#### Constructor
+
+The constructor uses an initializer list to call the `Character` constructor using a specific set of 
+parameters that separate it as a `Mage`. We don't need to write anything in the code block since in 
+this case, the `Character` constructor handles everything we need:
+
+```cpp title="mage.cc" showLineNumbers=false
+// Constructor
+Mage::Mage() : Character("Vivi", 50, Weapon("wooden rod", "rod", 1)) {}
+```
+
+#### Friend
+
+The way `cout` handles our `Mage` class is not very different from how it handles the `Character` class. 
+We simply add the string "Mage " before anything, then explicitly cast our `Mage` object to use the 
+`Character` class' customized `friend` function:
+
+```cpp title="mage.cc" showLineNumbers=false
+// Friend
+ostream& operator<<(ostream& whereto, const Mage& m) {
+  whereto << "Mage " << static_cast<const Character&>(m);
+  return whereto;
+}
+```
+
+#### Redefine SetWeapon
+
+We want our `Mage` class to only hold a specific weapon type. If you look at the `Weapon` class 
+you'll see that it only accepts three different strings as a type: "rod", "sword", and "dagger". This is a nice 
+base as we can create control statements that make a `Mage` only be able to accept a `Weapon` of type "rod":
+
+```cpp title="mage.cc" showLineNumbers=false
+// Redefine Mutator
+Mage& Mage::SetWeapon(Weapon w) {
+  if (w.GetType() == "rod") {
+    Character::SetWeapon(w);
+  } else {
+    cout << "A Mage can only be equipped a Weapon of type rod" << endl;
+  }
+  return *this;
+}
+```
+
+## Step 4. Thief Class
+
+The next class to create is the `Thief` class. It will follow the same design as the `Mage` class in building 
+a constructor, an overloaded `<<` operator, and a redefined `SetWeapon` function.
+
+### Define Header
+
+Go to `thief.h` and define the class similarly like the `Mage` class:
+
+<Code title="thief.h" lang="cpp" code={code.thiefHeader} />
+
+### Implement Members
+
+Now we'll move on to `thief.cc` and first import what we need:
+
+```cpp title="thief.cc" showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#include "thief.h"
+
+#include <iostream>
+
+#include "character.h"
+#include "weapon.h"
+
+using std::cout;
+using std::endl;
+using std::ostream;
+```
+
+#### Constructor
+
+Like the `Mage` class, we'll call the `Character` constructor using the initializer list and pass 
+some basic values that define a `Thief`:
+
+```cpp title="thief.cc" showLineNumbers=false
+// Constructor
+Thief::Thief()
+    : Character("Zidane", 50, Weapon("wooden dagger", "dagger", 1)) {}
+```
+
+#### Friend
+
+The `friend` function is extremely similar to the one in the  `Mage` class except we log the string "Thief " instead 
+of "Mage ":
+
+```cpp title="thief.cc" showLineNumbers=false
+// Friend
+ostream& operator<<(ostream& whereto, const Thief& t) {
+  whereto << "Thief " << static_cast<const Character&>(t);
+  return whereto;
+}
+```
+
+#### Redefine SetWeapon
+
+The `SetWeapon` function for the `Thief` class is very similar to the one in the `Mage` class. The only difference is 
+that we want a `Thief` to only be assigned a "dagger":
+
+```cpp title="thief.cc" showLineNumbers=false
+// Redefine Mutator
+Thief& Thief::SetWeapon(Weapon w) {
+  if (w.GetType() == "dagger") {
+    Character::SetWeapon(w);
+  } else {
+    cout << "A Thief can only be equipped a Weapon of type dagger" << endl;
+  }
+  return *this;
+}
+```
+
+## Step 5. Warrior Class
+
+The final class to create is the `Warrior` class. It will be designed just like the previous two classes except it 
+will contain `Warrior` specific values.
+
+### Define Header
+
+Lets move to `warrior.h` to define our final class:
+
+<Code title="warrior.h" lang="cpp" code={code.warriorHeader} />
+
+### Define Members
+
+Now lets go to `warrior.cc` to write the implementation for our final class. It will almost 
+be a copy-and-paste from the previous two classes. Below is what we need to import:
+
+```cpp title="warrior.cc" showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#include "warrior.h"
+
+#include <iostream>
+
+#include "weapon.h"
+
+using std::cout;
+using std::endl;
+using std::ostream;
+```
+
+#### Constructor
+
+A slight difference in this constructor from the others is that we call the `Character` constructor 
+only using a `string`. This is because the default parameters of the `Character` constructor already 
+define a `Warrior`:
+
+```cpp title="warrior.cc" showLineNumbers=false
+// Constructor
+Warrior::Warrior() : Character("Steiner") {}
+```
+
+#### Friend
+
+The difference in this `friend` function is that we log the `string` "Warrior" instead of "Mage" or "Thief":
+
+```cpp title="warrior.cc" showLineNumbers=false
+// Friend
+ostream& operator<<(ostream& whereto, const Warrior& w) {
+  whereto << "Warrior " << static_cast<const Character&>(w);
+  return whereto;
+}
+```
+
+#### SetWeapon
+
+The final function of the project is the `SetWeapon` function. It uses the same implementation as the one for 
+the other classes but with data pertaining to a `Warrior`:
+
+```cpp title="warrior.cc" showLineNumbers=false
+// Redefine Mutator
+Warrior& Warrior::SetWeapon(Weapon w) {
+  if (w.GetType() == "sword") {
+    Character::SetWeapon(w);
+  } else {
+    cout << "A Warrior can only be equipped a Weapon of type sword" << endl;
+  }
+  return *this;
+}
+```
+
+## Step 6. Test Classes
+
+The final step of the project is to test our new classes in `driver.cc`. Below are the imports needed for testing, the 
+only difference from the Composition Tutorial being that we included the three new classes:
+
+```cpp title="driver.cc" showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#include <iostream>
+
+#include "character.h"
+#include "mage.h"
+#include "potion.h"
+#include "thief.h"
+#include "warrior.h"
+#include "weapon.h"
+
+using std::cout;
+using std::endl;
+```
+
+Finally we'll create a couple of objects in the `main` function, and run our `make` command:
+
+<Tabs>
+
+    <TabItem label="Driver" icon="rocket">
+        <Code title="driver.cc" lang="cpp" code={code.tester} />
+    </TabItem>
+
+    <TabItem label="Terminal" icon="laptop">
+        <Code lang="bash" code={code.term} />
+    </TabItem>
+
+</Tabs>
+
+
