@@ -1,0 +1,344 @@
+---
+title: Polymorphism Example
+description: Walk through a hands-on example of implementing polymorphism in C++, showcasing how to use virtual functions and inheritance to allow derived classes to override base class behavior at runtime.
+lastUpdated: true
+---
+
+import { Code, FileTree, TabItem, Tabs, } from "@astrojs/starlight/components"
+import { code } from "@ts/classes/polymorphism-example"
+
+This example demonstrates how to apply polymorphism in C++ by 
+creating a set of video game-style character classes. Although 
+it continues the gaming theme from our previous examples, no prior 
+code is required—everything you need is included here. 
+
+You'll see how virtual functions, inheritance, and other C++ features 
+allow different classes to respond to the same function calls in uniquely 
+tailored ways, all while sharing a common interface.
+
+## Step 1. Create Files
+
+We'll be creating a base `Enemy` class along with two other specialized 
+`Enemy` types: `Bomb` and `Cactuar`. Below are all the files to create:
+
+<FileTree>
+
+- CSCE240
+    - **Polymorphism Example**
+        - bomb.cc
+        - bomb.h
+        - cactuar.cc 
+        - cactuar.h
+        - enemy.cc 
+        - enemy.h
+        - makefile
+
+</FileTree>
+
+## Step 2. Update Makefile
+
+Since we know all the names of our files, we can write all the scripts 
+needed to compile and link our program in our `makefile`:
+
+```makefile title="makefile"
+enemy.o : enemy.cc enemy.h
+	g++ -Wall -std=c++17 -c enemy.cc
+
+bomb.o : bomb.cc bomb.h enemy.h
+	g++ -Wall -std=c++17 -c bomb.cc
+
+cactuar.o : cactuar.cc cactuar.h enemy.h
+	g++ -Wall -std=c++17 -c cactuar.cc
+
+driver.o : driver.cc bomb.h cactuar.h enemy.h
+	g++ -Wall -std=c++17 -c driver.cc
+
+driver : driver.o bomb.o cactuar.o enemy.o
+	g++ -Wall -std=c++17 $^
+	./a.out
+
+clean :
+	rm *.o a.out
+```
+
+## Step 3. Enemy Class
+
+The `Enemy` class will be the base class that all types of enemies will inherit 
+from. It will have a pure `virtual` function in `Attack`, making it an abstract 
+class. Even though the class doesn't have special memory management, it will also 
+contain a `virtual` destructor so that the correct destructor is called if 
+someone were ever to create a pointer of our class.
+
+### Define Header
+
+Go to `enemy.h` and define the class. A difference between the other example tutorials 
+is that we are defining this class under a `namespace`. Your course assignments will 
+probably start to implement namespaces so this will serve as extra practice.
+
+Another difference between other example tutorials is the use of a `virtual` destructor.
+The `virtual` destructor will be implemented as an empty block since we don't need any 
+special operations:
+
+<Code title="enemy.h" lang="cpp" code={code.enemyHeader} />
+
+### Define Members
+
+Now we'll move to `enemy.cc` to write the implementation for the class. We'll first import 
+what we need, and declare a `namespace` block:
+
+```cpp title="enemy.cc" showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#include "enemy.h"
+
+#include <ostream>
+#include <string>
+
+using std::ostream;
+using std::string;
+
+namespace csce240 {
+
+}  // namespace csce240
+```
+
+#### Mutators
+
+Next we'll write the implementation for our mutator functions so that we can utilize them in 
+the constructor. You may have noticed from the header file that the `SetName` function is 
+defined under the `protected` accessor. For this program, **we don't want to change the names 
+of our specialized enemies**, so this would be one way of treating the `name_` member like a 
+constant, as objects would not have access to `SetName`.
+
+```cpp title="enemy.cc" showLineNumbers=false
+// Mutators
+void Enemy::SetName(string n) {
+  if (n != "") {
+    name_ = n;
+  } else {
+    name_ = "none";
+  }
+}
+
+void Enemy::SetHp(int h) {
+  if (h > 1) {
+    hp_ = h;
+  } else {
+    hp_ = 1;
+  }
+}
+
+void Enemy::SetLevel(int l) {
+  if (l > 1 && l < 100) {
+    level_ = l;
+  } else {
+    level_ = 1;
+  }
+}
+
+void Enemy::SetAtkPower(int a) {
+  if (a > 1 && a < 9000) {
+    atk_power_ = a;
+  } else {
+    atk_power_ = 1;
+  }
+}
+```
+
+#### Constructor
+
+Now we can use the mutators for the class constructor. It does not require any 
+complicated operations, so we'll just use each mutator to set its data members:
+
+```cpp title="enemy.cc" showLineNumbers=false
+// Constructor - name, hp, level, atk power
+Enemy::Enemy(string n, int h, int l, int a) {
+  SetName(n);
+  SetHp(h);
+  SetLevel(l);
+  SetAtkPower(a);
+}
+```
+
+#### Friend
+
+Finally, we need to tell `cout` how to handle the class. We print most of its stats, leaving its `atk_power_` hidden:
+
+```cpp title="enemy.cc" showLineNumbers=false
+// Friend
+ostream& operator<<(ostream& whereto, const Enemy& e) {
+  // Leave atk power hidden
+  whereto << e.GetName() << "\nHp: " << e.GetHp()
+          << "\nLevel: " << e.GetLevel();
+  return whereto;
+}
+```
+
+#### Attack
+
+As a reminder, the `Attack` function is a pure `virtual` function so no implementation 
+is written in this class. However, implementation is required in any child class.
+
+## Step 4. Bomb Class
+
+The next class to create is the `Bomb` class. It will publicly inherit the `Enemy` class, 
+and `override` the `Attack` function.
+
+### Define Header
+
+Go to `bomb.h`, import what you need, use the same `namespace` as the `Enemy` class, and 
+define it:
+
+<Code title="bomb.h" lang="cpp" code={code.bombHeader} />
+
+### Define Members
+
+Now move to `bomb.cc` to write the implementation of the `Bomb` class. The following is 
+what you need to import:
+
+```cpp title="bomb.cc" showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#include "bomb.h"
+
+#include <iostream>
+
+#include "enemy.h"
+
+using std::cout;
+using std::endl;
+
+namespace csce240 {
+
+}  // namespace csce240
+```
+
+#### Constructor
+
+The constructor is a tiny bit different than the `Enemy` class in that there is not a `string` in 
+its signature. Instead the `Enemy` constructor is used in an initializer list to give an object a `name_`.
+This is how we can treat the `name_` data member as a constant since it cannot be changed:
+
+```cpp title="bomb.cc" showLineNumbers=false
+// Constructor - hp, level, atk power
+Bomb::Bomb(int h, int l, int a) : Enemy("Bomb", h, l, a) {}
+```
+
+#### Attack
+
+The last function to implement is `Attack`. We simply print a statement and use arithmetic to generate how much damage 
+the `Bomb` does:
+
+```cpp title="bomb.cc" showLineNumbers=false
+// Override
+void Bomb::Attack() {
+  cout << "Inferno Crash does " << (GetAtkPower() + GetLevel()) << " damage."
+       << endl;
+}
+```
+
+## Step 5. Cactuar Class
+
+The last class to create is the `Cactuar` class. Its similar to the `Bomb` class we just created except it 
+uses `Cactuar` specific data.
+
+### Define Header
+
+Move to `cactuar.h`, import what you need, and define the class inside the same `namespace` we've been using. 
+Notice that the class redefines the `SetAtkPower` function. This is because we want to give this class a constant 
+`atk_power_` and this is one way to handle such a case:
+
+<Code title="cactuar.h" lang="cpp" code={code.cactuarHeader} />
+
+### Define Members
+
+Now we go to `cactuar.cc` to finalize the class. As always we first import what we need:
+
+```cpp title="cactuar.cc" showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#include "cactuar.h"
+
+#include <iostream>
+
+#include "enemy.h"
+
+using std::cout;
+using std::endl;
+
+namespace csce240 {
+
+}  // namespace csce240
+```
+
+#### Constructor
+
+The class constructor differs from the `Bomb` class in that it only allows the `hp_` and `level_` to be passed. 
+Another difference is that we use an initializer list to create a `Bomb` object 
+with an `atk_power_` which we'll use as a constant:
+
+```cpp title="cactuar.cc" showLineNumbers=false
+// Constructor - hp, level
+Cactuar::Cactuar(int h, int l) : Enemy("Cactuar", h, l, 1000) {}
+```
+
+#### SetAtkPower
+
+The `Cactuar` class is special in that it always has the same `atk_power_`. To not allow an object 
+to change the `atk_power_`, we simply change how the `SetAtkPower` mutator works. We just print a 
+statement stating that the `atk_power_` cannot be changed and we end the function:
+
+```cpp title="cactuar.cc" showLineNumbers=false
+// Redefine Mutator
+void Cactuar::SetAtkPower(int) {
+  cout << "Cactuars cannot change their attack power." << endl;
+}
+```
+
+#### Attack
+
+We finish the `Cactuar` class by writing the implementation for the `Attack` function. Its similar to 
+that of the one we wrote in the `Bomb` class except we print a different statement and we only use 
+the constant `atk_power_` to show how much damage the object does:
+
+```cpp title="cactuar.cc" showLineNumbers=false
+// Override
+void Cactuar::Attack() {
+  cout << "1000 Needles does " << GetAtkPower() << " damage." << endl;
+}
+```
+
+## Step 6. Test
+
+The final step of the project is to test our classes. We move to `driver.cc` and import what we need 
+which includes the class headers. We also use the classes under the `namespace` we've been using:
+
+```cpp title="driver.cc" showLineNumbers=false
+// Copyright 2024 CSCE240
+
+#include <iostream>
+
+#include "bomb.h"
+#include "cactuar.h"
+#include "enemy.h"
+
+using std::cout;
+using std::endl;
+
+using csce240::Bomb;
+using csce240::Cactuar;
+```
+
+In the `main` function, we create an object of each specialized class and test its member functions:
+
+<Tabs>
+
+    <TabItem label="Driver" icon="rocket">
+        <Code title="driver.cc" lang="cpp" code={code.test} />
+    </TabItem>
+
+    <TabItem label="Terminal" icon="laptop">
+        <Code lang="bash" code={code.term} />
+    </TabItem>
+
+</Tabs>

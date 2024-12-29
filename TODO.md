@@ -138,7 +138,7 @@
 
 - [x] Polymorphism
 
-- [ ] Polymorphism Example
+- [x] Polymorphism Example
 
 ## Templates
 

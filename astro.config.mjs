@@ -239,6 +239,10 @@ export default defineConfig({
               label: "Polymorphism",
               slug: "classes/polymorphism",
             },
+            {
+              label: "Polymorphism Example",
+              slug: "classes/polymorphism-example",
+            },
           ],
         },
         {

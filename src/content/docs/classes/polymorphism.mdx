@@ -19,7 +19,7 @@ in applications where **multiple derived classes share a base interface but impl
 ## Virtual Functions
 
 Polymorphism with `virtual` functions is one of the core strengths of C++. 
-By declaring functions as `virtual` in the base class and overriding them in derived classes:
+By declaring functions as `virtual` in the base class and overriding them in derived classes.
 
 ### Automatic Inheritance Of `virtual`
 
@@ -63,6 +63,11 @@ By declaring functions as `virtual` in the base class and overriding them in der
 
     - A class containing one or more pure virtual functions is called an **abstract class**, 
     meaning you **cannot instantiate objects of that class directly**—it exists only to be subclassed.
+
+    <Aside>
+    This concept may remind you of the interfaces you made in CSCE146. You didn't write any implementation in 
+    the `interface` but any class that used the `interface` had to have the implementation for each function.
+    </Aside>
 
 ### Virtual Destructors
 
