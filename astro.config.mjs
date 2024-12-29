@@ -235,6 +235,10 @@ export default defineConfig({
               label: "Inheritance Example",
               slug: "classes/inheritance-example",
             },
+            {
+              label: "Polymorphism",
+              slug: "classes/polymorphism",
+            },
           ],
         },
         {

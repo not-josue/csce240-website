@@ -1,0 +1,113 @@
+---
+title: Polymorphism
+description: Discover how polymorphism works in C++, enabling classes in an inheritance hierarchy to use virtual functions and dynamic binding, so different derived classes can respond uniquely to the same function calls.
+lastUpdated: true
+---
+
+import { Aside } from "@astrojs/starlight/components"
+
+Polymorphism in C++ allows **different classes in the same inheritance hierarchy to 
+respond uniquely to the same function call**, based on the actual type of the object 
+at runtime. The term comes from Greek roots:
+
+- **Poly**: meaning many
+- **Morph**: meaning form
+
+When used effectively, polymorphism lets you write more generic and extensible code—common 
+in applications where **multiple derived classes share a base interface but implement unique behaviors**.
+
+## Virtual Functions
+
+Polymorphism with `virtual` functions is one of the core strengths of C++. 
+By declaring functions as `virtual` in the base class and overriding them in derived classes:
+
+### Automatic Inheritance Of `virtual`
+
+    - Once a function is declared `virtual` in a base class, it remains `virtual` in 
+    all derived classes, even if you don't explicitly repeat the `virtual` keyword.
+
+### `override` Keyword
+
+    - You can append `override` to a derived class's function signature 
+    to explicitly state that it is overriding a virtual function from the base class.
+
+    - If the base class function is not `virtual`, or if the signatures don't match, 
+    the compiler will generate an error—catching mistakes early.
+
+    ```cpp showLineNumbers=false
+    virtual void DoSomething() override;
+    ```
+
+### `final` Keyword
+
+    - If you place `final` after a `virtual` function's prototype, no further overriding 
+    is allowed in derived classes.
+
+    ```cpp showLineNumbers=false
+    virtual void DoSomething() final;
+    ```
+
+### Implementing All Virtual Functions
+
+    - To instantiate objects of a class (i.e., it's a concrete class), all `virtual` 
+    functions (whether declared in that class or inherited) must be implemented 
+    somewhere in the inheritance chain.
+
+### Pure Virtual Functions
+
+    - You can create a pure virtual function by setting its prototype to `= 0`:
+
+    ```cpp showLineNumbers=false
+    virtual void DoSomething() = 0;
+    ```
+
+    - A class containing one or more pure virtual functions is called an **abstract class**, 
+    meaning you **cannot instantiate objects of that class directly**—it exists only to be subclassed.
+
+### Virtual Destructors
+
+    - It's advisable to declare a `virtual` destructor in any base class 
+    that has `virtual` functions.
+
+    - This ensures that the correct destructor is called when you `delete` 
+    an object via a base class pointer.
+
+    - If there's no special cleanup needed in your base class, you can provide 
+    an empty `virtual` destructor:
+
+    ```cpp showLineNumbers=false
+    virtual ~MyClass() {}
+    ```
+## Distinguishing Functions
+
+Distinguishing how a function differs between overloading, redefining, and 
+overriding is a core concept that may appear in the final exam. Below, you'll 
+find a guide clarifying each concept and how they affect your code's behavior.
+
+### Redefining Functions (Non-Virtual)
+
+    - A non-virtual function with the same prototype in both the base and derived classes is “redefined.”
+
+    - Such functions use early binding (also called **static binding**). The declared type 
+    of the variable (not the actual runtime type) determines which function is called 
+    at **compile time.**
+
+### Virtual (Overridden) Functions
+
+    - A virtual function is a function with the `virtual` keyword in the base class. 
+    A derived class **overrides it by providing a function with the same prototype**.
+
+    - Virtual functions use late binding (also known as **dynamic binding**). If you call 
+    a virtual function via a base class pointer or reference that actually refers to a 
+    derived object, the **derived class's function is called at runtime**.
+
+### Common Confusions
+
+    - **Overload != Redefine**: Overloading means different parameters. 
+    Redefining means the same parameters in base and derived classes, 
+    but no `virtual` keyword.
+
+    - **Overload != Override**: Overriding is the `virtual` version of redefining, 
+    again with the same parameters, but with `virtual`.
+
+    - **Redefine != Override**: Redefining is non-virtual; overriding is `virtual`.

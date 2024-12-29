@@ -134,9 +134,9 @@
 
 - [x] Inheritance
 
-- [ ] Inheritance Example
+- [x] Inheritance Example
 
-- [ ] Polymorphism
+- [x] Polymorphism
 
 - [ ] Polymorphism Example
 
