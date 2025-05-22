@@ -9,7 +9,7 @@ import { code } from "@ts/classes/composition-example"
 
 We're going to walk through an example of composition in C++ by creating a `Character` class—much like one you might 
 find in a video game. This `Character` will contain a `Weapon` and a collection of `Potion` objects, both of which are 
-separate classes that will be used within `Character`.
+separate classes that will be used within the `Character` class.
 
 If you followed along with the [Basic Example tutorial](./basic-example), some of the code here may look familiar. Rather than modifying 
 your existing files, however, it's best to create a new folder for this tutorial, ensuring you can experiment without 
@@ -241,10 +241,10 @@ Character::Character(string n, int h, const Weapon& w) : weapon_(w) {
 
 #### Copy Constructor
 
-The customized copy constructor is our second requirement when having a pointer as a data member. We're creating a new 
+The **customized copy constructor is our second requirement when having a pointer as a data member**. We're creating a new 
 `Character` object by passing another `Character` object as the argument. We simply assign the new Character's data 
-members to that of the argued one. For our pointer, we create a copy of each element since we don't want to point to 
-the same memory address:
+members to that of the argued one. **For our pointer, we have to create a copy of each element since we don't want to point to 
+the same memory address**:
 
 <Code title="character.cc" lang="cpp" code={code.characterCopy} />
 
@@ -271,7 +271,6 @@ Since we've already written a way for `cout` to handle a `Potion` object, we can
 void Character::PrintBag() const {
   if (current_bag_size == 0) {
     cout << "Your Bag is Empty" << endl;
-    return;
   } else {
     for (int i = 0; i < current_bag_size; ++i) {
       cout << bag_[i] << " ";
@@ -296,7 +295,7 @@ ostream& operator<<(ostream& whereto, const Character& c) {
 
 #### Overload Assignment
 
-The final requirement when having a pointer as a data member is that we have to overload the assignment operator (`=`). 
+**The final requirement when having a pointer as a data member is that we have to overload the assignment operator** (`=`). 
 The code will look very similar to that of the copy constructor with a difference being that **since we're using it on an 
 object that has already been created**, **we must release the previously allocated memory by deleting the old array**:
 
@@ -345,14 +344,33 @@ int Character::IndexOf(string s) const {
 ```
 
 Next we use the `IndexOf` function to adjust the array. How we adjust the array is **not always by overwriting an element**, **but 
-sometimes by just ignoring it**. Take a look at the bottom of the function where we adjust the array. 
-
-If the `Character` only has 
-one potion, `i` would equal `0`. `0` is not less than the `current size - 1 = 0`, meaning that the `for` does not execute. However, 
-the **current size of the bag is decremented meaning that any calls to a "bag function" immediately gets returned without iteration**. 
-If the `Character` were to add another `Potion`, that value would just get rewritten:
+sometimes by just ignoring it**. That tricky part is handled at the end of the function:
 
 <Code title="character.cc" lang="cpp" code={code.characterUsePotion} />
+
+Here is a breakdown of the `UsePotion` function in action:
+
+#### Scenario 1: One Potion
+
+- Assume the `Character` has one `Potion` in their bag
+- `bag_ = { "potion" }` and the `current_bag_size = 1`
+- The `UsePotion` function is called and the `IndexOf` function returns `0`
+- The `for` loop does not execute since `0` is not less than `current_bag_size - 1 = 0`
+- The `current_bag_size` is decremented to `0` but the `Potion` is not removed from the array
+- If the `UsePotion` function is called again, the first `if` statement will just log `"Your Bag is Empty"` and `return`
+- If the `AddToBag` function is called, the `Potion` at the `0` index will be overwritten
+
+#### Scenario 2: Multiple Potions
+
+- Assume the `Character` has three `Potions` in their bag
+- `bag_ = { "potion", "super potion", "potion" }` and the `current_bag_size = 3`
+- The `UsePotion("super potion")` function is called and the `IndexOf` function returns `1`
+- The `for` loop starts at `1` and will iterate if it is less than `current_bag_size - 1 = 2`, so only once in this case
+- The `Potion` at index `1` is overwritten to equal the `Potion` at index `2`
+- The `for` loop ends and the `current_bag_size` is decremented to `2`
+- Although the `current_bag_size` is `2`, `bag_ = { "potion", "potion", "potion" }`
+- Although the `Potion` at index `2` is not removed from the array, it can never be reached since the `current_bag_size` is `2`
+- `AddToBag` overwrites the `Potion` at index `2`, and `UsePotion` can never reach it
 
 ## Step 6. Test Classes
 

@@ -54,7 +54,7 @@ that you should be familiar with from CSCE146.
 
 Good candidates for template functions include **common array-based 
 algorithms and utility functions where the logic doesn't depend on 
-a specific data type**. For instance, you can template a function 
+a specific data type**. For instance, you can create a template function 
 that prints the contents of an array, or one that reverses an array, 
 making them work seamlessly with arrays of `int`, `double`, `char`, or 
 any other type you need—without rewriting the entire function.
@@ -64,7 +64,7 @@ any other type you need—without rewriting the entire function.
 1. **Create Driver**
 
     Create your driver file, import what you need, and declare your template 
-    functions. Unfortunately, we have to use `template <typename T>` for each 
+    functions. Unfortunately, we have to declare `template <typename T>` for each 
     function:
 
     <Code title="driver.cc" lang="cpp" code={code.step1} />
@@ -72,7 +72,7 @@ any other type you need—without rewriting the entire function.
 2. **Define Implementation**
 
     Under the `main` function, write the implementation for each function. 
-    Unfortunately again, we have to use `template <typename T>` for each function.
+    Again, we have to use `template <typename T>` for each function.
 
     The first function is our `Print` function:
 
@@ -89,7 +89,7 @@ any other type you need—without rewriting the entire function.
 
 3. **Test Functions**
 
-    Now its time to see if we've defined are functions correctly:
+    Now its time to see if we've defined our functions correctly:
 
     <Tabs>
 
