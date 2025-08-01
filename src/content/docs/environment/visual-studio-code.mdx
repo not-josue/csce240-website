@@ -54,8 +54,7 @@ practice customizing your editor you can follow the **slower method**:
     {/* Preferences Image */}
     ![how to find the preferences option in VSCode](@assets/editor/preferences.webp)
 
-2. Search for `@lang:cpp format`, Click on the **Workspace** tab (if you 
-want to set more global settings use other tabs), and Check **Editor: Format On Save**. 
+2. Search for `@lang:cpp format` -> Click on the **Workspace** tab -> Check **Editor: Format On Save**. 
 
     <Aside>What we're doing is customizing the language settings for C++ to automatically format 
     any associated C++ files when the document is saved.</Aside>
@@ -63,22 +62,21 @@ want to set more global settings use other tabs), and Check **Editor: Format On 
     {/* Search Image */}
     ![how to add "format on save" option in vscode](@assets/editor/search.webp)
 
-3. Search for `c_cpp`, Click on **Formatting** under **C/C++**, Edit the **C_Cpp: Clang_format_fallback Style **
+3. Search for `c_cpp` -> Click on **Formatting** under **C/C++** -> Edit the **C_Cpp: Clang_format_fallback Style**
 to be `Google`
 
     {/* Fallback Image */}
     ![how to change the fallback formatting style for c++ to Google in vscode](@assets/editor/fallback.webp)
 
 4. Finally scroll down to **C_Cpp: Formatting** and select `clangFormat`. Above that section 
-is **C_Cpp: Clang_format_style** and its value should be `file`
+is **C_Cpp: Clang_format_style** and its value should be `file`.
 
     {/* Clang Image */}
     ![how to change the default formatter for c++ to clang in vscode](@assets/editor/clang.webp)
 
     <Aside>
-    What we did is change the default file formatter to `clang` and require it to check for a `clang-format` 
-    file that defines its styles. If no `clang-format` file is provided (which is always in our case), 
-    then a file will be formatted to Google's preferred styles.
+    What we did was change the default file formatter to `clang` and require it to check for a `clang-format file` that defines its styles. 
+    Since we won't be using a `clang-format file`, then it will use the fallback styling preferences (which we changed to be `Google`).
     </Aside>
 
 5. You should now have a folder called `.vscode` in your **root folder** along with a file inside it called `settings.json`
