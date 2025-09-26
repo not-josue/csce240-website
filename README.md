@@ -17,7 +17,6 @@ npm create astro@latest -- --template starlight
 - Fonts through [Fontsource](https://fontsource.org/):
     - [Montserrat](https://fontsource.org/fonts/montserrat) - base font
     - [Fira Code](https://fontsource.org/fonts/fira-code) - code font
-    - [Trirong](https://fontsource.org/fonts/trirong) - heading font
 
 - [Excalidraw](https://excalidraw.com/) - drawing tool
 
