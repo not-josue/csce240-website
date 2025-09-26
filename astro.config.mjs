@@ -2,6 +2,8 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 
+import tailwindcss from "@tailwindcss/vite";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
@@ -12,9 +14,14 @@ export default defineConfig({
       logo: {
         src: "./src/assets/logo.svg",
       },
-      social: {
-        github: "https://github.com/not-josue/csce240-website",
-      },
+      credits: true,
+      social: [
+        {
+          icon: "github",
+          label: "GitHub",
+          href: "https://github.com/not-josue/csce240-website",
+        },
+      ],
       head: [
         // Favicons
         {
@@ -273,24 +280,30 @@ export default defineConfig({
         },
       ],
       customCss: [
+        // Tailwind CSS
+        "./src/styles/global.css",
         // Base Font
-        "@fontsource/inter/400.css",
-        "@fontsource/inter/400-italic.css",
-        "@fontsource/inter/600.css",
-        "@fontsource/inter/600-italic.css",
-        // Code Font
-        "@fontsource/fira-code/400.css",
-        "@fontsource/fira-code/600.css",
-        // Headings Font
-        "@fontsource/trirong/600.css",
-        "@fontsource/trirong/700.css",
-        // Fonts CSS
-        "./src/styles/custom.css",
+        // "@fontsource/inter/400.css",
+        // "@fontsource/inter/400-italic.css",
+        // "@fontsource/inter/600.css",
+        // "@fontsource/inter/600-italic.css",
+        // // Code Font
+        // "@fontsource/fira-code/400.css",
+        // "@fontsource/fira-code/600.css",
+        // // Headings Font
+        // "@fontsource/trirong/600.css",
+        // "@fontsource/trirong/700.css",
+        // // Fonts CSS
+        // "./src/styles/custom.css",
         // Catppuccin (not working when building)
-        "./src/styles/shared.css",
-        "./src/styles/catppuccin-latte-blue.css",
-        "./src/styles/catppuccin-mocha-blue.css",
+        // "./src/styles/shared.css",
+        // "./src/styles/catppuccin-latte-blue.css",
+        // "./src/styles/catppuccin-mocha-blue.css",
       ],
     }),
   ],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

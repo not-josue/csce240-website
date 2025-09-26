@@ -14,27 +14,8 @@ npm create astro@latest -- --template starlight
 
 - [Astro](https://astro.build/) - web framework
 
-- [Catppuccin](https://github.com/TheOtterlord/catppuccin-starlight) - color theme plugin
-
-    - Project wouldn't build using `catppuccin()`
-    - Easy fix is to copy and paste the CSS files into a `styles` folder in the `src` folder
-    - Update `astro.config.mjs` using the `customCss` key:
-```js
-    export default defineConfig({
-        integrations: [
-            starlight({
-                customCss: [
-                    // Import shared, a light theme, and a dark theme
-                    "./src/styles/shared.css",
-                    "./src/styles/catppuccin-latte-blue.css",
-                    "./src/styles/catppuccin-mocha-blue.css",
-                ],
-            })
-        ]
-    })
-```
 - Fonts through [Fontsource](https://fontsource.org/):
-    - [Inter](https://fontsource.org/fonts/inter) - base font
+    - [Montserrat](https://fontsource.org/fonts/montserrat) - base font
     - [Fira Code](https://fontsource.org/fonts/fira-code) - code font
     - [Trirong](https://fontsource.org/fonts/trirong) - heading font
 
@@ -45,6 +26,8 @@ npm create astro@latest -- --template starlight
 - [Inkscape](https://inkscape.org/) - graphic design
 
 - [Starlight](https://starlight.astro.build/) - astro technical documentation template
+
+- [TailwindCSS](https://tailwindcss.com/) - css framework
 
 - [TechSini](https://techsini.com/) - website mockup
 

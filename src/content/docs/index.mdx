@@ -2,6 +2,7 @@
 title: Welcome to CSCE240!
 description: Get started with learning the major concepts of C++ for CSCE240 at the University of South Carolina.
 template: splash
+lastUpdated: true
 hero:
   tagline: Advanced Programming Techniques
   image:
@@ -21,7 +22,6 @@ hero:
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
-import IndexFooter from '@components/IndexFooter.astro';
 
 ## Next steps
 
@@ -46,4 +46,8 @@ import IndexFooter from '@components/IndexFooter.astro';
 	</Card>
 </CardGrid>
 
-<IndexFooter/>
+<footer class="mt-12 text-center">
+	<p class="text-sm text-muted-foreground">
+		Code is <a aria-label="view code license" target="_blank" href="https://github.com/not-josue/csce240-website/blob/main/LICENSE">MIT Licensed</a> and made with ❤️ by <a aria-label="view not-josue's github profile" href="https://github.com/not-josue" target="_blank">Not Josue</a>.
+	</p>
+</footer>
